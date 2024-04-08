@@ -3,20 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".controllers.login">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/etContrasena"
         android:layout_width="226dp"
         android:layout_height="51dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="336dp"
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
@@ -24,20 +23,20 @@
         android:id="@+id/btnEntrar"
         android:layout_width="194dp"
         android:layout_height="65dp"
-        android:onClick="logUser"
+        android:onClick="loginUsuario"
         android:text="Entrar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.953" />
+        app:layout_constraintVertical_bias="0.801" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="136dp"
         android:layout_height="102dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="92dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +47,8 @@
         android:id="@+id/etCorreo"
         android:layout_width="229dp"
         android:layout_height="53dp"
-        android:layout_marginStart="252dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginStart="504dp"
+        android:layout_marginTop="292dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"

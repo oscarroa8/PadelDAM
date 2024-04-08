@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "933065225503",
-    "project_id": "proyectopadel-2747e",
-    "storage_bucket": "proyectopadel-2747e.appspot.com"
+    "project_number": "82479574626",
+    "project_id": "padeldam-badec",
+    "storage_bucket": "padeldam-badec.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:933065225503:android:86b44aedf0411b9bc1ec2a",
+        "mobilesdk_app_id": "1:82479574626:android:c6b0191038ec1cfa56eb3b",
         "android_client_info": {
-          "package_name": "com.example.proyectopadel"
+          "package_name": "com.example.padeldam"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCIOt0cpmOtJL_t0qlI1DJ-MmJRAQfV_TU"
+          "current_key": "AIzaSyDJ0t1DLifRba1Web_ZtDq9iufEipssS-Q"
         }
       ],
       "services": {

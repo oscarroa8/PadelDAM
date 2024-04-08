@@ -18,10 +18,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
 
-    private Button entrar;
     private EditText etUsuario, etContrasenia;
     private FirebaseAuth mAuth;//Variable para usar los metodos de firebase Authentication
-    private String emailUsuario, contasenaUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +29,19 @@ public class Login extends AppCompatActivity {
         elementosInterfaz();
     }
     private void elementosInterfaz(){
-        this.entrar = findViewById(R.id.btnEntrar);
+        Button entrar = findViewById(R.id.btnEntrar);
         this.etUsuario = findViewById(R.id.etCorreo);
         this.etContrasenia = findViewById(R.id.etContrasena);
     }
 
     public void loginUsuario(View v){
-        this.emailUsuario = etUsuario.getText().toString();
-        this.contasenaUsuario = etContrasenia.getText().toString();
+        String emailUsuario = etUsuario.getText().toString();
+        String contasenaUsuario = etContrasenia.getText().toString();
 
         Intent i = new Intent(Login.this, Menu.class);
         //Uso el signin que coge el correo y la contraseña para autenticar el ususario
         //Ese metodo devuelve un objeto Task<AuthResult> que es una tarea que se ejecutara en segundo plano para autenticar el usuario
-        Task<AuthResult> getUserInfoTask = mAuth.signInWithEmailAndPassword(this.emailUsuario,this.contasenaUsuario).addOnCompleteListener(
+        Task<AuthResult> getUserInfoTask = mAuth.signInWithEmailAndPassword(emailUsuario, contasenaUsuario).addOnCompleteListener(
                 task -> {
                     if(task.isSuccessful()){//Si la tarea fue existosa (se autentico el usuario)
                         AuthResult authResult = task.getResult(); //Se obtiene el resultado de la tarea y se guarda en un objeto authresult
@@ -61,6 +59,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Credenciales de autenticación incorrectas.", Toast.LENGTH_SHORT).show();
                         } else {
                             // Otros tipos de error
+                            assert exception != null;
                             Toast.makeText(getApplicationContext(), "Error de autenticación: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }

@@ -3,6 +3,10 @@ package com.example.padeldam;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -21,6 +25,26 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         Snackbar.make(findViewById(android.R.id.content),"Bienvenido "+currentUser.getEmail(),Snackbar.LENGTH_SHORT).show();
+
+        ImageView ivPistas = findViewById(R.id.ivPistas);
+        ImageView ivAlquiler = findViewById(R.id.ivAlquiler);
+        ivPistas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
+                ivPistas.startAnimation(anim);
+            }
+        });
+
+        ivAlquiler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
+                ivAlquiler.startAnimation(anim);
+            }
+        });
+
+
 
     }
 

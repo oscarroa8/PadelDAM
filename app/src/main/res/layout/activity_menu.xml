@@ -1,10 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Clientes">
+    android:background="@color/azul_pista">
+
+    <!-- Tarjeta 1: Vista de pistas -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewPistas"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cardViewAlquiler"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="openPistasActivity">
+
+        <LinearLayout
+            android:id="@+id/linearPistas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--                android:src="@drawable/pistas_image"-->
+
+
+            <ImageView
+                android:id="@+id/ivPistas"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/pista_foto" />
+
+            <TextView
+                android:id="@+id/tvPistas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#0953FD"
+                android:gravity="center"
+                android:text="Pistas"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" /> <!-- Fondo semi-transparente -->
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Tarjeta 2: Vista de alquiler de material -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewAlquiler"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cardViewPistas"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="openAlquilerActivity">
+
+        <LinearLayout
+            android:id="@+id/linearAlquiler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--                android:src="@drawable/alquiler_image" -->
+
+            <ImageView
+                android:id="@+id/ivAlquiler"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/foto_material" />
+
+            <TextView
+                android:id="@+id/tvAlquiler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#0953FD"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:text="Alquilar Material"
+                android:textSize="20sp" /> <!-- Fondo semi-transparente -->
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

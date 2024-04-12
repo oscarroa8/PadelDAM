@@ -33,6 +33,8 @@ public class Menu extends AppCompatActivity {
             public void onClick(View view) {
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
                 ivPistas.startAnimation(anim);
+                Intent i = new Intent(Menu.this, Pistas.class);
+                startActivity(i);
             }
         });
 
@@ -41,6 +43,8 @@ public class Menu extends AppCompatActivity {
             public void onClick(View view) {
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
                 ivAlquiler.startAnimation(anim);
+                Intent i = new Intent(Menu.this, Alquiler.class);
+                startActivity(i);
             }
         });
 

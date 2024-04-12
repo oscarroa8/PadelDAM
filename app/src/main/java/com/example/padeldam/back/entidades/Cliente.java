@@ -23,6 +23,9 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
+    public Cliente(String id, String nombre, String apellido1, String apellido2, String telefono, String mail) {
+    }
+
     public Integer getIdCliente() {
         return idCliente;
     }

@@ -51,6 +51,10 @@ public class Menu extends AppCompatActivity {
 
 
     }
+    public void botonPrueba (View view){
+        Intent i = new Intent(Menu.this, Clientes.class);
+        startActivity(i);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu) {

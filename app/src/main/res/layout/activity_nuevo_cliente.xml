@@ -8,54 +8,85 @@
     <TextView
         android:id="@+id/textViewTitulo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
         android:text="Nuevo Usuario"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="24dp"/>
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editTextNombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"
+        android:layout_width="1250dp"
+        android:layout_height="75dp"
         android:layout_below="@id/textViewTitulo"
-        android:layout_margin="16dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Nombre" />
 
     <EditText
         android:id="@+id/editTextApellido1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Primer Apellido"
+        android:layout_width="1254dp"
+        android:layout_height="78dp"
         android:layout_below="@id/editTextNombre"
-        android:layout_margin="16dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Primer Apellido" />
 
     <EditText
         android:id="@+id/editTextApellido2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Segundo Apellido"
+        android:layout_width="1246dp"
+        android:layout_height="66dp"
         android:layout_below="@id/editTextApellido1"
-        android:layout_margin="16dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Segundo Apellido" />
 
     <EditText
         android:id="@+id/editTextTelefono"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Teléfono"
-        android:inputType="phone"
+        android:layout_width="1240dp"
+        android:layout_height="65dp"
         android:layout_below="@id/editTextApellido2"
-        android:layout_margin="16dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Teléfono"
+        android:inputType="phone" />
 
     <EditText
         android:id="@+id/editTextMail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Correo electrónico"
-        android:inputType="textEmailAddress"
+        android:layout_width="1242dp"
+        android:layout_height="75dp"
         android:layout_below="@id/editTextTelefono"
-        android:layout_margin="16dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:hint="Correo electrónico"
+        android:inputType="textEmailAddress" />
 
     <Button
         android:id="@+id/btnGuardar"
@@ -64,6 +95,7 @@
         android:layout_below="@id/editTextMail"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
+        android:onClick="insertarCliente"
         android:text="Guardar" />
 
 </RelativeLayout>

@@ -23,7 +23,7 @@ public class ClienteRepositorio implements ICliente<Cliente> {
     }
     @Override
     public Task<List<Cliente>> findAll() {
-        return bd.collection("pistas")
+        return bd.collection("clientes")
                 .get()
                 .continueWith( task -> {
                             List<Cliente> clientes = new ArrayList<>();
@@ -71,8 +71,21 @@ public class ClienteRepositorio implements ICliente<Cliente> {
     }
 
     @Override
-    public Task<Void> borrar(Cliente entidad) {
-        return null;
+    public Task<Void> borrar(Cliente cliente) {
+
+
+        return bd.collection("clientes").document(cliente.getIdCliente())
+                .delete()
+                .continueWith(task -> {
+                    if (task.isSuccessful()) {
+                        return null;
+                    }
+                    else {
+                        Log.w(TAG, "Error en consulta de firebase", task.getException());
+                        return null;
+                    }
+                });
+
     }
 
     @Override

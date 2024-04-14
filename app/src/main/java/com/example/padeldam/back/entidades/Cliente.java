@@ -1,17 +1,18 @@
 package com.example.padeldam.back.entidades;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Cliente implements Serializable {
 
-    private Integer idCliente;
+    private String idCliente;
     private String nombre;
     private String apellido1;
     private String apellido2;
     private String telefono;
     private String mail;
 
-    public Cliente(Integer idCliente, String nombre, String apellido1, String apellido2, String telefono, String mail) {
+    public Cliente(String idCliente, String nombre, String apellido1, String apellido2, String telefono, String mail) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -23,14 +24,21 @@ public class Cliente implements Serializable {
     public Cliente() {
     }
 
-    public Cliente(String id, String nombre, String apellido1, String apellido2, String telefono, String mail) {
+    public Cliente(String nombreCliente, String primerApellido, String segundoApellido, String telefono, String mail) {
+        this.idCliente = UUID.randomUUID().toString();
+        this.nombre = nombreCliente;
+        this.apellido1 = primerApellido;
+        this.apellido2 = segundoApellido;
+        this.telefono = telefono;
+        this.mail = mail;
     }
 
-    public Integer getIdCliente() {
+
+    public String getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
+    public void setIdCliente(String idCliente) {
         this.idCliente = idCliente;
     }
 

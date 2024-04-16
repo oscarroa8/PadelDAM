@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="azul_pista">#F5B67C</color>
+    <color name="naranja_claro">#F5B67C</color>
     <color name="menu_lateral">#FC8818</color>
     <color name="borde_usuarios">#FF7D00</color>
 

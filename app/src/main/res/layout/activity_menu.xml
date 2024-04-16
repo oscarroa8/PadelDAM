@@ -4,7 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/azul_pista">
+    android:background="@color/naranja_claro">
+
+
+    <!-- Menu lateral -->
+
+    <androidx.drawerLayout.widget.DrawerLayout
+        android:id="@+id/menuLateral"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Menu"
+        tools:ignore="MissingClass">
+
+
+    </androidx.drawerLayout.widget.DrawerLayout>
+
+
 
     <!-- Tarjeta 1: Vista de pistas -->
     <androidx.cardview.widget.CardView

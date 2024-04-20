@@ -21,6 +21,14 @@ public class Pista implements Serializable {
         this.precioHora = precioHora;
     }
 
+    public Pista(String nombre, int numero, String material, Integer precioHora) {
+        this.idPista = UUID.randomUUID().toString();
+        this.nombre = nombre;
+        this.numero = numero;
+        this.material = material;
+        this.precioHora = precioHora;
+    }
+
     public String getIdPista() {
         return idPista;
     }

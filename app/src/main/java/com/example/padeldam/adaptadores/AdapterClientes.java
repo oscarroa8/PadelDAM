@@ -51,7 +51,7 @@ public class AdapterClientes extends ArrayAdapter<Cliente> {
         tvTelefono.setText(cliente.getTelefono());
         TextView tvMail = view.findViewById(R.id.textViewEmail);
         tvMail.setText(cliente.getMail());
-        ImageView borrarCliente = view.findViewById(R.id.ivBorrarCliente);
+        ImageView borrarCliente = view.findViewById(R.id.ivBorrarPista);
         borrarCliente.setOnClickListener((v) -> borrar(cliente));
 
         return view;

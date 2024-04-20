@@ -13,6 +13,9 @@
         android:theme="@style/Theme.PadelDAM"
         tools:targetApi="31">
         <activity
+            android:name=".nuevaPista"
+            android:exported="false" />
+        <activity
             android:name=".nuevoCliente"
             android:exported="false" />
         <activity
@@ -27,7 +30,6 @@
         <activity
             android:name=".Menu"
             android:exported="false" />
-
         <activity
             android:name=".Login"
             android:exported="true"

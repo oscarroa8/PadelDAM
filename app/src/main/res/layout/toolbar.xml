@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20dp"
-    android:id="@+id/toolbar"
+    android:id="@+id/menuToolbar"
     android:background="@color/menu_lateral"
     android:gravity="center_vertical"
     >

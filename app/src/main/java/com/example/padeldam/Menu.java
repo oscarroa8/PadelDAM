@@ -26,9 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Menu extends AppCompatActivity {
-    private DrawerLayout drawerLayout;
-    private Toolbar menu;
-    LinearLayout home,clientes,logout;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,38 +61,7 @@ public class Menu extends AppCompatActivity {
             }
         });
 //
-//        drawerLayout = findViewById(R.id.drawer_layout);
-        menu = (Toolbar) findViewById(R.id.menuToolbar);
-//        home = findViewById(R.id.home);
-//        clientes = findViewById(R.id.clientes);
-//        logout = findViewById(R.id.logout);
 //
-        menu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDrawer(drawerLayout);
-            }
-        });
-//        home.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//              recreate();
-//            }
-//        });
-//        clientes.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                cambiarActivity(Menu.this, Clientes.class);
-//            }
-//        });
-//        logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//               Toast.makeText(Menu.this, "logout", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
 
     }
     public void botonPrueba (View view){
@@ -102,41 +69,8 @@ public class Menu extends AppCompatActivity {
         startActivity(i);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        getMenuInflater().inflate(R.menu.overflow, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if(id == R.id.itemC){
-            Intent intent = new Intent(this,Clientes.class);
-            startActivity(intent);
-        }
 
-        return super.onOptionsItemSelected(item);    }
 
-    public static void openDrawer(DrawerLayout dl){
-        dl.openDrawer(GravityCompat.START);
-    }
 
-    public static void closeDrawer(DrawerLayout dl){
-      if(dl.isDrawerOpen(GravityCompat.START)){
-          dl.closeDrawer(GravityCompat.START);
-      }
-    }
-    public static void cambiarActivity (Activity a, Class b){
-        Intent i = new Intent(a,b);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        a.startActivity(i);
-        a.finish();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        closeDrawer(drawerLayout);
-    }
 }

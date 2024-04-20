@@ -38,10 +38,6 @@ public class Clientes extends AppCompatActivity {
     AdapterClientes adaptador;
     ListAdapter adapter;
 
-    private DrawerLayout drawerLayout;
-    private ImageView menu;
-    LinearLayout home,clientes,logout;
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,37 +55,7 @@ public class Clientes extends AppCompatActivity {
 
         adapter= listaClientes.getAdapter();
 
-        drawerLayout = findViewById(R.id.drawer_layout);
-        menu =findViewById(R.id.menu);
-        home = findViewById(R.id.home);
-        clientes = findViewById(R.id.clientes);
-        logout = findViewById(R.id.logout);
-
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openDrawer(drawerLayout);
-            }
-        });
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                cambiarActivity(Clientes.this, Menu.class);
-            }
-        });
-        clientes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                recreate();
-            }
-        });
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(Clientes.this, "logout", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+//
     }
 
     public void crearCliente (View v){
@@ -97,45 +63,18 @@ public class Clientes extends AppCompatActivity {
         startActivity(i);
     }
 
-
-
-    @Override
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        getMenuInflater().inflate(R.menu.overflow, menu);
-        return true;
+    public void volver (View v){
+        Intent i = new Intent(Clientes.this, Menu.class);
+        startActivity(i);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if(id == R.id.itemC){
-            Intent intent = new Intent(this,Clientes.class);
-            startActivity(intent);
-        }
 
-        return super.onOptionsItemSelected(item);    }
 
-    public static void openDrawer(DrawerLayout dl){
-        dl.openDrawer(GravityCompat.START);
-    }
 
-    public static void closeDrawer(DrawerLayout dl){
-        if(dl.isDrawerOpen(GravityCompat.START)){
-            dl.closeDrawer(GravityCompat.START);
-        }
-    }
-    public static void cambiarActivity (Activity a, Class b){
-        Intent i = new Intent(a,b);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        a.startActivity(i);
-        a.finish();
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        closeDrawer(drawerLayout);
-    }
+
+
+
 
 
 }

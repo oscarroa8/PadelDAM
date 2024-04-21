@@ -52,7 +52,7 @@ public class nuevoCliente extends AppCompatActivity {
             cr.insertar(c)
                     .addOnCompleteListener(task -> {
                         Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
+                        Intent intent = new Intent(this,Clientes.class);
                         startActivity(intent);
                     });
         } else {

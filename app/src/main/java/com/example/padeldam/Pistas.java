@@ -51,4 +51,9 @@ public class Pistas extends AppCompatActivity {
         startActivity(i);
     }
 
+
+    public void volverPistas (View v){
+        Intent i = new Intent(Pistas.this, Menu.class);
+        startActivity(i);
+    }
 }

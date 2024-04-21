@@ -8,7 +8,7 @@ public class Pista implements Serializable {
     private String nombre;
     private int numero;
     private String material;
-    private Integer precioHora;
+    private int precioHora;
 
     public Pista() {
     }
@@ -21,7 +21,7 @@ public class Pista implements Serializable {
         this.precioHora = precioHora;
     }
 
-    public Pista(String nombre, int numero, String material, Integer precioHora) {
+    public Pista(String nombre, int numero, String material, int precioHora) {
         this.idPista = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.numero = numero;

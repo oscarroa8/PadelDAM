@@ -2,8 +2,6 @@ package com.example.padeldam.back.dao;
 
 import android.util.Log;
 
-import com.example.padeldam.Pistas;
-import com.example.padeldam.back.entidades.Cliente;
 import com.example.padeldam.back.entidades.Pista;
 import com.example.padeldam.back.interfaces.IPistas;
 import com.google.android.gms.tasks.Task;
@@ -17,7 +15,7 @@ import java.util.List;
 public class PistaRepositorio implements IPistas<Pista> {
     private final FirebaseFirestore bd;
 
-    private static final String TAG = ClienteRepositorio.class.getName();
+    private static final String TAG = PistaRepositorio.class.getName();
 
     public PistaRepositorio(FirebaseFirestore bd) {
         this.bd = bd;

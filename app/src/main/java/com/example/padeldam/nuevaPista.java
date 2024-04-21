@@ -26,7 +26,7 @@ public class nuevaPista extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_nueva_pista);
 
-        btnCrear = findViewById(R.id.btnGuardarP);
+        btnCrear = findViewById(R.id.btnCrearP);
 
         bd = FirebaseFirestore.getInstance();
 
@@ -34,7 +34,7 @@ public class nuevaPista extends AppCompatActivity {
         etNombre = findViewById(R.id.editTextNombrePista);
         etNumero = findViewById(R.id.etNumero);
         etMaterial = findViewById(R.id.etMaterialPista);
-        etPrecio= findViewById(R.id.etPrecio);
+        etPrecio= findViewById(R.id.etNumero);
     }
 
     public void insertarPista(View view){
@@ -42,7 +42,7 @@ public class nuevaPista extends AppCompatActivity {
         String nombrePista= etNombre.getText().toString();
         int numeroPista = Integer.parseInt(etNumero.getText().toString());
         String materialPista = etMaterial.getText().toString();
-        int precioPista =Integer.parseInt(etPrecio.getText().toString());
+       int precioPista =Integer.parseInt(etPrecio.getText().toString());
 
         Pista p = new Pista(nombrePista,numeroPista,materialPista,precioPista);
 

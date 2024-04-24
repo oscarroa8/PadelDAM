@@ -28,6 +28,8 @@ public class Login extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance(); //Instanciamos en servicio
         elementosInterfaz();
     }
+
+
     private void elementosInterfaz(){
         Button entrar = findViewById(R.id.btnEntrar);
         this.etUsuario = findViewById(R.id.etCorreo);
@@ -38,7 +40,7 @@ public class Login extends AppCompatActivity {
         String emailUsuario = etUsuario.getText().toString();
         String contasenaUsuario = etContrasenia.getText().toString();
 
-        Intent i = new Intent(Login.this, Menu.class);
+        Intent i = new Intent(Login.this, menuPrincipal.class);
         //Uso el signin que coge el correo y la contraseña para autenticar el ususario
         //Ese metodo devuelve un objeto Task<AuthResult> que es una tarea que se ejecutara en segundo plano para autenticar el usuario
         Task<AuthResult> getUserInfoTask = mAuth.signInWithEmailAndPassword(emailUsuario, contasenaUsuario).addOnCompleteListener(

@@ -1,33 +1,26 @@
 package com.example.padeldam;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Menu extends AppCompatActivity {
+public class menuPrincipal extends AppCompatActivity  {
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +39,7 @@ public class Menu extends AppCompatActivity {
             public void onClick(View view) {
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
                 ivPistas.startAnimation(anim);
-                Intent i = new Intent(Menu.this, Pistas.class);
+                Intent i = new Intent(menuPrincipal.this, Pistas.class);
                 startActivity(i);
             }
         });
@@ -56,7 +49,7 @@ public class Menu extends AppCompatActivity {
             public void onClick(View view) {
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
                 ivAlquiler.startAnimation(anim);
-                Intent i = new Intent(Menu.this, Alquiler.class);
+                Intent i = new Intent(menuPrincipal.this, Alquiler.class);
                 startActivity(i);
             }
         });
@@ -64,8 +57,28 @@ public class Menu extends AppCompatActivity {
 //
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.overflow,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.itemCliente){
+            Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);    }
+
+    // Método para realizar alguna acción que afecte al menú
+
+
     public void botonPrueba (View view){
-        Intent i = new Intent(Menu.this, Clientes.class);
+        Intent i = new Intent(menuPrincipal.this, Clientes.class);
         startActivity(i);
     }
 

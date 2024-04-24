@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/itemC"
-        android:title="Cliente" />
+        android:id="@+id/itemHome"
+        android:icon="@drawable/nav_home"
+        android:title="Home"
+        app:showAsAction="always"
+        android:visible="true"/>
+    <item
+        android:id="@+id/itemCliente"
+        android:icon="@drawable/nav_clientes"
+        android:title="Cliente"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/itemLogout"
+        android:icon="@drawable/nav_logout"
+        android:title="Logout"
+        app:showAsAction="always"/>
 
 </menu>

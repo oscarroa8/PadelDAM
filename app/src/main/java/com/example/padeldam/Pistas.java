@@ -3,21 +3,17 @@ package com.example.padeldam;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.padeldam.adaptadores.AdapterClientes;
 import com.example.padeldam.adaptadores.ListAdapterPistas;
-import com.example.padeldam.back.dao.ClienteRepositorio;
 import com.example.padeldam.back.dao.PistaRepositorio;
-import com.example.padeldam.back.entidades.Pista;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -51,9 +47,15 @@ public class Pistas extends AppCompatActivity {
         startActivity(i);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.overflow, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     public void volverPistas (View v){
-        Intent i = new Intent(Pistas.this, Menu.class);
+        Intent i = new Intent(Pistas.this, menuPrincipal.class);
         startActivity(i);
     }
 }

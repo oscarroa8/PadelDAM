@@ -28,7 +28,7 @@
             android:name=".Clientes"
             android:exported="false" />
         <activity
-            android:name=".Menu"
+            android:name=".menuPrincipal"
             android:exported="false" />
         <activity
             android:name=".Login"

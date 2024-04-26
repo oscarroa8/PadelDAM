@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -24,10 +25,11 @@ public class menuPrincipal extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       // setTitle("menu");
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        Snackbar.make(findViewById(android.R.id.content),"Bienvenido "+currentUser.getEmail(),Snackbar.LENGTH_SHORT).show();
+
 
         ImageView ivPistas = findViewById(R.id.ivPistas);
         ImageView ivAlquiler = findViewById(R.id.ivAlquiler);
@@ -71,16 +73,23 @@ public class menuPrincipal extends AppCompatActivity  {
             Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
             startActivity(intent);
         }
+        if(id == R.id.itemHome){
+            Intent intent = new Intent(this,menuPrincipal.class);//Falta crear la clase usuarios
+            startActivity(intent);
+        }
+        if(id == R.id.itemLogout){
+            Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
+            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+
+            startActivity(intent);
+        }
 
         return super.onOptionsItemSelected(item);    }
 
     // Método para realizar alguna acción que afecte al menú
 
 
-    public void botonPrueba (View view){
-        Intent i = new Intent(menuPrincipal.this, Clientes.class);
-        startActivity(i);
-    }
+
 
 
 

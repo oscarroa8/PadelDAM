@@ -49,6 +49,7 @@ public class Login extends AppCompatActivity {
                         AuthResult authResult = task.getResult(); //Se obtiene el resultado de la tarea y se guarda en un objeto authresult
                         FirebaseUser currentUser = authResult.getUser();
                         i.putExtra("user", currentUser);
+                        Toast.makeText(getApplicationContext(), "Bienvenido "+currentUser.getEmail(), Toast.LENGTH_SHORT).show();
                         startActivity(i);
                     } else {
                         // Si la autenticación no fue exitosa, se maneja el caso de error

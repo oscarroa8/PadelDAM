@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.padeldam.adaptadores.ListAdapterPistas;
@@ -42,6 +45,8 @@ public class Pistas extends AppCompatActivity {
 
     }
 
+
+
     public void crearPista (View v){
         Intent i = new Intent(Pistas.this, nuevaPista.class);
         startActivity(i);
@@ -49,13 +54,29 @@ public class Pistas extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.overflow, menu);
+        getMenuInflater().inflate(R.menu.overflow,menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void volverPistas (View v){
-        Intent i = new Intent(Pistas.this, menuPrincipal.class);
-        startActivity(i);
-    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.itemCliente){
+            Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
+            startActivity(intent);
+        }
+        if(id == R.id.itemHome){
+            Intent intent = new Intent(this,menuPrincipal.class);//Falta crear la clase usuarios
+            startActivity(intent);
+        }
+        if(id == R.id.itemLogout){
+            Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
+            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);    }
+
+
 }

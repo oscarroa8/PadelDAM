@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">PadelDAM</string>
+    <string name="nombre">PadelPro Manager🎾</string>
     <string name="abrir_navegacion">Abrir navegacion</string>
     <string name="cerrar_navegacion">Cerrar navegacion</string>
     <!-- TODO: Remove or change this placeholder text -->

@@ -11,6 +11,7 @@
     tools:context=".menuPrincipal"
    >
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +28,7 @@
                 android:id="@+id/cardViewPistas"
                 android:layout_width="400dp"
                 android:layout_height="400dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="12dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="openPistasActivity"
@@ -61,7 +62,7 @@
                         android:gravity="center"
                         android:text="Pistas"
                         android:textColor="#FFFFFF"
-                        android:textSize="20sp" /> <!-- Fondo semi-transparente -->
+                        android:textSize="20sp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -106,17 +107,6 @@
                         android:textSize="20sp" /> <!-- Fondo semi-transparente -->
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
-            <Button
-                android:id="@+id/btnpruebas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="224dp"
-                android:layout_marginTop="72dp"
-                android:onClick="botonPrueba"
-                android:text="Ir a clientes"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardViewPistas" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

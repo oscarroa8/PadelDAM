@@ -12,16 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="56dp"
         android:gravity="center"
         android:text="Lista de usuarios"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ListView
         android:id="@+id/listViewClientes"
-        android:layout_width="1280dp"
-        android:layout_height="605dp"
+        android:layout_width="1283dp"
+        android:layout_height="463dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitulo" />
 
@@ -29,21 +32,11 @@
         android:id="@+id/btnCrearCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1092dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="1016dp"
+        android:layout_marginTop="16dp"
         android:onClick="crearCliente"
         android:text="Añadir"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listViewClientes" />
 
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="48dp"
-        android:onClick="volver"
-        android:text="Volver"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listViewClientes" />
 </androidx.constraintlayout.widget.ConstraintLayout>

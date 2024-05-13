@@ -20,15 +20,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/naranja_claro">
+            android:background="@color/menu">
 
 
             <!-- Tarjeta 1: Vista de pistas -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewPistas"
-                android:layout_width="400dp"
-                android:layout_height="400dp"
-                android:layout_marginEnd="12dp"
+                android:layout_width="600dp"
+                android:layout_height="600dp"
+                android:layout_marginEnd="8dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="openPistasActivity"
@@ -69,9 +69,9 @@
             <!-- Tarjeta 2: Vista de alquiler de material -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewAlquiler"
-                android:layout_width="400dp"
-                android:layout_height="400dp"
-                android:layout_marginStart="8dp"
+                android:layout_width="600dp"
+                android:layout_height="600dp"
+                android:layout_marginStart="4dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="openAlquilerActivity"

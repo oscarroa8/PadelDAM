@@ -2,9 +2,13 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="naranja_claro">#F5B67C</color>
+    <color name="menu">#2F93FF</color>
     <color name="menu_lateral">#FC8818</color>
     <color name="borde_usuarios">#FF7D00</color>
+    <color name="darkGray">#757575</color>
+    <color name="primaryColor">#3F51B5</color>
+    <color name="primaryDarkColor">#303F9F</color>
+    <color name="lightGray">#F5F5F5</color>
 
 
 </resources>

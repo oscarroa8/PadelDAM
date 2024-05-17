@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -41,6 +42,15 @@ public class Clientes extends AppCompatActivity {
         });
 
         adapter= listaClientes.getAdapter();
+
+        listaClientes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Obtén el texto del ítem clicado
+                String item = (String) parent.getItemAtPosition(position);
+
+            }
+        });
 
 //
     }

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -42,6 +43,18 @@ public class Pistas extends AppCompatActivity {
         });
 
         adapter= listaPistas.getAdapter();
+
+        listaPistas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                // Obtén el texto del ítem clicado
+                Intent intent = new Intent(Pistas.this, FechaYHora.class);
+                startActivity(intent);
+
+            }
+        });
 
     }
 

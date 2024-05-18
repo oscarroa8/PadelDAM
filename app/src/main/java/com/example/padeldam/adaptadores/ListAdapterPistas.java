@@ -72,4 +72,7 @@ public class ListAdapterPistas extends ArrayAdapter<Pista> {
                 });
 
     }
+    public Pista getItem(int position) {
+        return super.getItem(position);
+    }
 }

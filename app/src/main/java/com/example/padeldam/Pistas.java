@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.padeldam.adaptadores.ListAdapterPistas;
 import com.example.padeldam.back.dao.PistaRepositorio;
+import com.example.padeldam.back.entidades.Pista;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -48,9 +49,17 @@ public class Pistas extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                // Obtén el ítem seleccionado
+                Pista pistaSeleccionada = adaptador.getItem(position);
 
-                // Obtén el texto del ítem clicado
+                // Crea un intent para la nueva actividad
                 Intent intent = new Intent(Pistas.this, FechaYHora.class);
+
+                // Añade los datos del ítem seleccionado al intent
+                intent.putExtra("nombrePista", pistaSeleccionada.getNombre());
+                intent.putExtra("precioHora", pistaSeleccionada.getPrecioHora());
+
+                // Inicia la nueva actividad
                 startActivity(intent);
 
             }

@@ -1,95 +1,70 @@
 package com.example.padeldam.back.entidades;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
 public class ReservarPista implements Serializable {
-    private String idPista;
-    private String idReserva;
-    private String idEmpleado;
-    private String idCliente;
-    private Date fecha;
-    private double precio;
-    private int horaInicio;
-    private int horaFin;
+        private String fecha;
+        private String hora;
+        private String cliente;
+        private String pista;
+        private FirebaseUser empleado;
 
+        // Constructor vacío necesario para Firestore
+        public ReservarPista() {
+        }
 
-    public ReservarPista() {
+        // Constructor completo
+        public ReservarPista(String fecha, String hora, String cliente, String pista, FirebaseUser empleado) {
+            this.fecha = fecha;
+            this.hora = hora;
+            this.cliente = cliente;
+            this.pista = pista;
+            this.empleado = empleado;
+        }
+
+        // Getters y Setters
+        public String getFecha() {
+            return fecha;
+        }
+
+        public void setFecha(String fecha) {
+            this.fecha = fecha;
+        }
+
+        public String getHora() {
+            return hora;
+        }
+
+        public void setHora(String hora) {
+            this.hora = hora;
+        }
+
+        public String getCliente() {
+            return cliente;
+        }
+
+        public void setCliente(String cliente) {
+            this.cliente = cliente;
+        }
+
+        public String getPista() {
+            return pista;
+        }
+
+        public void setPista(String pista) {
+            this.pista = pista;
+        }
+
+        public FirebaseUser getEmpleado() {
+            return empleado;
+        }
+
+        public void setEmpleado(FirebaseUser empleado) {
+            this.empleado = empleado;
+        }
     }
 
-    public ReservarPista(String idPista, String idReserva, String idEmpleado, String idCliente, Date fecha, double precio, int horaInicio, int horaFin) {
-        this.idPista = idPista;
-        this.idReserva = idReserva;
-        this.idEmpleado = idEmpleado;
-        this.idCliente = idCliente;
-        this.fecha = fecha;
-        this.precio = precio;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-    }
-
-    public String getIdPista() {
-        return idPista;
-    }
-
-    public void setIdPista(String idPista) {
-        this.idPista = idPista;
-    }
-
-    public String getIdReserva() {
-        return idReserva;
-    }
-
-    public void setIdReserva(String idReserva) {
-        this.idReserva = idReserva;
-    }
-
-    public String getIdEmpleado() {
-        return idEmpleado;
-    }
-
-    public void setIdEmpleado(String idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
-
-    public String getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(String idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-
-    public int getHoraInicio() {
-        return horaInicio;
-    }
-
-    public void setHoraInicio(int horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public int getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(int horaFin) {
-        this.horaFin = horaFin;
-    }
-}

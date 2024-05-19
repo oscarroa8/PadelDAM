@@ -17,13 +17,15 @@ import androidx.appcompat.app.AppCompatActivity;
 public class FechaYHora extends AppCompatActivity {
     private Button buttonFecha;
     private GridLayout gridLayoutHoras;
+    private String fechaSeleccionada;
+    private String nombrePista;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fecha_yhora);
 
         // Obtener los datos de la pista del Intent
         Intent intent = getIntent();
-        String nombrePista = intent.getStringExtra("nombrePista");
+         nombrePista = intent.getStringExtra("nombrePista");
 
         // Configurar la vista con los datos de la pista
         TextView textView = findViewById(R.id.textViewPista);
@@ -51,7 +53,7 @@ public class FechaYHora extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 // Manejar la fecha seleccionada
-                String fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
+                fechaSeleccionada = dayOfMonth + "/" + (month + 1) + "/" + year;
                 Toast.makeText(FechaYHora.this, "Fecha seleccionada: " + fechaSeleccionada, Toast.LENGTH_SHORT).show();
 
                 buttonFecha.setText(fechaSeleccionada);
@@ -116,7 +118,11 @@ public class FechaYHora extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Manejar la selección de hora
-                    Toast.makeText(FechaYHora.this, "Hora seleccionada: " + btn, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(FechaYHora.this, Reserva.class);
+                    intent.putExtra("fechaSeleccionada", fechaSeleccionada);
+                    intent.putExtra("horaSeleccionada", hora);
+                    intent.putExtra("nombrePista", nombrePista);
+                    startActivity(intent);
                 }
             });
         }

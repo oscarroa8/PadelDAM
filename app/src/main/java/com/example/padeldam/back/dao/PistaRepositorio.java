@@ -65,8 +65,9 @@ public class PistaRepositorio implements IPistas<Pista> {
     }
 
     @Override
-    public void actualizar(Pista entidad) {
+    public Task<Void> actualizar(Pista entidad) {
 
+        return null;
     }
 
     @Override

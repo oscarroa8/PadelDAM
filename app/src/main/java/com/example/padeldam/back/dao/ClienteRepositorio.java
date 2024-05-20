@@ -66,8 +66,18 @@ public class ClienteRepositorio implements ICliente<Cliente> {
     }
 
     @Override
-    public void actualizar(Cliente entidad) {
+    public Task<Void> actualizar(Cliente cliente) {
+        DocumentReference clienteRef = bd.collection("clientes").document(cliente.getIdCliente());
+        return clienteRef.update(
+                "nombre", cliente.getNombre(),
+                "apellido1",cliente.getApellido1(),
+                "apellido2",cliente.getApellido2(),
+                "telefono",cliente.getTelefono(),
+                "mail", cliente.getMail()
 
+
+
+        );
     }
 
     @Override

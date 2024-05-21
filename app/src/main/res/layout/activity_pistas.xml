@@ -31,12 +31,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabCrearCliente"
+        android:id="@+id/fabCrearPista"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:onClick="crearPista"
-        android:src="@drawable/plus_large_svgrepo_com"
+        android:src="@drawable/tennis_court_svgrepo_com"
         app:backgroundTint="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

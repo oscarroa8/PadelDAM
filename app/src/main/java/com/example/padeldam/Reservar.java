@@ -12,21 +12,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.padeldam.back.entidades.ReservarPista;
+import com.example.padeldam.back.dao.ReservasRepositorio;
+import com.example.padeldam.back.entidades.Reserva;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -34,7 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Reserva extends AppCompatActivity {
+public class Reservar extends AppCompatActivity {
     private TextView textViewFechaHora;
     private Spinner spinnerClientes;
     private Button buttonReservar;
@@ -90,7 +84,7 @@ public class Reserva extends AppCompatActivity {
                         clientes.add(nombreCliente);
                     }
 
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(Reserva.this, android.R.layout.simple_spinner_item, clientes);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(Reservar.this, android.R.layout.simple_spinner_item, clientes);
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerClientes.setAdapter(adapter);
 
@@ -108,7 +102,7 @@ public class Reserva extends AppCompatActivity {
                     });
 
                 } else {
-                    Toast.makeText(Reserva.this, "Error al cargar clientes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Reservar.this, "Error al cargar clientes", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -116,7 +110,7 @@ public class Reserva extends AppCompatActivity {
 
     private void reservarHora() {
         if (clienteSeleccionado == null) {
-            Toast.makeText(Reserva.this, "Por favor, seleccione un cliente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Reservar.this, "Por favor, seleccione un cliente", Toast.LENGTH_SHORT).show();
             return;
         }
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -124,26 +118,15 @@ public class Reserva extends AppCompatActivity {
         FirebaseUser empleado = mAuth.getCurrentUser();
 
         // Crear un nuevo objeto Reserva
-        ReservarPista reserva = new ReservarPista(fechaSeleccionada, horaSeleccionada, clienteSeleccionado, nombrePista, empleado);
+        Reserva reserva = new Reserva(fechaSeleccionada, horaSeleccionada, clienteSeleccionado, nombrePista, empleado);
 
-        // Guardar la reserva en Firestore
-        db.collection("reservas")
-                .add(reserva)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(Reserva.this, "Reserva realizada correctamente", Toast.LENGTH_SHORT).show();
+        ReservasRepositorio rp = new ReservasRepositorio(db);
 
-                        // Regresa a la actividad anterior o a la principal
-                        finish();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Reserva.this, "Error al realizar la reserva", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        rp.insertar(reserva);
+
+
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

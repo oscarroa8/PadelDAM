@@ -118,7 +118,7 @@ public class FechaYHora extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // Manejar la selección de hora
-                    Intent intent = new Intent(FechaYHora.this, Reserva.class);
+                    Intent intent = new Intent(FechaYHora.this, Reservar.class);
                     intent.putExtra("fechaSeleccionada", fechaSeleccionada);
                     intent.putExtra("horaSeleccionada", hora);
                     intent.putExtra("nombrePista", nombrePista);

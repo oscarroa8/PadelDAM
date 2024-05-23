@@ -3,6 +3,7 @@ package com.example.padeldam;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -45,28 +46,23 @@ public class Pistas extends AppCompatActivity {
 
         adapter= listaPistas.getAdapter();
 
-        listaPistas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        listaPistas.setOnItemClickListener((adapterView, view, position, l) -> {
+            Log.d("ListViewClick", "Item clicked at position: " + position);
+            Pista pistaSeleccionada = adaptador.getItem(position);
 
-                // Obtén el ítem seleccionado
-                Pista pistaSeleccionada = adaptador.getItem(position);
+            // Crea un intent para la nueva actividad
+            Intent intent = new Intent(Pistas.this, FechaYHora.class);
 
-                // Crea un intent para la nueva actividad
-                Intent intent = new Intent(Pistas.this, FechaYHora.class);
+            // Añade los datos del ítem seleccionado al intent
+            intent.putExtra("nombrePista", pistaSeleccionada.getNombre());
+            intent.putExtra("precioHora", pistaSeleccionada.getPrecioHora());
 
-                // Añade los datos del ítem seleccionado al intent
-                intent.putExtra("nombrePista", pistaSeleccionada.getNombre());
-                intent.putExtra("precioHora", pistaSeleccionada.getPrecioHora());
-
-                // Inicia la nueva actividad
-                startActivity(intent);
-
-            }
+            // Inicia la nueva actividad
+            startActivity(intent);
         });
 
-    }
 
+    }
 
 
     public void crearPista (View v){

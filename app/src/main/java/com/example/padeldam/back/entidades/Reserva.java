@@ -1,12 +1,11 @@
 package com.example.padeldam.back.entidades;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.UUID;
 
-public class ReservarPista implements Serializable {
+public class Reserva implements Serializable {
         private String fecha;
         private String hora;
         private String cliente;
@@ -14,11 +13,11 @@ public class ReservarPista implements Serializable {
         private FirebaseUser empleado;
 
         // Constructor vacío necesario para Firestore
-        public ReservarPista() {
+        public Reserva() {
         }
 
         // Constructor completo
-        public ReservarPista(String fecha, String hora, String cliente, String pista, FirebaseUser empleado) {
+        public Reserva(String fecha, String hora, String cliente, String pista, FirebaseUser empleado) {
             this.fecha = fecha;
             this.hora = hora;
             this.cliente = cliente;
@@ -26,7 +25,9 @@ public class ReservarPista implements Serializable {
             this.empleado = empleado;
         }
 
-        // Getters y Setters
+
+
+    // Getters y Setters
         public String getFecha() {
             return fecha;
         }

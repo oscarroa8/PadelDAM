@@ -79,7 +79,7 @@ public class Clientes extends AppCompatActivity {
             }
         });
 
-//
+
     }
 
     private void cargarClientes() {
@@ -116,22 +116,12 @@ public class Clientes extends AppCompatActivity {
             startActivity(intent);
         }
 
-        return super.onOptionsItemSelected(item);    }
+        return super.onOptionsItemSelected(item);
+    }
 
     public void crearCliente (View v){
         Intent i = new Intent(Clientes.this, nuevoCliente.class);
         startActivity(i);
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }

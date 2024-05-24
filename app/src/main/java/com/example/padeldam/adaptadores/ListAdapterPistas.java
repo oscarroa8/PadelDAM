@@ -42,7 +42,6 @@ public class ListAdapterPistas extends ArrayAdapter<Pista> {
 
         Pista pista = getItem(position);
 
-
         TextView tvNombre = view.findViewById(R.id.nombretv);
         tvNombre.setText(pista.getNombre());
         TextView numerotv = view.findViewById(R.id.numerotv);

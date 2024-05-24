@@ -65,12 +65,7 @@ public class Reservar extends AppCompatActivity {
         // Cargar clientes de Firestore y configurar el Spinner
         cargarClientesEnSpinner();
 
-        buttonReservar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                reservarHora();
-            }
-        });
+
     }
 
     private void cargarClientesEnSpinner() {
@@ -108,7 +103,7 @@ public class Reservar extends AppCompatActivity {
         });
     }
 
-    private void reservarHora() {
+    public void reservarHora(View v) {
         if (clienteSeleccionado == null) {
             Toast.makeText(Reservar.this, "Por favor, seleccione un cliente", Toast.LENGTH_SHORT).show();
             return;
@@ -122,10 +117,12 @@ public class Reservar extends AppCompatActivity {
 
         ReservasRepositorio rp = new ReservasRepositorio(db);
 
-        rp.insertar(reserva);
-
-
-
+        rp.insertar(reserva)
+                .addOnCompleteListener(task -> {
+            Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,FechaYHora.class);//Falta crear la clase usuarios
+            startActivity(intent);
+        });
 
     }
     @Override

@@ -9,7 +9,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class ReservasRepositorio implements IReserva<Reservar> {
+public class ReservasRepositorio implements IReserva<Reserva> {
     private final FirebaseFirestore bd;
 
     private static final String TAG = ReservasRepositorio.class.getName();
@@ -18,6 +18,7 @@ public class ReservasRepositorio implements IReserva<Reservar> {
     public ReservasRepositorio(FirebaseFirestore bd) {
         this.bd = bd;
     }
+
 
     @Override
     public Task<String> insertar(Reserva reserva) {
@@ -36,22 +37,17 @@ public class ReservasRepositorio implements IReserva<Reservar> {
     }
 
     @Override
-    public Task<String> insertar(Reservar entidad) {
+    public Task<Void> actualizar(Reserva entidad) {
         return null;
     }
 
     @Override
-    public Task<Void> actualizar(Reservar entidad) {
+    public Task<Void> borrar(Reserva entidad) {
         return null;
     }
 
     @Override
-    public Task<Void> borrar(Reservar entidad) {
-        return null;
-    }
-
-    @Override
-    public Reservar getById(Integer id) {
+    public Reserva getById(Integer id) {
         return null;
     }
 }

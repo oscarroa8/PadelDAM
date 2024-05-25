@@ -113,7 +113,7 @@ public class Reservar extends AppCompatActivity {
         FirebaseUser empleado = mAuth.getCurrentUser();
 
         // Crear un nuevo objeto Reserva
-        Reserva reserva = new Reserva(fechaSeleccionada, horaSeleccionada, clienteSeleccionado, nombrePista, empleado);
+        Reserva reserva = new Reserva(fechaSeleccionada, horaSeleccionada, clienteSeleccionado, nombrePista, empleado.getEmail());
 
         ReservasRepositorio rp = new ReservasRepositorio(db);
 

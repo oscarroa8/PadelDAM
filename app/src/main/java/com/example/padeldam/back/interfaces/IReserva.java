@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface IReserva<T> extends Operaciones<T>{
 
-    Task<String> insertar(Reserva reserva);
+
 }

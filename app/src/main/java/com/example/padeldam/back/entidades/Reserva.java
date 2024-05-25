@@ -10,19 +10,19 @@ public class Reserva implements Serializable {
         private String hora;
         private String cliente;
         private String pista;
-        private FirebaseUser empleado;
+        private String empleadoEmail;
 
         // Constructor vacío necesario para Firestore
         public Reserva() {
         }
 
         // Constructor completo
-        public Reserva(String fecha, String hora, String cliente, String pista, FirebaseUser empleado) {
+        public Reserva(String fecha, String hora, String cliente, String pista, String empleadoEmail) {
             this.fecha = fecha;
             this.hora = hora;
             this.cliente = cliente;
             this.pista = pista;
-            this.empleado = empleado;
+            this.empleadoEmail = empleadoEmail;
         }
 
 
@@ -60,12 +60,12 @@ public class Reserva implements Serializable {
             this.pista = pista;
         }
 
-        public FirebaseUser getEmpleado() {
-            return empleado;
+        public String getEmpleadoEmail() {
+            return empleadoEmail;
         }
 
-        public void setEmpleado(FirebaseUser empleado) {
-            this.empleado = empleado;
+        public void setEmpleadoEmail(String empleadoEmail) {
+            this.empleadoEmail = empleadoEmail;
         }
     }
 

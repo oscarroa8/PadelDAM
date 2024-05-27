@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface IReserva<T> extends Operaciones<T>{
 
+    Task<List<Reserva>> findAll();
 
 }

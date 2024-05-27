@@ -4,8 +4,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Reserva implements Serializable {
+
+
+
+    private String idReserva;
         private String fecha;
         private String hora;
         private String cliente;
@@ -18,6 +23,7 @@ public class Reserva implements Serializable {
 
         // Constructor completo
         public Reserva(String fecha, String hora, String cliente, String pista, String empleadoEmail) {
+            this.idReserva = UUID.randomUUID().toString();
             this.fecha = fecha;
             this.hora = hora;
             this.cliente = cliente;
@@ -25,9 +31,26 @@ public class Reserva implements Serializable {
             this.empleadoEmail = empleadoEmail;
         }
 
+    public Reserva(String idReserva,String fecha, String hora, String cliente, String pista, String empleadoEmail) {
+        this.idReserva = idReserva;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.cliente = cliente;
+        this.pista = pista;
+        this.empleadoEmail = empleadoEmail;
+    }
+
 
 
     // Getters y Setters
+
+    public String getIdReserva() {
+        return idReserva;
+    }
+
+    public void setIdReserva(String idReserva) {
+        this.idReserva = idReserva;
+    }
         public String getFecha() {
             return fecha;
         }

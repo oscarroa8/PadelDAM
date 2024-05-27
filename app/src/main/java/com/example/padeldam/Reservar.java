@@ -76,7 +76,12 @@ public class Reservar extends AppCompatActivity {
                     List<String> clientes = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         String nombreCliente = document.getString("nombre");
-                        clientes.add(nombreCliente);
+                        String primerApellido = document.getString("apellido1");
+                        String segundoApellido = document.getString("apellido2");
+
+                        // Construir el nombre completo del cliente
+                        String nombreCompleto = nombreCliente + " " + primerApellido + " " + segundoApellido;
+                        clientes.add(nombreCompleto);
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(Reservar.this, android.R.layout.simple_spinner_item, clientes);
@@ -120,8 +125,11 @@ public class Reservar extends AppCompatActivity {
         rp.insertar(reserva)
                 .addOnCompleteListener(task -> {
             Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this,FechaYHora.class);//Falta crear la clase usuarios
+            Intent intent = new Intent(this,FechaYHora.class);
+                    intent.putExtra("fechaSeleccionada", fechaSeleccionada);
+                    intent.putExtra("nombrePista", nombrePista);
             startActivity(intent);
+
         });
 
     }

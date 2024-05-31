@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,6 +24,23 @@ public class Alquiler extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_alquiler);
+
+        ImageView ivPelotas = findViewById(R.id.ivPelotas);
+        ImageView ivPalas = findViewById(R.id.ivPalas);
+        ImageView ivZapatillas = findViewById(R.id.ivZapatillas);
+
+//
+
+        ivPelotas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
+                ivPelotas.startAnimation(anim);
+               // Intent i = new Intent(Alquiler.this, ReservaPelotas.class);
+               // startActivity(i);
+            }
+        });
+
 
     }
 

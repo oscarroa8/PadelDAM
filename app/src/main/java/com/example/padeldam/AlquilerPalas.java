@@ -21,12 +21,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.padeldam.back.dao.MaterialesRepositorio;
 import com.example.padeldam.back.entidades.BotePelotas;
-import com.example.padeldam.back.entidades.Zapatillas;
+import com.example.padeldam.back.entidades.Palas;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
-public class AlquilerZapatillas extends AppCompatActivity {
+public class AlquilerPalas extends AppCompatActivity {
+
     private GridLayout gridLayout;
     private FirebaseFirestore db;
     private MaterialesRepositorio mr;
@@ -34,12 +35,12 @@ public class AlquilerZapatillas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alquiler_zapatillas);
-        gridLayout = findViewById(R.id.gridLayoutZapatillas);
+        setContentView(R.layout.activity_alquiler_palas);
+        gridLayout = findViewById(R.id.gridLayoutPalas);
         db = FirebaseFirestore.getInstance();
         mr = new MaterialesRepositorio(db);
 
-        cargarZapas();
+        cargarPalas();
     }
 
     @Override
@@ -68,23 +69,23 @@ public class AlquilerZapatillas extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);    }
 
-    private void cargarZapas() {
-        mr.findAllZapatillas().addOnCompleteListener(task -> {
+    private void cargarPalas() {
+        mr.findAllPalas().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
-                List<Zapatillas> zapatillas = task.getResult();
-                mostrarZapatillas(zapatillas);
+                List<Palas> palas = task.getResult();
+                mostrarPalas(palas);
             }
         });
     }
 
-    private void mostrarZapatillas(List<Zapatillas> zapatillas) {
+    private void mostrarPalas(List<Palas> palas) {
         gridLayout.removeAllViews();
         final Context context = this;
 
-        for (Zapatillas zapas : zapatillas) {
+        for (Palas pala : palas) {
 
             Button button = new Button(this);
-            button.setText(zapas.getNombre() + "\n" + zapas.getMarca() + "\n" + zapas.getPrecio() + "€"+ " talla"+ zapas.getTalla());
+            button.setText(pala.getNombre() + "\n" + pala.getMarca() + " " +pala.getModelo()+"\n" + pala.getPrecio() + "€");
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -93,18 +94,18 @@ public class AlquilerZapatillas extends AppCompatActivity {
 
             button.setLayoutParams(params);
 
-            if (!zapas.isAlquilado()) {
+            if (!pala.isAlquilado()) {
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
             }
-            if (zapas.isAlquilado()) {
+            if (pala.isAlquilado()) {
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
             }
 
             button.setOnClickListener(view -> {
-                if (zapas.isAlquilado()) {
-                    mostrarDialogoDesAlquilar(zapas);
+                if (pala.isAlquilado()) {
+                    mostrarDialogoDesAlquilar(pala);
                 } else {
-                    mostrarDialogoAlquilar(zapas);
+                    mostrarDialogoAlquilar(pala);
                 }
             });
 
@@ -112,44 +113,44 @@ public class AlquilerZapatillas extends AppCompatActivity {
         }
     }
 
-    private void mostrarDialogoAlquilar(Zapatillas zapas) {
+    private void mostrarDialogoAlquilar(Palas pala) {
         new AlertDialog.Builder(this)
                 .setTitle("Alquilar")
-                .setMessage("¿Estás seguro de que deseas alquilar esta zapatillas " + zapas.getNombre() + "?")
+                .setMessage("¿Estás seguro de que deseas alquilar esta pala " + pala.getMarca() +" "+ pala.getModelo()+"?")
                 .setPositiveButton("Sí", (dialog, which) -> {
-                    mr.actualizarZapatillas(zapas)
+                    mr.actualizarPalas(pala)
                             .addOnSuccessListener(aVoid -> {
-                                cargarZapas();
-                                Toast.makeText(AlquilerZapatillas.this, "Zapatillas alquiladas con éxito", Toast.LENGTH_SHORT).show();
+                                cargarPalas();
+                                Toast.makeText(AlquilerPalas.this, "Pala alquilada con éxito", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
-                                Toast.makeText(AlquilerZapatillas.this, "Error al alquilar el zapatillas", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AlquilerPalas.this, "Error al alquilar una pala", Toast.LENGTH_SHORT).show();
                             });
                 })
                 .setNegativeButton("No", null)
                 .show();
     }
 
-    private void mostrarDialogoDesAlquilar(Zapatillas zapas) {
+    private void mostrarDialogoDesAlquilar(Palas pala) {
         new AlertDialog.Builder(this)
                 .setTitle("Devolver")
-                .setMessage("¿Estás seguro de que deseas devolver estas zapatillas " + zapas.getNombre() + "?")
+                .setMessage("¿Estás seguro de que deseas devolver este bote " +  pala.getMarca() +" "+ pala.getModelo()+ "?")
                 .setPositiveButton("Sí", (dialog, which) -> {
-                    mr.devolverZapatillas(zapas)
+                    mr.devolverPalas(pala)
                             .addOnSuccessListener(aVoid -> {
-                                cargarZapas();
-                                Toast.makeText(AlquilerZapatillas.this, "Zapatillas devueltas con éxito", Toast.LENGTH_SHORT).show();
+                                cargarPalas();
+                                Toast.makeText(AlquilerPalas.this, "Pala devuelta con éxito", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
-                                Toast.makeText(AlquilerZapatillas.this, "Error al devolver las zapatillas", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AlquilerPalas.this, "Error al devolver la pala", Toast.LENGTH_SHORT).show();
                             });
                 })
                 .setNegativeButton("No", null)
                 .show();
     }
 
-    public void crearZapatillas(View v) {
-        Intent i = new Intent(AlquilerZapatillas.this, NuevasZapatillas.class);
+    public void crearPala(View v) {
+        Intent i = new Intent(AlquilerPalas.this, NuevaPala.class);
         startActivity(i);
     }
 }

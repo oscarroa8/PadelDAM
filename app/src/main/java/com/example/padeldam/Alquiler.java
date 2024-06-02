@@ -51,6 +51,16 @@ public class Alquiler extends AppCompatActivity {
             }
         });
 
+        ivPalas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
+                ivPalas.startAnimation(anim);
+                Intent i = new Intent(Alquiler.this, AlquilerPalas.class);
+                startActivity(i);
+            }
+        });
+
 
     }
 

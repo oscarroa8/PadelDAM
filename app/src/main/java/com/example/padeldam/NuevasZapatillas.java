@@ -3,11 +3,14 @@ package com.example.padeldam;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.padeldam.back.dao.MaterialesRepositorio;
@@ -21,7 +24,7 @@ public class NuevasZapatillas extends AppCompatActivity {
 
     private EditText etTalla;
 
-    private Button btnCrearBote;
+    private Button btnCrearZapatilla;
 
     private FirebaseFirestore db;
 
@@ -35,12 +38,36 @@ public class NuevasZapatillas extends AppCompatActivity {
         etNombre = findViewById(R.id.etNombre);
         etMarca = findViewById(R.id.etMarca);
         etTalla = findViewById(R.id.etTalla);
-        btnCrearBote = findViewById(R.id.btnCrearZapas);
+        btnCrearZapatilla = findViewById(R.id.btnCrearZapas);
 
         db = FirebaseFirestore.getInstance();
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.overflow,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.itemCliente){
+            Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
+            startActivity(intent);
+        }
+        if(id == R.id.itemHome){
+            Intent intent = new Intent(this,menuPrincipal.class);//Falta crear la clase usuarios
+            startActivity(intent);
+        }
+        if(id == R.id.itemLogout){
+            Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
+            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+
+            startActivity(intent);
+        }
+
+        return super.onOptionsItemSelected(item);    }
     public void crearBote(View v) {
         String  precioStr= etPrecio.getText().toString().trim();
         String nombre = etNombre.getText().toString().trim();

@@ -13,32 +13,41 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-import com.example.padeldam.back.dao.PistaRepositorio;
-import com.example.padeldam.back.entidades.Pista;
+import com.example.padeldam.back.dao.MaterialesRepositorio;
+import com.example.padeldam.back.entidades.Palas;
+import com.example.padeldam.back.entidades.Zapatillas;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class nuevaPista extends AppCompatActivity {
-    Button btnCrear;
-    EditText etNombre,etNumero,etMaterial,etPrecio;
-    FirebaseFirestore bd;
+public class NuevaPala extends AppCompatActivity {
+    private EditText etPrecio;
+    private EditText etNombre;
+    private EditText etMarca;
+    private EditText etModelo;
+
+
+    private Button btnCrearPala;
+
+    private FirebaseFirestore db;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_nueva_pista);
+        setContentView(R.layout.activity_nueva_pala);
 
-        btnCrear = findViewById(R.id.btnCrearP);
+        etPrecio = findViewById(R.id.etPrecioPala);
+        etNombre = findViewById(R.id.etNombre);
+        etMarca = findViewById(R.id.etMarca);
+        etModelo = findViewById(R.id.etModelo);
+        btnCrearPala = findViewById(R.id.btnCrearPala);
 
-        bd = FirebaseFirestore.getInstance();
+        db = FirebaseFirestore.getInstance();
 
-
-        etNombre = findViewById(R.id.editTextNombrePista);
-        etNumero = findViewById(R.id.etNumero);
-        etMaterial = findViewById(R.id.etMaterialPista);
-        etPrecio= findViewById(R.id.etNumero);
-    }
+}
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.overflow,menu);
@@ -65,24 +74,28 @@ public class nuevaPista extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);    }
 
-    public void insertarPista(View view){
-        PistaRepositorio pr = new PistaRepositorio(bd);
-        String nombrePista= etNombre.getText().toString();
-        int numeroPista = Integer.parseInt(etNumero.getText().toString());
-        String materialPista = etMaterial.getText().toString();
-       int precioPista =Integer.parseInt(etPrecio.getText().toString());
+    public void insertarPala(View v) {
+        String precioStr = etPrecio.getText().toString().trim();
+        String nombre = etNombre.getText().toString().trim();
+        String marca = etMarca.getText().toString().trim();
+        String modelo = etModelo.getText().toString().trim();
+        double precio = Double.parseDouble(precioStr);
 
-        Pista p = new Pista(nombrePista,numeroPista,materialPista,precioPista);
 
-        if (!nombrePista.isEmpty() && !materialPista.isEmpty()) {
-            pr.insertar(p)
+        Palas nuevaPala = new Palas(nombre, marca, modelo, precio);
+
+        MaterialesRepositorio mr = new MaterialesRepositorio(db);
+
+        if (!nombre.isEmpty() && !marca.isEmpty() && !precioStr.isEmpty()) {
+            mr.insertarPalas(nuevaPala)
                     .addOnCompleteListener(task -> {
                         Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this,Pistas.class);//Falta crear la clase usuarios
+                        Intent intent = new Intent(this, AlquilerPalas.class);
                         startActivity(intent);
                     });
         } else {
             Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
         }
+
     }
 }

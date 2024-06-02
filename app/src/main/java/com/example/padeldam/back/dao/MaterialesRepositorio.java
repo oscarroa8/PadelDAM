@@ -5,6 +5,7 @@ import android.util.Log;
 import com.example.padeldam.back.entidades.BotePelotas;
 import com.example.padeldam.back.entidades.Cliente;
 import com.example.padeldam.back.entidades.Material;
+import com.example.padeldam.back.entidades.Palas;
 import com.example.padeldam.back.entidades.Pista;
 import com.example.padeldam.back.entidades.Zapatillas;
 import com.example.padeldam.back.interfaces.ICliente;
@@ -206,6 +207,93 @@ public class MaterialesRepositorio implements IMateriales<Material> {
                 "precio", zapas.getPrecio(),
                 "alquilado", false,
                 "talla", zapas.getTalla()
+        ).addOnSuccessListener(aVoid -> {
+            Log.d("Firestore", "Bote actualizado exitosamente");
+        }).addOnFailureListener(e -> {
+            Log.e("Firestore", "Error actualizando el bote", e);
+        });
+    }
+
+    @Override
+    public Task<List<Palas>> findAllPalas() {
+        return  bd.collection("Materiales").document("Palas").collection("palas")
+                .get()
+                .continueWith( task -> {
+                            List<Palas> palas = new ArrayList<>();
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    Palas pala= new Palas(
+                                            document.getId(),
+                                            document.get("nombre", String.class),
+                                            document.get("marca", String.class),
+                                            document.get("modelo", String.class),
+                                            document.get("precio", Integer.class),
+                                            document.get("alquilado", boolean.class)
+
+                                    );
+                                    palas.add(pala);
+                                }
+                            }
+                            else {
+                                Log.w(TAG, "Error en consulta de firebase", task.getException());
+                            }
+                            return palas;
+                        }
+                );
+    }
+
+    @Override
+    public Task<String> insertarPalas(Palas pala) {
+        return  bd.collection("Materiales").document("Palas").collection("palas")
+                .add(pala)
+                .continueWith(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentReference doc = task.getResult();
+                        return doc.getId();
+                    } else {
+                        Log.w(TAG, "Error en consulta de firebase", task.getException());
+                        return null;
+                    }
+                });
+    }
+
+    @Override
+    public Task<Void> actualizarPalas(Palas pala) {
+        DocumentReference boteRef = bd.collection("Materiales").document("Palas")
+                .collection("palas")
+                .document(pala.getIdMaterial());
+
+        Log.d("Firestore", "Actualizando palas: " + pala.getIdMaterial());
+
+        return boteRef.update(
+                "nombre", pala.getNombre(),
+                "marca", pala.getMarca(),
+                "marca", pala.getMarca(),
+                "precio", pala.getPrecio(),
+                "alquilado", true
+
+        ).addOnSuccessListener(aVoid -> {
+            Log.d("Firestore", "Bote actualizado exitosamente");
+        }).addOnFailureListener(e -> {
+            Log.e("Firestore", "Error actualizando el bote", e);
+        });
+    }
+
+    @Override
+    public Task<Void> devolverPalas(Palas pala) {
+        DocumentReference boteRef = bd.collection("Materiales").document("Palas")
+                .collection("palas")
+                .document(pala.getIdMaterial());
+
+        Log.d("Firestore", "Actualizando palas: " + pala.getIdMaterial());
+
+        return boteRef.update(
+                "nombre", pala.getNombre(),
+                "marca", pala.getMarca(),
+                "marca", pala.getMarca(),
+                "precio", pala.getPrecio(),
+                "alquilado", false
+
         ).addOnSuccessListener(aVoid -> {
             Log.d("Firestore", "Bote actualizado exitosamente");
         }).addOnFailureListener(e -> {

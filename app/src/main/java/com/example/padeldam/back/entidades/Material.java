@@ -6,16 +6,16 @@ public class Material implements Serializable {
     private Integer idMaterial;
     private double precioHora;
     private String nombre;
-    private int cantidad;
+
 
     public Material() {
     }
 
-    public Material(Integer idMaterial, double precioHora, String nombre, int cantidad) {
+    public Material(Integer idMaterial, double precioHora, String nombre) {
         this.idMaterial = idMaterial;
         this.precioHora = precioHora;
         this.nombre = nombre;
-        this.cantidad = cantidad;
+
     }
 
     public Integer getIdMaterial() {
@@ -42,11 +42,5 @@ public class Material implements Serializable {
         this.nombre = nombre;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
 }

@@ -36,8 +36,8 @@ public class Alquiler extends AppCompatActivity {
             public void onClick(View view) {
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
                 ivPelotas.startAnimation(anim);
-               // Intent i = new Intent(Alquiler.this, ReservaPelotas.class);
-               // startActivity(i);
+                Intent i = new Intent(Alquiler.this, AlquilerPelotas.class);
+                startActivity(i);
             }
         });
 

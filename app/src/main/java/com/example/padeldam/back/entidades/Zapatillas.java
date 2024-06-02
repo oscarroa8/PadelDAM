@@ -2,42 +2,42 @@ package com.example.padeldam.back.entidades;
 
 import java.util.UUID;
 
-public class BotePelotas {
+public class Zapatillas {
     private String idMaterial;
     private double precio;
     private String nombre;
+
+
     private String marca;
+    private String talla;
 
 
 
     private boolean alquilado;
 
 
-    public BotePelotas() {
-
+    public Zapatillas() {
     }
 
-    public BotePelotas(String idMaterial, String nombre,String marca, double precio,boolean alquilado) {
+    public Zapatillas(String idMaterial,String nombre, String marca, double precio,  boolean alquilado,String talla) {
         this.idMaterial = idMaterial;
-        this.nombre = nombre;
-        this.marca = marca;
         this.precio = precio;
-        this.alquilado = alquilado;
-
-
-
-    }
-    public BotePelotas(String nombre, String marca, double precio) {
-        this.idMaterial = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.marca = marca;
-        this.precio =precio;
-        this.alquilado = false;
-
-
+        this.alquilado = alquilado;
+        this.talla = talla;
     }
 
-    // Métodos getter y setter
+    public Zapatillas(  String nombre, String marca, double precio,String talla) {
+        this.idMaterial =  UUID.randomUUID().toString();;
+        this.precio = precio;
+        this.nombre = nombre;
+        this.marca = marca;
+        this.alquilado = false;
+        this.talla = talla;
+    }
+
+
     public String getIdMaterial() {
         return idMaterial;
     }
@@ -69,6 +69,7 @@ public class BotePelotas {
     public void setMarca(String marca) {
         this.marca = marca;
     }
+
     public boolean isAlquilado() {
         return alquilado;
     }
@@ -76,5 +77,13 @@ public class BotePelotas {
     public void setAlquilado(boolean alquilado) {
         this.alquilado = alquilado;
     }
-}
 
+    public String getTalla() {
+        return talla;
+    }
+
+    public void setTalla(String talla) {
+        this.talla = talla;
+    }
+
+}

@@ -2,22 +2,14 @@ package com.example.padeldam;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
@@ -26,20 +18,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.padeldam.back.dao.MaterialesRepositorio;
 import com.example.padeldam.back.entidades.BotePelotas;
-import com.example.padeldam.back.entidades.Reserva;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.firestore.DocumentReference;
+import com.example.padeldam.back.entidades.Zapatillas;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class AlquilerPelotas extends AppCompatActivity {
+public class AlquilerZapatillas extends AppCompatActivity {
     private GridLayout gridLayout;
     private FirebaseFirestore db;
     private MaterialesRepositorio mr;
@@ -47,31 +31,31 @@ public class AlquilerPelotas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alquiler_pelotas);
-        gridLayout = findViewById(R.id.gridLayoutBotesPelotas);
+        setContentView(R.layout.activity_alquiler_zapatillas);
+        gridLayout = findViewById(R.id.gridLayoutZapatillas);
         db = FirebaseFirestore.getInstance();
         mr = new MaterialesRepositorio(db);
 
-        cargarBotes();
+        cargarZapas();
     }
 
-    private void cargarBotes() {
-        mr.findAllBotes().addOnCompleteListener(task -> {
+    private void cargarZapas() {
+        mr.findAllZapatillas().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
-                List<BotePelotas> botesPelotas = task.getResult();
-                mostrarBotesPelotas(botesPelotas);
+                List<Zapatillas> zapatillas = task.getResult();
+                mostrarZapatillas(zapatillas);
             }
         });
     }
 
-    private void mostrarBotesPelotas(List<BotePelotas> botesPelotas) {
+    private void mostrarZapatillas(List<Zapatillas> zapatillas) {
         gridLayout.removeAllViews();
         final Context context = this;
 
-        for (BotePelotas bote : botesPelotas) {
+        for (Zapatillas zapas : zapatillas) {
 
             Button button = new Button(this);
-            button.setText(bote.getNombre() + "\n" + bote.getMarca() + "\n" + bote.getPrecio() + "€");
+            button.setText(zapas.getNombre() + "\n" + zapas.getMarca() + "\n" + zapas.getPrecio() + "€"+ " talla"+ zapas.getTalla());
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -80,18 +64,18 @@ public class AlquilerPelotas extends AppCompatActivity {
 
             button.setLayoutParams(params);
 
-            if (!bote.isAlquilado()) {
+            if (!zapas.isAlquilado()) {
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
             }
-            if (bote.isAlquilado()) {
+            if (zapas.isAlquilado()) {
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
             }
 
             button.setOnClickListener(view -> {
-                if (bote.isAlquilado()) {
-                    mostrarDialogoDesAlquilar(bote);
+                if (zapas.isAlquilado()) {
+                    mostrarDialogoDesAlquilar(zapas);
                 } else {
-                    mostrarDialogoAlquilar(bote);
+                    mostrarDialogoAlquilar(zapas);
                 }
             });
 
@@ -99,45 +83,44 @@ public class AlquilerPelotas extends AppCompatActivity {
         }
     }
 
-    private void mostrarDialogoAlquilar(BotePelotas bote) {
+    private void mostrarDialogoAlquilar(Zapatillas zapas) {
         new AlertDialog.Builder(this)
                 .setTitle("Alquilar")
-                .setMessage("¿Estás seguro de que deseas alquilar este bote " + bote.getNombre() + "?")
+                .setMessage("¿Estás seguro de que deseas alquilar esta zapatillas " + zapas.getNombre() + "?")
                 .setPositiveButton("Sí", (dialog, which) -> {
-                    mr.actualizarBote(bote)
+                    mr.actualizarZapatillas(zapas)
                             .addOnSuccessListener(aVoid -> {
-                                cargarBotes();
-                                Toast.makeText(AlquilerPelotas.this, "Bote alquilado con éxito", Toast.LENGTH_SHORT).show();
+                                cargarZapas();
+                                Toast.makeText(AlquilerZapatillas.this, "Zapatillas alquiladas con éxito", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
-                                Toast.makeText(AlquilerPelotas.this, "Error al alquilar el bote", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AlquilerZapatillas.this, "Error al alquilar el zapatillas", Toast.LENGTH_SHORT).show();
                             });
                 })
                 .setNegativeButton("No", null)
                 .show();
     }
 
-    private void mostrarDialogoDesAlquilar(BotePelotas bote) {
+    private void mostrarDialogoDesAlquilar(Zapatillas zapas) {
         new AlertDialog.Builder(this)
                 .setTitle("Devolver")
-                .setMessage("¿Estás seguro de que deseas devolver este bote " + bote.getNombre() + "?")
+                .setMessage("¿Estás seguro de que deseas devolver estas zapatillas " + zapas.getNombre() + "?")
                 .setPositiveButton("Sí", (dialog, which) -> {
-                    mr.devolverBote(bote)
+                    mr.devolverZapatillas(zapas)
                             .addOnSuccessListener(aVoid -> {
-                                cargarBotes();
-                                Toast.makeText(AlquilerPelotas.this, "Bote devuelto con éxito", Toast.LENGTH_SHORT).show();
+                                cargarZapas();
+                                Toast.makeText(AlquilerZapatillas.this, "Zapatillas devueltas con éxito", Toast.LENGTH_SHORT).show();
                             })
                             .addOnFailureListener(e -> {
-                                Toast.makeText(AlquilerPelotas.this, "Error al devolver el bote", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(AlquilerZapatillas.this, "Error al devolver las zapatillas", Toast.LENGTH_SHORT).show();
                             });
                 })
                 .setNegativeButton("No", null)
                 .show();
     }
 
-    public void crearPelotas(View v) {
-        Intent i = new Intent(AlquilerPelotas.this, NuevoBotePelotas.class);
+    public void crearZapatillas(View v) {
+        Intent i = new Intent(AlquilerZapatillas.this, NuevasZapatillas.class);
         startActivity(i);
     }
 }
-

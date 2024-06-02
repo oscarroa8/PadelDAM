@@ -41,6 +41,16 @@ public class Alquiler extends AppCompatActivity {
             }
         });
 
+        ivZapatillas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
+                ivZapatillas.startAnimation(anim);
+                Intent i = new Intent(Alquiler.this, AlquilerZapatillas.class);
+                startActivity(i);
+            }
+        });
+
 
     }
 

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:background="@color/azul_claro"
     android:layout_height="match_parent"
-    tools:context=".AlquilerPelotas">
+    tools:context=".AlquilerZapatillas">
 
 
     <TextView
@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="520dp"
         android:layout_marginTop="16dp"
-        android:text="Botes de Pelotas Disponibles"
+        android:text="Zapatillas Disponibles"
         android:textSize="32sp"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
 
 
     <GridLayout
-        android:id="@+id/gridLayoutBotesPelotas"
+        android:id="@+id/gridLayoutZapatillas"
         android:layout_width="998dp"
         android:layout_height="547dp"
         android:layout_gravity="center_horizontal"
@@ -36,13 +36,13 @@
         app:layout_constraintTop_toTopOf="parent"></GridLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabCrearBotePelotas"
+        android:id="@+id/fabCrearZapatillas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@drawable/tennis_ball_svgrepo_com"
+        android:src="@drawable/sports_shoes_1_svgrepo_com"
         app:backgroundTint="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="crearPelotas"/>
+        android:onClick="crearZapatillas"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

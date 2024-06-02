@@ -11,14 +11,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.padeldam.back.dao.MaterialesRepositorio;
-import com.example.padeldam.back.entidades.BotePelotas;
+import com.example.padeldam.back.entidades.Zapatillas;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class NuevoBotePelotas extends AppCompatActivity {
-
-    private EditText etPrecioHora;
+public class NuevasZapatillas extends AppCompatActivity {
+    private EditText etPrecio;
     private EditText etNombre;
     private EditText etMarca;
+
+    private EditText etTalla;
 
     private Button btnCrearBote;
 
@@ -28,11 +29,12 @@ public class NuevoBotePelotas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nuevo_bote_pelotas);
+        setContentView(R.layout.activity_nuevas_zapatillas);
 
-        etPrecioHora = findViewById(R.id.etPrecioZapas);
+        etPrecio = findViewById(R.id.etPrecioZapas);
         etNombre = findViewById(R.id.etNombre);
         etMarca = findViewById(R.id.etMarca);
+        etTalla = findViewById(R.id.etTalla);
         btnCrearBote = findViewById(R.id.btnCrearZapas);
 
         db = FirebaseFirestore.getInstance();
@@ -40,24 +42,22 @@ public class NuevoBotePelotas extends AppCompatActivity {
     }
 
     public void crearBote(View v) {
-        String  precioStr= etPrecioHora.getText().toString().trim();
+        String  precioStr= etPrecio.getText().toString().trim();
         String nombre = etNombre.getText().toString().trim();
         String marca = etMarca.getText().toString().trim();
-
-
-
+        String talla = etTalla.getText().toString().trim();
         double precio = Double.parseDouble(precioStr);
 
 
-        BotePelotas nuevoBote = new BotePelotas(nombre,marca,precio);
+        Zapatillas nuevaZapatilla = new Zapatillas(nombre,marca,precio,talla);
 
         MaterialesRepositorio mr = new MaterialesRepositorio(db);
 
         if (!nombre.isEmpty() && !marca.isEmpty()&& !precioStr.isEmpty()) {
-            mr.insertarBotePelotas(nuevoBote)
+            mr.insertarZapatillas(nuevaZapatilla)
                     .addOnCompleteListener(task -> {
                         Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this,AlquilerPelotas.class);
+                        Intent intent = new Intent(this,AlquilerZapatillas.class);
                         startActivity(intent);
                     });
         } else {

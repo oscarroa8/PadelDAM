@@ -4,6 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="menu">#2F93FF</color>
     <color name="azul_claro">#75B6FB</color>
+    <color name="azul_muyclaro">#9CCCFF</color>
+
     <color name="menu_lateral">#FC8818</color>
     <color name="borde_usuarios">#FF7D00</color>
     <color name="darkGray">#757575</color>

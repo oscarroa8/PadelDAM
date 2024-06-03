@@ -203,39 +203,10 @@ public class FechaYHora extends AppCompatActivity {
     }
 
     private void mostrarDialogoCancelarReserva(Reserva reserva) {
-        new AlertDialog.Builder(this)
-                .setTitle("Cancelar Reserva")
-                .setMessage("¿Estás seguro de que deseas cancelar la reserva de la hora " + reserva.getHora() + " para la pista " + reserva.getPista() + " para el cliente "+reserva.getCliente()+"?")
-                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // Cancelar la reserva
-                        cancelarReserva(reserva);
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
+        Intent intent = new Intent(this, DetallesReserva.class);
+        intent.putExtra("reserva", reserva);
+        startActivity(intent);
     }
-
-    private void cancelarReserva(Reserva reserva) {
-        ReservasRepositorio rp = new ReservasRepositorio(FirebaseFirestore.getInstance());
-        rp.borrar(reserva).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Toast.makeText(FechaYHora.this, "Reserva cancelada", Toast.LENGTH_SHORT).show();
-                    ActualizarBotones(); // Actualizar botones después de cancelar la reserva
-                } else {
-                    Toast.makeText(FechaYHora.this, "Error al cancelar la reserva", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-
-
-
-
 
 
 }

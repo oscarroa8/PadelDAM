@@ -13,6 +13,9 @@
         android:theme="@style/Theme.PadelDAM"
         tools:targetApi="31">
         <activity
+            android:name=".DetallesReserva"
+            android:exported="false" />
+        <activity
             android:name=".NuevaPala"
             android:exported="false" />
         <activity

@@ -27,6 +27,8 @@ public class NuevoBotePelotas extends AppCompatActivity {
 
     private FirebaseFirestore db;
 
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {

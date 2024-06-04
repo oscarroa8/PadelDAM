@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -16,7 +15,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -51,7 +49,7 @@ public class menuPrincipal extends AppCompatActivity  {
             public void onClick(View view) {
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
                 ivAlquiler.startAnimation(anim);
-                Intent i = new Intent(menuPrincipal.this, Alquiler.class);
+                Intent i = new Intent(menuPrincipal.this, Alquilar.class);
                 startActivity(i);
             }
         });

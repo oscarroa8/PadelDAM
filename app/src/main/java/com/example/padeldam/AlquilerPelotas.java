@@ -2,44 +2,24 @@ package com.example.padeldam;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.InputType;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.padeldam.back.dao.MaterialesRepositorio;
 import com.example.padeldam.back.entidades.BotePelotas;
-import com.example.padeldam.back.entidades.Reserva;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AlquilerPelotas extends AppCompatActivity {
     private GridLayout gridLayout;
@@ -119,7 +99,9 @@ public class AlquilerPelotas extends AppCompatActivity {
                 if (bote.isAlquilado()) {
                     mostrarDialogoDesAlquilar(bote);
                 } else {
-                    mostrarDialogoAlquilar(bote);
+                    Intent i = new Intent(AlquilerPelotas.this, FormularioAlquiler.class);
+                    i.putExtra("nombreBote", bote.getNombre());
+                    startActivity(i);
                 }
             });
 

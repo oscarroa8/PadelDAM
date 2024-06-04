@@ -13,11 +13,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-public class Alquiler extends AppCompatActivity {
+public class Alquilar extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +33,7 @@ public class Alquiler extends AppCompatActivity {
             public void onClick(View view) {
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
                 ivPelotas.startAnimation(anim);
-                Intent i = new Intent(Alquiler.this, AlquilerPelotas.class);
+                Intent i = new Intent(Alquilar.this, AlquilerPelotas.class);
                 startActivity(i);
             }
         });
@@ -46,7 +43,7 @@ public class Alquiler extends AppCompatActivity {
             public void onClick(View view) {
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
                 ivZapatillas.startAnimation(anim);
-                Intent i = new Intent(Alquiler.this, AlquilerZapatillas.class);
+                Intent i = new Intent(Alquilar.this, AlquilerZapatillas.class);
                 startActivity(i);
             }
         });
@@ -56,7 +53,7 @@ public class Alquiler extends AppCompatActivity {
             public void onClick(View view) {
                 Animation anim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.aumento_imagen);
                 ivPalas.startAnimation(anim);
-                Intent i = new Intent(Alquiler.this, AlquilerPalas.class);
+                Intent i = new Intent(Alquilar.this, AlquilerPalas.class);
                 startActivity(i);
             }
         });

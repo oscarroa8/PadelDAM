@@ -2,83 +2,62 @@ package com.example.padeldam.back.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.UUID;
 
 public class Alquiler implements Serializable {
 
-    private Integer idAlquiler;
-    private Integer idCliente;
-    private Integer idMaterial;
-    private Integer idEmpleado;
-    private Date fecha;
-    private int horaInicio;
-    private int horaFin;
+    private String idAlquiler;
+    private String cliente;
+    private String empleado;
+    private String nombreMaterial;
+
+
+    public Alquiler(String idAlquiler, String cliente, String empleado, String nombreMaterial) {
+        this.idAlquiler = idAlquiler;
+        this.cliente = cliente;
+        this.empleado = empleado;
+        this.nombreMaterial = nombreMaterial;
+    }
+
+    public Alquiler( String cliente, String empleado, String nombreMaterial) {
+        this.idAlquiler =  UUID.randomUUID().toString();
+        this.cliente = cliente;
+        this.empleado = empleado;
+        this.nombreMaterial = nombreMaterial;
+    }
 
     public Alquiler() {
     }
 
-    public Alquiler(Integer idAlquiler, Integer idCliente, Integer idMaterial, Integer idEmpleado, Date fecha, int horaInicio, int horaFin) {
-        this.idAlquiler = idAlquiler;
-        this.idCliente = idCliente;
-        this.idMaterial = idMaterial;
-        this.idEmpleado = idEmpleado;
-        this.fecha = fecha;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-    }
-
-    public Integer getIdAlquiler() {
+    public String getIdAlquiler() {
         return idAlquiler;
     }
 
-    public void setIdAlquiler(Integer idAlquiler) {
+    public void setIdAlquiler(String idAlquiler) {
         this.idAlquiler = idAlquiler;
     }
 
-    public Integer getIdCliente() {
-        return idCliente;
+    public String getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
-    public Integer getIdMaterial() {
-        return idMaterial;
+    public String getEmpleado() {
+        return empleado;
     }
 
-    public void setIdMaterial(Integer idMaterial) {
-        this.idMaterial = idMaterial;
+    public void setEmpleado(String empleado) {
+        this.empleado = empleado;
     }
 
-    public Integer getIdEmpleado() {
-        return idEmpleado;
+    public String getNombreMaterial() {
+        return nombreMaterial;
     }
 
-    public void setIdEmpleado(Integer idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public int getHoraInicio() {
-        return horaInicio;
-    }
-
-    public void setHoraInicio(int horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    public int getHoraFin() {
-        return horaFin;
-    }
-
-    public void setHoraFin(int horaFin) {
-        this.horaFin = horaFin;
+    public void setNombreMaterial(String nombreMaterial) {
+        this.nombreMaterial = nombreMaterial;
     }
 }

@@ -46,7 +46,7 @@ public class DetallesReserva extends AppCompatActivity {
         textViewCliente.setText("Cliente: " + reserva.getCliente());
 
         TextView textViewEmpleado = findViewById(R.id.textViewEmpleado);
-        textViewEmpleado.setText("Cliente: " + reserva.getEmpleadoEmail());
+        textViewEmpleado.setText("Empleado: " + reserva.getEmpleadoEmail());
 
         Button buttonCancelar = findViewById(R.id.buttonCancelar);
         buttonCancelar.setOnClickListener(new View.OnClickListener() {

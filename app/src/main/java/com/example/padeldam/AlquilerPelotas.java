@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.padeldam.back.dao.AlquilerRepositorio;
 import com.example.padeldam.back.dao.MaterialesRepositorio;
+import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.BotePelotas;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -25,6 +28,11 @@ public class AlquilerPelotas extends AppCompatActivity {
     private GridLayout gridLayout;
     private FirebaseFirestore db;
     private MaterialesRepositorio mr;
+    private AlquilerRepositorio ar;
+
+    private boolean isAlquilado = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +41,8 @@ public class AlquilerPelotas extends AppCompatActivity {
         gridLayout = findViewById(R.id.gridLayoutBotesPelotas);
         db = FirebaseFirestore.getInstance();
         mr = new MaterialesRepositorio(db);
+        ar = new AlquilerRepositorio(db);
+
 
         cargarBotes();
     }
@@ -67,19 +77,25 @@ public class AlquilerPelotas extends AppCompatActivity {
         mr.findAllBotes().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 List<BotePelotas> botesPelotas = task.getResult();
-                mostrarBotesPelotas(botesPelotas);
+                ar.findAll().addOnCompleteListener(alquilerTask -> {
+                    if (alquilerTask.isSuccessful() && alquilerTask.getResult() != null) {
+                        List<Alquiler> alquileres = alquilerTask.getResult();
+                        mostrarBotesPelotas(botesPelotas, alquileres);
+                    }
+                });
             }
         });
     }
 
-    private void mostrarBotesPelotas(List<BotePelotas> botesPelotas) {
+    private void mostrarBotesPelotas(List<BotePelotas> botesPelotas,List<Alquiler> alquileres) {
         gridLayout.removeAllViews();
         final Context context = this;
 
         for (BotePelotas bote : botesPelotas) {
 
             Button button = new Button(this);
-            button.setText(bote.getNombre() + "\n" + bote.getMarca() + "\n" + bote.getPrecio() + "€");
+            button.setText(String.format("%s\n%s\n%.2f€", bote.getNombre(), bote.getMarca(), bote.getPrecio()));
+
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -88,18 +104,27 @@ public class AlquilerPelotas extends AppCompatActivity {
 
             button.setLayoutParams(params);
 
-            if (!bote.isAlquilado()) {
-                button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
-            }
-            if (bote.isAlquilado()) {
-                button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
+            Alquiler alquilerEncontrado = null;
+            for (Alquiler alquiler : alquileres) {
+                if (alquiler.getNombreMaterial().equals(bote.getNombre())) {
+                    isAlquilado = true;
+                    alquilerEncontrado = alquiler;
+                    break;
+                }
             }
 
+            if (!isAlquilado) {
+                button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
+            }
+            else{
+                button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
+            }
+            Alquiler finalAlquilerEncontrado = alquilerEncontrado; // Necesario para la referencia dentro del listener
             button.setOnClickListener(view -> {
-                if (bote.isAlquilado()) {
-                  /*  Intent intent = new Intent(this, DetallesAlquiler.class);
-                    intent.putExtra("alquiler", alquiler);
-                    startActivity(intent);*/
+                if (isAlquilado) {
+                    Intent intent = new Intent(AlquilerPelotas.this, DetallesAlquiler.class);
+                    intent.putExtra("alquiler", finalAlquilerEncontrado);
+                    startActivity(intent);
                 } else {
                     Intent i = new Intent(AlquilerPelotas.this, FormularioAlquiler.class);
                     i.putExtra("nombreMaterial", bote.getNombre());
@@ -112,41 +137,7 @@ public class AlquilerPelotas extends AppCompatActivity {
         }
     }
 
-  /*  private void mostrarDialogoAlquilar(BotePelotas bote) {
-        new AlertDialog.Builder(this)
-                .setTitle("Alquilar")
-                .setMessage("¿Estás seguro de que deseas alquilar este bote " + bote.getNombre() + "?")
-                .setPositiveButton("Sí", (dialog, which) -> {
-                    mr.actualizarBote(bote)
-                            .addOnSuccessListener(aVoid -> {
-                                cargarBotes();
-                                Toast.makeText(AlquilerPelotas.this, "Bote alquilado con éxito", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(AlquilerPelotas.this, "Error al alquilar el bote", Toast.LENGTH_SHORT).show();
-                            });
-                })
-                .setNegativeButton("No", null)
-                .show();
-    }*/
 
-    private void mostrarDialogoDesAlquilar(BotePelotas bote) {
-        new AlertDialog.Builder(this)
-                .setTitle("Devolver")
-                .setMessage("¿Estás seguro de que deseas devolver este bote " + bote.getNombre() + "?")
-                .setPositiveButton("Sí", (dialog, which) -> {
-                    mr.devolverBote(bote)
-                            .addOnSuccessListener(aVoid -> {
-                                cargarBotes();
-                                Toast.makeText(AlquilerPelotas.this, "Bote devuelto con éxito", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(AlquilerPelotas.this, "Error al devolver el bote", Toast.LENGTH_SHORT).show();
-                            });
-                })
-                .setNegativeButton("No", null)
-                .show();
-    }
 
     public void crearPelotas(View v) {
         Intent i = new Intent(AlquilerPelotas.this, NuevoBotePelotas.class);

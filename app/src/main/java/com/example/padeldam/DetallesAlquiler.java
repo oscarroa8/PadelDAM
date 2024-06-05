@@ -38,7 +38,7 @@ public class DetallesAlquiler extends AppCompatActivity {
 
         // Mostrar detalles de la reserva en la interfaz de usuario
         TextView textViewNombre = findViewById(R.id.tvNombreMaterial);
-        textViewNombre.setText("Nombre: " + alquiler.getNombreMaterial());
+        textViewNombre.setText("Nombre: " + alquiler.getNombreMaterial()+"  Marca: "+alquiler.getMarca());
 
 
         TextView textViewCliente = findViewById(R.id.textViewCliente);

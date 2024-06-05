@@ -10,19 +10,19 @@ public class BotePelotas {
 
 
 
-    private boolean alquilado;
+
 
 
     public BotePelotas() {
 
     }
 
-    public BotePelotas(String idMaterial, String nombre,String marca, double precio,boolean alquilado) {
+    public BotePelotas(String idMaterial, String nombre,String marca, double precio) {
         this.idMaterial = idMaterial;
         this.nombre = nombre;
         this.marca = marca;
         this.precio = precio;
-        this.alquilado = alquilado;
+
 
 
 
@@ -32,7 +32,7 @@ public class BotePelotas {
         this.nombre = nombre;
         this.marca = marca;
         this.precio =precio;
-        this.alquilado = false;
+
 
 
     }
@@ -69,12 +69,6 @@ public class BotePelotas {
     public void setMarca(String marca) {
         this.marca = marca;
     }
-    public boolean isAlquilado() {
-        return alquilado;
-    }
 
-    public void setAlquilado(boolean alquilado) {
-        this.alquilado = alquilado;
-    }
 }
 

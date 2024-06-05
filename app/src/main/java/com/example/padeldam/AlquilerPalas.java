@@ -19,9 +19,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.padeldam.back.dao.AlquilerRepositorio;
 import com.example.padeldam.back.dao.MaterialesRepositorio;
+import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.BotePelotas;
 import com.example.padeldam.back.entidades.Palas;
+import com.example.padeldam.back.entidades.Zapatillas;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -32,13 +35,18 @@ public class AlquilerPalas extends AppCompatActivity {
     private FirebaseFirestore db;
     private MaterialesRepositorio mr;
 
+    private AlquilerRepositorio ar;
+
+    private boolean isAlquilado = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alquiler_palas);
-        gridLayout = findViewById(R.id.gridLayoutPalas);
+        setContentView(R.layout.activity_alquiler_zapatillas);
+        gridLayout = findViewById(R.id.gridLayoutZapatillas);
         db = FirebaseFirestore.getInstance();
         mr = new MaterialesRepositorio(db);
+        ar = new AlquilerRepositorio(db);
 
         cargarPalas();
     }
@@ -73,19 +81,24 @@ public class AlquilerPalas extends AppCompatActivity {
         mr.findAllPalas().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 List<Palas> palas = task.getResult();
-                mostrarPalas(palas);
+                ar.findAll().addOnCompleteListener(alquilerTask -> {
+                    if (alquilerTask.isSuccessful() && alquilerTask.getResult() != null) {
+                        List<Alquiler> alquileres = alquilerTask.getResult();
+                        mostrarPalas(palas, alquileres);
+                    }
+                });
             }
         });
     }
 
-    private void mostrarPalas(List<Palas> palas) {
+    private void mostrarPalas(List<Palas> palas,List<Alquiler> alquileres) {
         gridLayout.removeAllViews();
         final Context context = this;
 
         for (Palas pala : palas) {
 
             Button button = new Button(this);
-            button.setText(pala.getNombre() + "\n" + pala.getMarca() + " " +pala.getModelo()+"\n" + pala.getPrecio() + "€");
+            button.setText(String.format("%s\n%s\n %s\n%.2f€", pala.getNombre(), pala.getMarca(), pala.getModelo(),pala.getPrecio()));
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -94,16 +107,27 @@ public class AlquilerPalas extends AppCompatActivity {
 
             button.setLayoutParams(params);
 
-            if (!pala.isAlquilado()) {
-                button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
-            }
-            if (pala.isAlquilado()) {
-                button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
+            Alquiler alquilerEncontrado = null;
+            for (Alquiler alquiler : alquileres) {
+                if (alquiler.getNombreMaterial().equals(pala.getNombre())) {
+                    isAlquilado = true;
+                    alquilerEncontrado = alquiler;
+                    break;
+                }
             }
 
+            if (!isAlquilado) {
+                button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
+            }
+            else{
+                button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
+            }
+            Alquiler finalAlquilerEncontrado = alquilerEncontrado; // Necesario para la referencia dentro del listener
             button.setOnClickListener(view -> {
-                if (pala.isAlquilado()) {
-                    mostrarDialogoDesAlquilar(pala);
+                if (isAlquilado) {
+                    Intent intent = new Intent(AlquilerPalas.this, DetallesAlquiler.class);
+                    intent.putExtra("alquiler", finalAlquilerEncontrado);
+                    startActivity(intent);
                 } else {
                     Intent i = new Intent(AlquilerPalas.this, FormularioAlquiler.class);
                     i.putExtra("nombreMaterial", pala.getNombre());
@@ -116,41 +140,6 @@ public class AlquilerPalas extends AppCompatActivity {
         }
     }
 
-    private void mostrarDialogoAlquilar(Palas pala) {
-        new AlertDialog.Builder(this)
-                .setTitle("Alquilar")
-                .setMessage("¿Estás seguro de que deseas alquilar esta pala " + pala.getMarca() +" "+ pala.getModelo()+"?")
-                .setPositiveButton("Sí", (dialog, which) -> {
-                    mr.actualizarPalas(pala)
-                            .addOnSuccessListener(aVoid -> {
-                                cargarPalas();
-                                Toast.makeText(AlquilerPalas.this, "Pala alquilada con éxito", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(AlquilerPalas.this, "Error al alquilar una pala", Toast.LENGTH_SHORT).show();
-                            });
-                })
-                .setNegativeButton("No", null)
-                .show();
-    }
-
-    private void mostrarDialogoDesAlquilar(Palas pala) {
-        new AlertDialog.Builder(this)
-                .setTitle("Devolver")
-                .setMessage("¿Estás seguro de que deseas devolver este bote " +  pala.getMarca() +" "+ pala.getModelo()+ "?")
-                .setPositiveButton("Sí", (dialog, which) -> {
-                    mr.devolverPalas(pala)
-                            .addOnSuccessListener(aVoid -> {
-                                cargarPalas();
-                                Toast.makeText(AlquilerPalas.this, "Pala devuelta con éxito", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(AlquilerPalas.this, "Error al devolver la pala", Toast.LENGTH_SHORT).show();
-                            });
-                })
-                .setNegativeButton("No", null)
-                .show();
-    }
 
     public void crearPala(View v) {
         Intent i = new Intent(AlquilerPalas.this, NuevaPala.class);

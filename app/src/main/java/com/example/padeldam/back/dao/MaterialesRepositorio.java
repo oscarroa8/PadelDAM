@@ -58,8 +58,7 @@ public class MaterialesRepositorio implements IMateriales<Material> {
                                             document.getId(),
                                             document.get("nombre", String.class),
                                             document.get("marca", String.class),
-                                            document.get("precio", Integer.class),
-                                            document.get("alquilado", boolean.class)
+                                            document.get("precio", Double.class)
 
                                     );
                                     botes.add(bp);
@@ -140,7 +139,7 @@ public class MaterialesRepositorio implements IMateriales<Material> {
                                             document.getId(),
                                             document.get("nombre", String.class),
                                             document.get("marca", String.class),
-                                            document.get("precio", Integer.class),
+                                            document.get("precio", Double.class),
                                             document.get("talla", String.class)
 
                                     );
@@ -226,8 +225,7 @@ public class MaterialesRepositorio implements IMateriales<Material> {
                                             document.get("nombre", String.class),
                                             document.get("marca", String.class),
                                             document.get("modelo", String.class),
-                                            document.get("precio", Integer.class),
-                                            document.get("alquilado", boolean.class)
+                                            document.get("precio", Double.class)
 
                                     );
                                     palas.add(pala);

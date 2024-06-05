@@ -41,8 +41,8 @@ public class AlquilerZapatillas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alquiler_zapatillas);
-        gridLayout = findViewById(R.id.gridLayoutZapatillas);
+        setContentView(R.layout.activity_alquiler_palas);
+        gridLayout = findViewById(R.id.gridLayoutPalas);
         db = FirebaseFirestore.getInstance();
         mr = new MaterialesRepositorio(db);
         ar = new AlquilerRepositorio(db);
@@ -97,7 +97,7 @@ public class AlquilerZapatillas extends AppCompatActivity {
         for (Zapatillas zapas : zapatillas) {
 
             Button button = new Button(this);
-            button.setText(zapas.getNombre() + "\n" + zapas.getMarca() + "\n" + zapas.getPrecio() + "€"+ " talla"+ zapas.getTalla());
+            button.setText(String.format("%s\n%s\n%.2f€\nTalla: %s", zapas.getNombre(), zapas.getMarca(), zapas.getPrecio(), zapas.getTalla()));
 
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.width = GridLayout.LayoutParams.WRAP_CONTENT;
@@ -139,23 +139,6 @@ public class AlquilerZapatillas extends AppCompatActivity {
         }
     }
 
-   /* private void mostrarDialogoAlquilar(Zapatillas zapas) {
-        new AlertDialog.Builder(this)
-                .setTitle("Alquilar")
-                .setMessage("¿Estás seguro de que deseas alquilar esta zapatillas " + zapas.getNombre() + "?")
-                .setPositiveButton("Sí", (dialog, which) -> {
-                    mr.actualizarZapatillas(zapas)
-                            .addOnSuccessListener(aVoid -> {
-                                cargarZapas();
-                                Toast.makeText(AlquilerZapatillas.this, "Zapatillas alquiladas con éxito", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(AlquilerZapatillas.this, "Error al alquilar el zapatillas", Toast.LENGTH_SHORT).show();
-                            });
-                })
-                .setNegativeButton("No", null)
-                .show();
-    }*/
 
 
 

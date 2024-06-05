@@ -11,19 +11,18 @@ public class Palas {
 
     private String modelo;
 
-    private boolean alquilado;
 
 
     public Palas() {
     }
 
-    public Palas(String idMaterial, String nombre, String marca, String modelo,  double precio,boolean alquilado) {
+    public Palas(String idMaterial, String nombre, String marca, String modelo,  double precio) {
         this.idMaterial = idMaterial;
         this.precio = precio;
         this.nombre = nombre;
         this.marca = marca;
         this.modelo = modelo;
-        this.alquilado = alquilado;
+
     }
 
     public Palas( String nombre, String marca, String modelo,double precio) {
@@ -32,7 +31,7 @@ public class Palas {
         this.nombre = nombre;
         this.marca = marca;
         this.modelo = modelo;
-        this.alquilado = false;
+
     }
 
     public String getIdMaterial() {
@@ -75,11 +74,5 @@ public class Palas {
         this.modelo = modelo;
     }
 
-    public boolean isAlquilado() {
-        return alquilado;
-    }
 
-    public void setAlquilado(boolean alquilado) {
-        this.alquilado = alquilado;
-    }
 }

@@ -19,8 +19,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.padeldam.back.dao.AlquilerRepositorio;
 import com.example.padeldam.back.dao.MaterialesRepositorio;
+import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.BotePelotas;
+import com.example.padeldam.back.entidades.Reserva;
 import com.example.padeldam.back.entidades.Zapatillas;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,6 +34,10 @@ public class AlquilerZapatillas extends AppCompatActivity {
     private FirebaseFirestore db;
     private MaterialesRepositorio mr;
 
+    private AlquilerRepositorio ar;
+
+    private boolean isAlquilado = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +45,7 @@ public class AlquilerZapatillas extends AppCompatActivity {
         gridLayout = findViewById(R.id.gridLayoutZapatillas);
         db = FirebaseFirestore.getInstance();
         mr = new MaterialesRepositorio(db);
+        ar = new AlquilerRepositorio(db);
 
         cargarZapas();
     }
@@ -72,12 +80,17 @@ public class AlquilerZapatillas extends AppCompatActivity {
         mr.findAllZapatillas().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 List<Zapatillas> zapatillas = task.getResult();
-                mostrarZapatillas(zapatillas);
+                ar.findAll().addOnCompleteListener(alquilerTask -> {
+                    if (alquilerTask.isSuccessful() && alquilerTask.getResult() != null) {
+                        List<Alquiler> alquileres = alquilerTask.getResult();
+                        mostrarZapatillas(zapatillas, alquileres);
+                    }
+                });
             }
         });
     }
 
-    private void mostrarZapatillas(List<Zapatillas> zapatillas) {
+    private void mostrarZapatillas(List<Zapatillas> zapatillas,List<Alquiler> alquileres) {
         gridLayout.removeAllViews();
         final Context context = this;
 
@@ -93,18 +106,32 @@ public class AlquilerZapatillas extends AppCompatActivity {
 
             button.setLayoutParams(params);
 
-            if (!zapas.isAlquilado()) {
-                button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
-            }
-            if (zapas.isAlquilado()) {
-                button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
+            Alquiler alquilerEncontrado = null;
+            for (Alquiler alquiler : alquileres) {
+                if (alquiler.getNombreMaterial().equals(zapas.getNombre())) {
+                    isAlquilado = true;
+                    alquilerEncontrado = alquiler;
+                    break;
+                }
             }
 
+            if (!isAlquilado) {
+                button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
+            }
+            else{
+                button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
+            }
+            Alquiler finalAlquilerEncontrado = alquilerEncontrado; // Necesario para la referencia dentro del listener
             button.setOnClickListener(view -> {
-                if (zapas.isAlquilado()) {
-                    mostrarDialogoDesAlquilar(zapas);
+                if (isAlquilado) {
+                    Intent intent = new Intent(AlquilerZapatillas.this, DetallesAlquiler.class);
+                    intent.putExtra("alquiler", finalAlquilerEncontrado);
+                    startActivity(intent);
                 } else {
-                    mostrarDialogoAlquilar(zapas);
+                    Intent i = new Intent(AlquilerZapatillas.this, FormularioAlquiler.class);
+                    i.putExtra("nombreMaterial", zapas.getNombre());
+                    i.putExtra("marca", zapas.getMarca());
+                    startActivity(i);
                 }
             });
 
@@ -112,7 +139,7 @@ public class AlquilerZapatillas extends AppCompatActivity {
         }
     }
 
-    private void mostrarDialogoAlquilar(Zapatillas zapas) {
+   /* private void mostrarDialogoAlquilar(Zapatillas zapas) {
         new AlertDialog.Builder(this)
                 .setTitle("Alquilar")
                 .setMessage("¿Estás seguro de que deseas alquilar esta zapatillas " + zapas.getNombre() + "?")
@@ -128,25 +155,9 @@ public class AlquilerZapatillas extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
-    }
+    }*/
 
-    private void mostrarDialogoDesAlquilar(Zapatillas zapas) {
-        new AlertDialog.Builder(this)
-                .setTitle("Devolver")
-                .setMessage("¿Estás seguro de que deseas devolver estas zapatillas " + zapas.getNombre() + "?")
-                .setPositiveButton("Sí", (dialog, which) -> {
-                    mr.devolverZapatillas(zapas)
-                            .addOnSuccessListener(aVoid -> {
-                                cargarZapas();
-                                Toast.makeText(AlquilerZapatillas.this, "Zapatillas devueltas con éxito", Toast.LENGTH_SHORT).show();
-                            })
-                            .addOnFailureListener(e -> {
-                                Toast.makeText(AlquilerZapatillas.this, "Error al devolver las zapatillas", Toast.LENGTH_SHORT).show();
-                            });
-                })
-                .setNegativeButton("No", null)
-                .show();
-    }
+
 
     public void crearZapatillas(View v) {
         Intent i = new Intent(AlquilerZapatillas.this, NuevasZapatillas.class);

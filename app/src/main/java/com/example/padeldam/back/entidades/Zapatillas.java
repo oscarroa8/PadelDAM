@@ -13,18 +13,16 @@ public class Zapatillas {
 
 
 
-    private boolean alquilado;
 
 
     public Zapatillas() {
     }
 
-    public Zapatillas(String idMaterial,String nombre, String marca, double precio,  boolean alquilado,String talla) {
+    public Zapatillas(String idMaterial,String nombre, String marca, double precio,  String talla) {
         this.idMaterial = idMaterial;
         this.precio = precio;
         this.nombre = nombre;
         this.marca = marca;
-        this.alquilado = alquilado;
         this.talla = talla;
     }
 
@@ -33,7 +31,6 @@ public class Zapatillas {
         this.precio = precio;
         this.nombre = nombre;
         this.marca = marca;
-        this.alquilado = false;
         this.talla = talla;
     }
 
@@ -70,13 +67,7 @@ public class Zapatillas {
         this.marca = marca;
     }
 
-    public boolean isAlquilado() {
-        return alquilado;
-    }
 
-    public void setAlquilado(boolean alquilado) {
-        this.alquilado = alquilado;
-    }
 
     public String getTalla() {
         return talla;

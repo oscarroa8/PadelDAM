@@ -36,7 +36,7 @@ public class FormularioAlquiler extends AppCompatActivity {
     private Button buttonAlquiler;
 
     private String nombreMaterial;
-
+    private String marca;
     private String clienteSeleccionado;
 
 
@@ -56,6 +56,8 @@ public class FormularioAlquiler extends AppCompatActivity {
         // Recupera los datos del intent
         Intent intent = getIntent();
         nombreMaterial = intent.getStringExtra("nombreMaterial");
+        marca = intent.getStringExtra("marca");
+
 
         cargarClientesEnSpinner();
 
@@ -111,7 +113,7 @@ public class FormularioAlquiler extends AppCompatActivity {
         FirebaseUser empleado = mAuth.getCurrentUser();
 
         // Crear un nuevo objeto Reserva
-        Alquiler alquiler = new Alquiler(clienteSeleccionado, empleado.getEmail(), nombreMaterial );
+        Alquiler alquiler = new Alquiler(clienteSeleccionado, empleado.getEmail(), nombreMaterial,marca );
 
         AlquilerRepositorio ar = new AlquilerRepositorio(db);
 

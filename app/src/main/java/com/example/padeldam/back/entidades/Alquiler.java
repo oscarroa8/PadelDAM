@@ -10,20 +10,24 @@ public class Alquiler implements Serializable {
     private String cliente;
     private String empleado;
     private String nombreMaterial;
+    private String marca;
 
 
-    public Alquiler(String idAlquiler, String cliente, String empleado, String nombreMaterial) {
+
+    public Alquiler(String idAlquiler, String cliente, String empleado, String nombreMaterial, String marca) {
         this.idAlquiler = idAlquiler;
         this.cliente = cliente;
         this.empleado = empleado;
         this.nombreMaterial = nombreMaterial;
+        this.marca = marca;
     }
 
-    public Alquiler( String cliente, String empleado, String nombreMaterial) {
+    public Alquiler( String cliente, String empleado, String nombreMaterial,String marca) {
         this.idAlquiler =  UUID.randomUUID().toString();
         this.cliente = cliente;
         this.empleado = empleado;
         this.nombreMaterial = nombreMaterial;
+        this.marca = marca;
     }
 
     public Alquiler() {
@@ -59,5 +63,13 @@ public class Alquiler implements Serializable {
 
     public void setNombreMaterial(String nombreMaterial) {
         this.nombreMaterial = nombreMaterial;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 }

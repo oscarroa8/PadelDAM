@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
-        android:onClick="reservarHora"
+        android:onClick="AlquilarBote"
         android:text="Alquilar" />
 
 </LinearLayout>

@@ -141,7 +141,6 @@ public class MaterialesRepositorio implements IMateriales<Material> {
                                             document.get("nombre", String.class),
                                             document.get("marca", String.class),
                                             document.get("precio", Integer.class),
-                                            document.get("alquilado", boolean.class),
                                             document.get("talla", String.class)
 
                                     );

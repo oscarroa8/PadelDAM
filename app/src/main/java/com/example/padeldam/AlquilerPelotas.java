@@ -97,10 +97,13 @@ public class AlquilerPelotas extends AppCompatActivity {
 
             button.setOnClickListener(view -> {
                 if (bote.isAlquilado()) {
-                    mostrarDialogoDesAlquilar(bote);
+                  /*  Intent intent = new Intent(this, DetallesAlquiler.class);
+                    intent.putExtra("alquiler", alquiler);
+                    startActivity(intent);*/
                 } else {
                     Intent i = new Intent(AlquilerPelotas.this, FormularioAlquiler.class);
-                    i.putExtra("nombreBote", bote.getNombre());
+                    i.putExtra("nombreMaterial", bote.getNombre());
+                    i.putExtra("marca", bote.getMarca());
                     startActivity(i);
                 }
             });
@@ -109,7 +112,7 @@ public class AlquilerPelotas extends AppCompatActivity {
         }
     }
 
-    private void mostrarDialogoAlquilar(BotePelotas bote) {
+  /*  private void mostrarDialogoAlquilar(BotePelotas bote) {
         new AlertDialog.Builder(this)
                 .setTitle("Alquilar")
                 .setMessage("¿Estás seguro de que deseas alquilar este bote " + bote.getNombre() + "?")
@@ -125,7 +128,7 @@ public class AlquilerPelotas extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
-    }
+    }*/
 
     private void mostrarDialogoDesAlquilar(BotePelotas bote) {
         new AlertDialog.Builder(this)

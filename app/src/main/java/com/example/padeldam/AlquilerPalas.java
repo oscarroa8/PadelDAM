@@ -105,7 +105,10 @@ public class AlquilerPalas extends AppCompatActivity {
                 if (pala.isAlquilado()) {
                     mostrarDialogoDesAlquilar(pala);
                 } else {
-                    mostrarDialogoAlquilar(pala);
+                    Intent i = new Intent(AlquilerPalas.this, FormularioAlquiler.class);
+                    i.putExtra("nombreMaterial", pala.getNombre());
+                    i.putExtra("marca", pala.getMarca());
+                    startActivity(i);
                 }
             });
 

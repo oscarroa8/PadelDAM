@@ -30,13 +30,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
 
 public class AlquilerZapatillas extends AppCompatActivity {
+    public static final int ALQUILADO = 0;
     private GridLayout gridLayout;
     private FirebaseFirestore db;
     private MaterialesRepositorio mr;
 
     private AlquilerRepositorio ar;
 
-    private boolean isAlquilado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +107,7 @@ public class AlquilerZapatillas extends AppCompatActivity {
             button.setLayoutParams(params);
 
             Alquiler alquilerEncontrado = null;
+            boolean isAlquilado = false;
             for (Alquiler alquiler : alquileres) {
                 if (alquiler.getNombreMaterial().equals(zapas.getNombre())) {
                     isAlquilado = true;
@@ -117,13 +118,15 @@ public class AlquilerZapatillas extends AppCompatActivity {
 
             if (!isAlquilado) {
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
+                button.setTag("NO_ALQUILADA");
             }
             else{
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
+                button.setTag("ALQUILADA");
             }
             Alquiler finalAlquilerEncontrado = alquilerEncontrado; // Necesario para la referencia dentro del listener
             button.setOnClickListener(view -> {
-                if (isAlquilado) {
+                if ("ALQUILADA".equals(view.getTag())) {
                     Intent intent = new Intent(AlquilerZapatillas.this, DetallesAlquiler.class);
                     intent.putExtra("alquiler", finalAlquilerEncontrado);
                     startActivity(intent);

@@ -37,7 +37,6 @@ public class AlquilerPalas extends AppCompatActivity {
 
     private AlquilerRepositorio ar;
 
-    private boolean isAlquilado = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +106,7 @@ public class AlquilerPalas extends AppCompatActivity {
 
             button.setLayoutParams(params);
 
+            boolean isAlquilado = false;
             Alquiler alquilerEncontrado = null;
             for (Alquiler alquiler : alquileres) {
                 if (alquiler.getNombreMaterial().equals(pala.getNombre())) {
@@ -118,13 +118,17 @@ public class AlquilerPalas extends AppCompatActivity {
 
             if (!isAlquilado) {
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
+                button.setTag("NO_ALQUILADA");
+
             }
             else{
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
+                button.setTag("ALQUILADA");
+
             }
             Alquiler finalAlquilerEncontrado = alquilerEncontrado; // Necesario para la referencia dentro del listener
             button.setOnClickListener(view -> {
-                if (isAlquilado) {
+                if ("ALQUILADA".equals(view.getTag())) {
                     Intent intent = new Intent(AlquilerPalas.this, DetallesAlquiler.class);
                     intent.putExtra("alquiler", finalAlquilerEncontrado);
                     startActivity(intent);

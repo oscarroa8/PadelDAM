@@ -30,7 +30,7 @@ public class AlquilerPelotas extends AppCompatActivity {
     private MaterialesRepositorio mr;
     private AlquilerRepositorio ar;
 
-    private boolean isAlquilado = false;
+
 
 
 
@@ -105,6 +105,7 @@ public class AlquilerPelotas extends AppCompatActivity {
             button.setLayoutParams(params);
 
             Alquiler alquilerEncontrado = null;
+            boolean isAlquilado = false;
             for (Alquiler alquiler : alquileres) {
                 if (alquiler.getNombreMaterial().equals(bote.getNombre())) {
                     isAlquilado = true;
@@ -115,13 +116,15 @@ public class AlquilerPelotas extends AppCompatActivity {
 
             if (!isAlquilado) {
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.noReservado));
+                button.setTag("NO_ALQUILADA");
             }
             else{
                 button.setBackgroundColor(ContextCompat.getColor(context, R.color.reservado));
+                button.setTag("ALQUILADA");
             }
             Alquiler finalAlquilerEncontrado = alquilerEncontrado; // Necesario para la referencia dentro del listener
             button.setOnClickListener(view -> {
-                if (isAlquilado) {
+                if ("ALQUILADA".equals(view.getTag())) {
                     Intent intent = new Intent(AlquilerPelotas.this, DetallesAlquiler.class);
                     intent.putExtra("alquiler", finalAlquilerEncontrado);
                     startActivity(intent);

@@ -129,6 +129,7 @@ public class AlquilerPelotas extends AppCompatActivity {
                     Intent i = new Intent(AlquilerPelotas.this, FormularioAlquiler.class);
                     i.putExtra("nombreMaterial", bote.getNombre());
                     i.putExtra("marca", bote.getMarca());
+                    i.putExtra("precio", bote.getPrecio());
                     startActivity(i);
                 }
             });

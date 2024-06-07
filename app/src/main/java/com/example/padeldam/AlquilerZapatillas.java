@@ -41,8 +41,8 @@ public class AlquilerZapatillas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alquiler_palas);
-        gridLayout = findViewById(R.id.gridLayoutPalas);
+        setContentView(R.layout.activity_alquiler_zapatillas);
+        gridLayout = findViewById(R.id.gridLayoutZapatillas);
         db = FirebaseFirestore.getInstance();
         mr = new MaterialesRepositorio(db);
         ar = new AlquilerRepositorio(db);
@@ -131,6 +131,8 @@ public class AlquilerZapatillas extends AppCompatActivity {
                     Intent i = new Intent(AlquilerZapatillas.this, FormularioAlquiler.class);
                     i.putExtra("nombreMaterial", zapas.getNombre());
                     i.putExtra("marca", zapas.getMarca());
+                    i.putExtra("precio", zapas.getPrecio());
+
                     startActivity(i);
                 }
             });

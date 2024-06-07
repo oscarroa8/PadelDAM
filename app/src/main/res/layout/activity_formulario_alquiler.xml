@@ -11,24 +11,154 @@
         android:id="@+id/textViewMaterial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre Material"
+        android:text="Finalizar alquiler"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:gravity="center"
+        android:layout_marginTop="25dp"
         android:layout_marginBottom="20dp"/>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingEnd="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:text="Elige el cliente que va a alquilar " />
 
     <Spinner
         android:id="@+id/spinnerClientes"
+        style="@style/spinner"
+        android:layout_width="450dp"
+        android:layout_height="wrap_content" />
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        style="@style/spinner"/>
+        android:layout_height="350dp"
+        android:layout_below="@id/textViewTitulo"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="114dp"
+        android:background="@color/azul_muyclaro"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="90dp"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/iconMaterial"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/tennis_ball_svgrepo_com" />
+
+            <TextView
+                android:id="@+id/tvNombreMaterial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textViewTitulo"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/iconMarca"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/pelotablanca" />
+
+            <TextView
+                android:id="@+id/tvMarcaMaterial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNombreMaterial"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/iconPrecio"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/money_bag_svgrepo_com" />
+
+            <TextView
+                android:id="@+id/tvPrecioMaterial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvMarcaMaterial"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
     <Button
         android:id="@+id/buttonAlquilar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
         android:enabled="false"
         android:onClick="AlquilarBote"
         android:text="Alquilar" />

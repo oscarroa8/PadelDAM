@@ -29,15 +29,21 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class FormularioAlquiler extends AppCompatActivity {
     private TextView textViewNombreMaterial;
     private Spinner spinnerClientes;
     private Button buttonAlquiler;
-
+    private TextView textViewMarca;
+    private TextView textViewPrecio;
     private String nombreMaterial;
     private String marca;
     private String clienteSeleccionado;
+
+
+    private double precio;
+
 
 
     private FirebaseFirestore db;
@@ -47,16 +53,22 @@ public class FormularioAlquiler extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_formulario_alquiler);
 
-        textViewNombreMaterial = findViewById(R.id.textViewMaterial);
+        textViewNombreMaterial = findViewById(R.id.tvNombreMaterial);
+        textViewMarca = findViewById(R.id.tvMarcaMaterial);
+        textViewPrecio = findViewById(R.id.tvPrecioMaterial);
         spinnerClientes = findViewById(R.id.spinnerClientes);
         buttonAlquiler = findViewById(R.id.buttonAlquilar);
 
         db = FirebaseFirestore.getInstance();
 
-        // Recupera los datos del intent
         Intent intent = getIntent();
         nombreMaterial = intent.getStringExtra("nombreMaterial");
         marca = intent.getStringExtra("marca");
+        precio = intent.getDoubleExtra("precio", 0.0); // Recupera el precio como double
+
+        textViewNombreMaterial.setText(nombreMaterial);
+        textViewMarca.setText(marca);
+        textViewPrecio.setText(String.format(Locale.getDefault(), "%.2f€", precio)); // Convierte el double a String con 2 decimales y añade el símbolo del euro
 
 
         cargarClientesEnSpinner();
@@ -120,7 +132,7 @@ public class FormularioAlquiler extends AppCompatActivity {
         ar.insertar(alquiler)
                 .addOnCompleteListener(task -> {
                     Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, Alquilar.class);
+                    Intent intent = new Intent(FormularioAlquiler.this, Alquilar.class);
                     startActivity(intent);
 
                 });

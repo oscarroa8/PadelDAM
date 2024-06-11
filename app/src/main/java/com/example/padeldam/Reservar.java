@@ -38,8 +38,13 @@ public class Reservar extends AppCompatActivity {
     private String clienteSeleccionado;
 
     private String nombrePista;
+    private String idPista;
+    private String idCliente;
 
     private FirebaseFirestore db;
+
+    List<String> clienteNombres = new ArrayList<>();
+    List<String> clienteIds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +60,10 @@ public class Reservar extends AppCompatActivity {
 
         // Recupera los datos del intent
         Intent intent = getIntent();
+        idPista = intent.getStringExtra("idPista");
         fechaSeleccionada = intent.getStringExtra("fechaSeleccionada");
         horaSeleccionada = intent.getStringExtra("horaSeleccionada");
-        nombrePista = intent.getStringExtra("nombrePista");
+        //nombrePista = intent.getStringExtra("nombrePista");
 
         // Muestra la fecha y hora seleccionadas
         textViewFechaHora.setText(fechaSeleccionada + " " + horaSeleccionada);
@@ -69,19 +75,24 @@ public class Reservar extends AppCompatActivity {
     }
 
     private void cargarClientesEnSpinner() {
+
         db.collection("clientes").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     List<String> clientes = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
+                        String idCliente = document.getId();
                         String nombreCliente = document.getString("nombre");
                         String primerApellido = document.getString("apellido1");
                         String segundoApellido = document.getString("apellido2");
 
                         // Construir el nombre completo del cliente
-                        String nombreCompleto = nombreCliente + " " + primerApellido + " " + segundoApellido;
+                        String nombreCompleto =nombreCliente + " " + primerApellido + " " + segundoApellido;
                         clientes.add(nombreCompleto);
+
+                        clienteNombres.add(nombreCompleto);
+                        clienteIds.add(idCliente);
                     }
 
                     ArrayAdapter<String> adapter = new ArrayAdapter<>(Reservar.this, android.R.layout.simple_spinner_item, clientes);
@@ -91,7 +102,9 @@ public class Reservar extends AppCompatActivity {
                     spinnerClientes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            clienteSeleccionado = (String) parent.getItemAtPosition(position);
+                            clienteSeleccionado = clienteNombres.get(position);
+                            // Obtener el ID del cliente seleccionado utilizando la misma posición en la lista de IDs
+                            String idClienteSeleccionado = clienteIds.get(position);
                             buttonReservar.setEnabled(true);
                         }
 
@@ -117,8 +130,11 @@ public class Reservar extends AppCompatActivity {
 
         FirebaseUser empleado = mAuth.getCurrentUser();
 
+        String idClienteSeleccionado = clienteIds.get(spinnerClientes.getSelectedItemPosition());
+
+
         // Crear un nuevo objeto Reserva
-        Reserva reserva = new Reserva(fechaSeleccionada, horaSeleccionada, clienteSeleccionado, nombrePista, empleado.getEmail());
+        Reserva reserva = new Reserva(idPista,fechaSeleccionada, horaSeleccionada, idClienteSeleccionado,empleado.getEmail());
 
         ReservasRepositorio rp = new ReservasRepositorio(db);
 
@@ -126,8 +142,9 @@ public class Reservar extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
             Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this,FechaYHora.class);
+                    intent.putExtra("idPista", idPista);
                     intent.putExtra("fechaSeleccionada", fechaSeleccionada);
-                    intent.putExtra("nombrePista", nombrePista);
+
             startActivity(intent);
 
         });

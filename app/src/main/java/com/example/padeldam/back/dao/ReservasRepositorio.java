@@ -62,7 +62,7 @@ public class ReservasRepositorio implements IReserva<Reserva> {
     }
 
     @Override
-    public Reserva getById(Integer id) {
+    public Reserva getById(String id) {
         return null;
     }
 
@@ -76,10 +76,10 @@ public class ReservasRepositorio implements IReserva<Reserva> {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     Reserva r = new Reserva(
                                             document.getId(),
+                                            document.getString("idPista"),
                                             document.getString("fecha"),
                                             document.getString("hora"),
-                                            document.getString("cliente"),
-                                            document.getString("pista"),
+                                            document.getString("idCliente"),
                                             document.getString("empleadoEmail")
                                     );
                                     reservas.add(r);

@@ -6,6 +6,7 @@ import com.example.padeldam.back.entidades.Pista;
 import com.example.padeldam.back.interfaces.IPistas;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -87,7 +88,30 @@ public class PistaRepositorio implements IPistas<Pista> {
     }
 
     @Override
-    public Pista getById(Integer id) {
+    public Pista getById(String id) {
         return null;
+    }
+    @Override
+    public Task<Pista> obtenerPistaPorId(String pistaId) {
+        return bd.collection("pistas").document(pistaId).get().continueWith(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    return new Pista(
+                            document.getId(),
+                            document.getString("nombre"),
+                            document.getLong("numero").intValue(),
+                            document.getString("material"),
+                            document.getLong("precioHora").intValue()
+                    );
+                } else {
+                    Log.w("PistasRepositorio", "Pista no encontrada");
+                    return null;
+                }
+            } else {
+                Log.w("PistasRepositorio", "Error en consulta de firebase", task.getException());
+                return null;
+            }
+        });
     }
 }

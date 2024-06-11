@@ -36,6 +36,7 @@ public class Pistas extends AppCompatActivity {
         setContentView(R.layout.activity_pistas);
         listaPistas = findViewById(R.id.listaPistas);
 
+
         FirebaseFirestore bd = FirebaseFirestore.getInstance();
         PistaRepositorio pr = new PistaRepositorio(bd);
         adaptador = new ListAdapterPistas(Pistas.this,R.layout.card_pista, new ArrayList<>());
@@ -54,8 +55,8 @@ public class Pistas extends AppCompatActivity {
             Intent intent = new Intent(Pistas.this, FechaYHora.class);
 
             // Añade los datos del ítem seleccionado al intent
-            intent.putExtra("nombrePista", pistaSeleccionada.getNombre());
-            intent.putExtra("precioHora", pistaSeleccionada.getPrecioHora());
+            intent.putExtra("idPista", pistaSeleccionada.getIdPista());
+
 
             // Inicia la nueva actividad
             startActivity(intent);

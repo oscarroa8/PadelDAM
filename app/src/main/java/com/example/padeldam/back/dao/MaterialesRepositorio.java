@@ -42,7 +42,7 @@ public class MaterialesRepositorio implements IMateriales<Material> {
     }
 
     @Override
-    public Material getById(Integer id) {
+    public Material getById(String id) {
         return null;
     }
 

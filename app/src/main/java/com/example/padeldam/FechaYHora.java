@@ -23,7 +23,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.example.padeldam.back.dao.PistaRepositorio;
 import com.example.padeldam.back.dao.ReservasRepositorio;
+import com.example.padeldam.back.entidades.Pista;
 import com.example.padeldam.back.entidades.Reserva;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,18 +40,47 @@ public class FechaYHora extends AppCompatActivity {
     private GridLayout gridLayoutHoras;
     private String fechaSeleccionada;
     private String nombrePista;
+
+    private String idPista;
+
+    private FirebaseFirestore db;
+
+    private PistaRepositorio pistasRepositorio;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fecha_yhora);
 
+        db = FirebaseFirestore.getInstance();
+
+
+        pistasRepositorio = new PistaRepositorio(db);
+
         // Obtener los datos de la pista del Intent
         Intent intent = getIntent();
-         nombrePista = intent.getStringExtra("nombrePista");
+        // nombrePista = intent.getStringExtra("nombrePista");
         fechaSeleccionada = intent.getStringExtra("fechaSeleccionada");
+        idPista = intent.getStringExtra("idPista");
 
         // Configurar la vista con los datos de la pista
-        TextView textView = findViewById(R.id.textViewPista);
-        textView.setText(nombrePista);
+        TextView textViewPista = findViewById(R.id.textViewPista);
+
+        pistasRepositorio.obtenerPistaPorId(idPista).addOnCompleteListener(new OnCompleteListener<Pista>() {
+            @Override
+            public void onComplete(@NonNull Task<Pista> task) {
+                if (task.isSuccessful()) {
+                    Pista pista = task.getResult();
+                    if (pista != null) {
+                        textViewPista.setText("Pista: " + pista.getNombre());
+                    } else {
+                        textViewPista.setText("Pista no encontrada");
+                    }
+                } else {
+                    textViewPista.setText("Error al obtener la pista");
+                }
+            }
+        });
+
 
          buttonFecha = findViewById(R.id.buttonFecha);
 
@@ -137,7 +168,9 @@ public class FechaYHora extends AppCompatActivity {
                     // Filtrar reservas para la fecha y pista seleccionadas
                     List<Reserva> reservasFiltradas = new ArrayList<>();
                     for (Reserva reserva : reservas) {
-                        if (reserva.getFecha().equals(fechaSeleccionada) && reserva.getPista().equals(nombrePista)) {
+                        if (fechaSeleccionada != null && idPista != null
+                                && fechaSeleccionada.equals(reserva.getFecha())
+                                && idPista.equals(reserva.getIdPista())) {
                             reservasFiltradas.add(reserva);
                         }
                     }
@@ -185,9 +218,10 @@ public class FechaYHora extends AppCompatActivity {
                                 } else {
                                     // Manejar la selección de hora para nueva reserva
                                     Intent intent = new Intent(FechaYHora.this, Reservar.class);
+                                    intent.putExtra("idPista", idPista);
                                     intent.putExtra("fechaSeleccionada", fechaSeleccionada);
                                     intent.putExtra("horaSeleccionada", hora);
-                                    intent.putExtra("nombrePista", nombrePista);
+                                  //  intent.putExtra("nombrePista", nombrePista);
                                     startActivity(intent);
                                 }
                             }

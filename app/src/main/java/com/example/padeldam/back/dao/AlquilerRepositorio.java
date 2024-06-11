@@ -63,7 +63,7 @@ public class AlquilerRepositorio implements IAlquiler<Alquiler> {
     }
 
     @Override
-    public Alquiler getById(Integer id) {
+    public Alquiler getById(String id) {
         return null;
     }
 

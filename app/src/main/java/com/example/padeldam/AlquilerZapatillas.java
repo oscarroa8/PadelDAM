@@ -109,7 +109,7 @@ public class AlquilerZapatillas extends AppCompatActivity {
             Alquiler alquilerEncontrado = null;
             boolean isAlquilado = false;
             for (Alquiler alquiler : alquileres) {
-                if (alquiler.getNombreMaterial().equals(zapas.getNombre())) {
+                if (alquiler.getIdMaterial() != null && zapas.getIdMaterial() != null && alquiler.getIdMaterial().equals(zapas.getIdMaterial())) {
                     isAlquilado = true;
                     alquilerEncontrado = alquiler;
                     break;
@@ -129,12 +129,14 @@ public class AlquilerZapatillas extends AppCompatActivity {
                 if ("ALQUILADA".equals(view.getTag())) {
                     Intent intent = new Intent(AlquilerZapatillas.this, DetallesAlquiler.class);
                     intent.putExtra("alquiler", finalAlquilerEncontrado);
+                    intent.putExtra("documento","Zapatillas");
+                    intent.putExtra("coleccion","zapatillas");
                     startActivity(intent);
                 } else {
                     Intent i = new Intent(AlquilerZapatillas.this, FormularioAlquiler.class);
-                    i.putExtra("nombreMaterial", zapas.getNombre());
-                    i.putExtra("marca", zapas.getMarca());
-                    i.putExtra("precio", zapas.getPrecio());
+                    i.putExtra("idMaterial", zapas.getIdMaterial());
+                    i.putExtra("documento","Zapatillas");
+                    i.putExtra("coleccion","zapatillas");
 
                     startActivity(i);
                 }

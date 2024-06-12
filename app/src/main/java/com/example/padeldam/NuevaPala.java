@@ -79,23 +79,26 @@ public class NuevaPala extends AppCompatActivity {
         String nombre = etNombre.getText().toString().trim();
         String marca = etMarca.getText().toString().trim();
         String modelo = etModelo.getText().toString().trim();
+
+        if (precioStr.isEmpty() || nombre.isEmpty() || marca.isEmpty() || modelo.isEmpty()) {
+            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         double precio = Double.parseDouble(precioStr);
 
-
         Palas nuevaPala = new Palas(nombre, marca, modelo, precio);
-
         MaterialesRepositorio mr = new MaterialesRepositorio(db);
-
-        if (!nombre.isEmpty() && !marca.isEmpty() && !precioStr.isEmpty()) {
-            mr.insertarPalas(nuevaPala)
-                    .addOnCompleteListener(task -> {
+        mr.insertarPalas(nuevaPala)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
                         Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(this, AlquilerPalas.class);
                         startActivity(intent);
-                    });
-        } else {
-            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
-        }
-
+                    } else {
+                        Toast.makeText(this, "Error al insertar los datos", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
 }

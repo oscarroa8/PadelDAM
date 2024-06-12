@@ -153,14 +153,35 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/buttonVolver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="350dp"
+            android:onClick="volverAtras"
+            android:text="Volver"  />
 
     <Button
         android:id="@+id/buttonAlquilar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="200dp"
         android:enabled="false"
         android:onClick="AlquilarBote"
         android:text="Alquilar" />
 
+
+
+
+    </LinearLayout>
 </LinearLayout>

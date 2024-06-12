@@ -128,6 +128,10 @@ public class DetallesReserva extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
+
     private void cancelarReserva(Reserva reserva) {
         ReservasRepositorio rp = new ReservasRepositorio(FirebaseFirestore.getInstance());
         rp.borrar(reserva).addOnCompleteListener(new OnCompleteListener<Void>() {

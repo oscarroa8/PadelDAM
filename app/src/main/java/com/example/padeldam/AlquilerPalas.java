@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -90,6 +91,7 @@ public class AlquilerPalas extends AppCompatActivity {
         });
     }
 
+
     private void mostrarPalas(List<Palas> palas,List<Alquiler> alquileres) {
         gridLayout.removeAllViews();
         final Context context = this;
@@ -109,7 +111,7 @@ public class AlquilerPalas extends AppCompatActivity {
             boolean isAlquilado = false;
             Alquiler alquilerEncontrado = null;
             for (Alquiler alquiler : alquileres) {
-                if (alquiler.getNombreMaterial().equals(pala.getNombre())) {
+                if (alquiler.getIdMaterial() != null && pala.getIdMaterial() != null && alquiler.getIdMaterial().equals(pala.getIdMaterial())) {
                     isAlquilado = true;
                     alquilerEncontrado = alquiler;
                     break;
@@ -131,12 +133,15 @@ public class AlquilerPalas extends AppCompatActivity {
                 if ("ALQUILADA".equals(view.getTag())) {
                     Intent intent = new Intent(AlquilerPalas.this, DetallesAlquiler.class);
                     intent.putExtra("alquiler", finalAlquilerEncontrado);
+                    intent.putExtra("documento","Palas");
+                    intent.putExtra("coleccion","palas");
+
                     startActivity(intent);
                 } else {
                     Intent i = new Intent(AlquilerPalas.this, FormularioAlquiler.class);
-                    i.putExtra("nombreMaterial", pala.getNombre());
-                    i.putExtra("marca", pala.getMarca());
-                    i.putExtra("precio", pala.getPrecio());
+                    i.putExtra("idMaterial", pala.getIdMaterial());
+                    i.putExtra("documento","Palas");
+                    i.putExtra("coleccion","palas");
                     startActivity(i);
                 }
             });

@@ -2,6 +2,7 @@ package com.example.padeldam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,11 +18,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.padeldam.back.dao.AlquilerRepositorio;
+import com.example.padeldam.back.dao.ClienteRepositorio;
 import com.example.padeldam.back.dao.ReservasRepositorio;
 import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.Reserva;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DetallesAlquiler extends AppCompatActivity {
@@ -31,23 +35,77 @@ public class DetallesAlquiler extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detalles_alquiler);
-        // Obtener detalles de la reserva del Intent
+        ClienteRepositorio clientesRepositorio = new ClienteRepositorio(FirebaseFirestore.getInstance());
         Intent intent = getIntent();
         Alquiler alquiler = (Alquiler) intent.getSerializableExtra("alquiler");
+        String documento = intent.getStringExtra("documento");
+        String coleccion = intent.getStringExtra("coleccion");
 
 
-        // Mostrar detalles de la reserva en la interfaz de usuario
-        TextView textViewNombre = findViewById(R.id.tvNombreMaterial);
-        textViewNombre.setText("Nombre: " + alquiler.getNombreMaterial()+"  Marca: "+alquiler.getMarca());
+        if (alquiler != null) {
+            String idMaterial = alquiler.getIdMaterial();
+            Log.d("DEBUG", "idMaterial: " + idMaterial);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference materialRef = db.collection("Materiales").document(documento).collection(coleccion).document(idMaterial);
+
+            materialRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            // Obtener los datos del material
+                            String nombreMaterial = document.getString("nombre");
+                            String marca = document.getString("marca");
+
+                            // Mostrar los datos del material en la interfaz de usuario
+                            TextView textViewNombre = findViewById(R.id.tvNombreMaterial);
+                            textViewNombre.setText("Nombre: " + nombreMaterial + " Marca: " + marca);
+
+                        } else {
+                            Log.d("DEBUG", "Documento no existe para idMaterial: " + idMaterial);
+                            Toast.makeText(DetallesAlquiler.this, "El material no existe", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d("DEBUG", "Error al obtener documento: ", task.getException());
+                        Toast.makeText(DetallesAlquiler.this, "Error al obtener los datos del material", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            Log.d("DEBUG", "Alquiler es null");
+            Toast.makeText(DetallesAlquiler.this, "Error al obtener los detalles del alquiler", Toast.LENGTH_SHORT).show();
+        }
 
 
         TextView textViewCliente = findViewById(R.id.textViewCliente);
-        textViewCliente.setText("Cliente: " + alquiler.getCliente());
+        String idCliente = alquiler.getIdCliente();
+        if (idCliente != null) {
+            clientesRepositorio.obtenerNombreClientePorId(idCliente).addOnCompleteListener(new OnCompleteListener<String>() {
+                @Override
+                public void onComplete(@NonNull Task<String> task) {
+                    if (task.isSuccessful()) {
+                        String nombreCliente = task.getResult();
+                        if (nombreCliente != null) {
+                            textViewCliente.setText("Cliente: " + nombreCliente);
+                        } else {
+                            textViewCliente.setText("Cliente no encontrado");
+                        }
+                    } else {
+                        textViewCliente.setText("Error al obtener el cliente");
+                    }
+                }
+            });
+        } else {
+            textViewCliente.setText("Cliente no especificado");
+        }
+
 
         TextView textViewEmpleado = findViewById(R.id.textViewEmpleado);
         textViewEmpleado.setText("Empleado: " + alquiler.getEmpleado());
 
         Button buttonCancelar = findViewById(R.id.buttonCancelarAlquiler);
+
         buttonCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

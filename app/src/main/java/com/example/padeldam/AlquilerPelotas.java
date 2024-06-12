@@ -107,7 +107,7 @@ public class AlquilerPelotas extends AppCompatActivity {
             Alquiler alquilerEncontrado = null;
             boolean isAlquilado = false;
             for (Alquiler alquiler : alquileres) {
-                if (alquiler.getNombreMaterial().equals(bote.getNombre())) {
+                if (alquiler.getIdMaterial() != null && bote.getIdMaterial() != null && alquiler.getIdMaterial().equals(bote.getIdMaterial())) {
                     isAlquilado = true;
                     alquilerEncontrado = alquiler;
                     break;
@@ -127,12 +127,14 @@ public class AlquilerPelotas extends AppCompatActivity {
                 if ("ALQUILADA".equals(view.getTag())) {
                     Intent intent = new Intent(AlquilerPelotas.this, DetallesAlquiler.class);
                     intent.putExtra("alquiler", finalAlquilerEncontrado);
+                    intent.putExtra("documento","Pelotas");
+                    intent.putExtra("coleccion","botes");
                     startActivity(intent);
                 } else {
                     Intent i = new Intent(AlquilerPelotas.this, FormularioAlquiler.class);
-                    i.putExtra("nombreMaterial", bote.getNombre());
-                    i.putExtra("marca", bote.getMarca());
-                    i.putExtra("precio", bote.getPrecio());
+                    i.putExtra("idMaterial", bote.getIdMaterial());
+                    i.putExtra("documento","Pelotas");
+                    i.putExtra("coleccion","botes");
                     startActivity(i);
                 }
             });

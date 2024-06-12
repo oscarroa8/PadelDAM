@@ -124,13 +124,24 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/buttonVolver"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="380dp"
+        android:layout_marginTop="122dp"
+        android:onClick="volverAtras"
+        android:text="Volver" />
+
+    <Button
         android:id="@+id/buttonCancelarAlquiler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="554dp"
-        android:layout_marginTop="137dp"
+        android:layout_marginStart="868dp"
+        android:layout_marginTop="124dp"
         android:background="@drawable/button_background"
         android:text="Devolver Articulo"
         android:textColor="@android:color/white" />

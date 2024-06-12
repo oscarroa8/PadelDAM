@@ -68,6 +68,9 @@ public class NuevasZapatillas extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);    }
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
     public void crearBote(View v) {
         String  precioStr= etPrecio.getText().toString().trim();
         String nombre = etNombre.getText().toString().trim();
@@ -90,6 +93,8 @@ public class NuevasZapatillas extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
         }
+
+
 
 
     }

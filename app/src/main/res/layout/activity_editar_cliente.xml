@@ -89,13 +89,26 @@
         android:hint="Correo electrónico"
         android:inputType="textEmailAddress" />
 
+
+    <Button
+        android:id="@+id/buttonVolver"
+        android:layout_width="111dp"
+        android:layout_height="66dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="314dp"
+        android:layout_marginTop="630dp"
+        android:onClick="volverAtras"
+        android:text="Volver" />
+
     <Button
         android:id="@+id/btnGuardar"
         android:layout_width="137dp"
         android:layout_height="69dp"
         android:layout_below="@id/editTextMail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="870dp"
+        android:layout_marginTop="36dp"
         android:onClick="actualizarCliente"
         android:text="Guardar" />
 

@@ -144,6 +144,10 @@ public class AlquilerPelotas extends AppCompatActivity {
     }
 
 
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
+
 
     public void crearPelotas(View v) {
         Intent i = new Intent(AlquilerPelotas.this, NuevoBotePelotas.class);

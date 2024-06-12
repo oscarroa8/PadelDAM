@@ -141,6 +141,12 @@ public class DetallesAlquiler extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);    }
 
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
+
+
+
     private void cancelarAlquiler(Alquiler alquiler) {
         AlquilerRepositorio ar = new AlquilerRepositorio(FirebaseFirestore.getInstance());
         ar.borrar(alquiler).addOnCompleteListener(new OnCompleteListener<Void>() {

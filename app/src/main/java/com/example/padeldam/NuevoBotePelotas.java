@@ -96,4 +96,7 @@ public class NuevoBotePelotas extends AppCompatActivity {
 
 
     }
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
 }

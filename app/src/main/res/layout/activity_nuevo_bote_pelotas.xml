@@ -45,13 +45,24 @@
         android:hint="Marca"/>
 
     <Button
+        android:id="@+id/buttonVolver"
+        android:layout_width="115dp"
+        android:layout_height="68dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="442dp"
+        android:onClick="volverAtras"
+        android:text="Volver" />
+
+    <Button
         android:id="@+id/btnCrearZapas"
         android:layout_width="152dp"
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="567dp"
-        android:layout_marginTop="372dp"
+        android:layout_marginStart="923dp"
+        android:layout_marginTop="442dp"
         android:onClick="crearBote"
         android:text="Crear Bote" />
 

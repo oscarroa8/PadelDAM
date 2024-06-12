@@ -174,4 +174,8 @@ public class Reservar extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);    }
+
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
 }

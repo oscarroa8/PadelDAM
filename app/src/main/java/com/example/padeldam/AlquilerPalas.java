@@ -150,6 +150,10 @@ public class AlquilerPalas extends AppCompatActivity {
         }
     }
 
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
+
 
     public void crearPala(View v) {
         Intent i = new Intent(AlquilerPalas.this, NuevaPala.class);

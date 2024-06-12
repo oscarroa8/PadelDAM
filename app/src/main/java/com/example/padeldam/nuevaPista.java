@@ -85,4 +85,9 @@ public class nuevaPista extends AppCompatActivity {
             Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
+
 }

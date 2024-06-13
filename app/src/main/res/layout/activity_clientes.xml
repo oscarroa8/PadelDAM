@@ -24,8 +24,8 @@
 
     <ListView
         android:id="@+id/listViewClientes"
-        android:layout_width="1280dp"
-        android:layout_height="528dp"
+        android:layout_width="1282dp"
+        android:layout_height="514dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTitulo" />

@@ -62,6 +62,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="335dp"
+        android:background="@color/primaryColor"
+
         android:layout_marginTop="541dp"
         android:onClick="volverAtras"
         android:text="Volver" />
@@ -71,6 +73,8 @@
         android:layout_width="152dp"
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
+        android:background="@color/primaryColor"
+
         android:layout_alignParentTop="true"
         android:layout_marginStart="849dp"
         android:layout_marginTop="541dp"

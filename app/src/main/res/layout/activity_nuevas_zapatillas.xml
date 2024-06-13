@@ -60,6 +60,8 @@
         android:layout_height="68dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:background="@color/primaryColor"
+
         android:layout_marginStart="367dp"
         android:layout_marginTop="540dp"
         android:onClick="volverAtras"
@@ -70,6 +72,8 @@
         android:layout_width="152dp"
         android:layout_height="80dp"
         android:layout_alignParentStart="true"
+        android:background="@color/primaryColor"
+
         android:layout_alignParentTop="true"
         android:layout_marginStart="832dp"
         android:layout_marginTop="534dp"

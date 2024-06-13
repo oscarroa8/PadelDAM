@@ -209,6 +209,8 @@ public class FormularioAlquiler extends AppCompatActivity {
             Intent intent = new Intent(this, menuPrincipal.class);
             startActivity(intent);
         } else if (id == R.id.itemLogout) {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
             Intent intent = new Intent(this, Login.class);
             Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
             startActivity(intent);

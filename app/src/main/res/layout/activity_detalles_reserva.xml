@@ -164,6 +164,7 @@
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentStart="true"
         android:layout_marginStart="823dp"
+        android:background="@color/primaryColor"
         android:layout_marginTop="131dp"
         android:text="Cancelar"
         android:textColor="@android:color/white" />
@@ -175,6 +176,7 @@
         android:textSize="20dp"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentStart="true"
+        android:background="@color/primaryColor"
         android:layout_marginStart="358dp"
         android:layout_marginTop="131dp"
         android:onClick="volverAtras"

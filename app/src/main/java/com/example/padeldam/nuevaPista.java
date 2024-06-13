@@ -37,7 +37,7 @@ public class nuevaPista extends AppCompatActivity {
         etNombre = findViewById(R.id.editTextNombrePista);
         etNumero = findViewById(R.id.etNumero);
         etMaterial = findViewById(R.id.etMaterialPista);
-        etPrecio= findViewById(R.id.etNumero);
+        etPrecio= findViewById(R.id.etPrecio);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -70,7 +70,7 @@ public class nuevaPista extends AppCompatActivity {
         String nombrePista= etNombre.getText().toString();
         int numeroPista = Integer.parseInt(etNumero.getText().toString());
         String materialPista = etMaterial.getText().toString();
-       int precioPista =Integer.parseInt(etPrecio.getText().toString());
+        double precioPista =Integer.parseInt(etPrecio.getText().toString());
 
         Pista p = new Pista(nombrePista,numeroPista,materialPista,precioPista);
 

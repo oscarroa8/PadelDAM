@@ -13,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Nombre de la Pista"
-        android:textSize="24sp"
+        android:text="Nombre de la pista"
+        android:textSize="35sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:gravity="center"
         android:layout_gravity="center_horizontal"/>
 

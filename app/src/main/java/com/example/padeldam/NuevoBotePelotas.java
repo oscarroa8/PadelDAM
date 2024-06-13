@@ -70,32 +70,43 @@ public class NuevoBotePelotas extends AppCompatActivity {
         return super.onOptionsItemSelected(item);    }
 
     public void crearBote(View v) {
-        String  precioStr= etPrecioHora.getText().toString().trim();
+        String precioStr = etPrecioHora.getText().toString().trim();
         String nombre = etNombre.getText().toString().trim();
         String marca = etMarca.getText().toString().trim();
 
-
-
-        double precio = Double.parseDouble(precioStr);
-
-
-        BotePelotas nuevoBote = new BotePelotas(nombre,marca,precio);
-
-        MaterialesRepositorio mr = new MaterialesRepositorio(db);
-
-        if (!nombre.isEmpty() && !marca.isEmpty()&& !precioStr.isEmpty()) {
-            mr.insertarBotePelotas(nuevoBote)
-                    .addOnCompleteListener(task -> {
-                        Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this,AlquilerPelotas.class);
-                        startActivity(intent);
-                    });
-        } else {
+        // Validar campos vacíos
+        if (nombre.isEmpty() || marca.isEmpty() || precioStr.isEmpty()) {
             Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
         }
 
+        // Convertir a double
+        double precio;
+        try {
+            precio = Double.parseDouble(precioStr);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "El precio debe ser un número válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        // Crear una nueva instancia de BotePelotas
+        BotePelotas nuevoBote = new BotePelotas(nombre, marca, precio);
+
+        // Insertar en el repositorio
+        MaterialesRepositorio mr = new MaterialesRepositorio(db);
+
+        mr.insertarBotePelotas(nuevoBote)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Bote insertado correctamente", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(this, AlquilerPelotas.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Error al insertar datos del bote", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
     public void volverAtras(View view) {
         finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
     }

@@ -41,27 +41,48 @@ public class nuevoCliente extends AppCompatActivity {
         etMail = findViewById(R.id.editTextMail);
     }
 
-    public void insertarCliente(View view){
+    public void insertarCliente(View view) {
         ClienteRepositorio cr = new ClienteRepositorio(bd);
-        String nombreCliente = etNombre.getText().toString();
-        String primerApellido = etPrimerApellido.getText().toString();
-        String segundoApellido = etSegundoApellido.getText().toString();
-        String telefono = etTelefono.getText().toString();
-        String mail = etMail.getText().toString();
+        String nombreCliente = etNombre.getText().toString().trim();
+        String primerApellido = etPrimerApellido.getText().toString().trim();
+        String segundoApellido = etSegundoApellido.getText().toString().trim();
+        String telefono = etTelefono.getText().toString().trim();
+        String mail = etMail.getText().toString().trim();
 
-        Cliente c = new Cliente(nombreCliente,primerApellido,segundoApellido,telefono,mail);
-
-        if (!nombreCliente.isEmpty() && !primerApellido.isEmpty() && !segundoApellido.isEmpty() && !telefono.isEmpty() && !mail.isEmpty()) {
-            cr.insertar(c)
-                    .addOnCompleteListener(task -> {
-                        Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this,Clientes.class);
-                        startActivity(intent);
-                    });
-        } else {
+        // Validar campos vacíos
+        if (nombreCliente.isEmpty() || primerApellido.isEmpty() || segundoApellido.isEmpty() || telefono.isEmpty() || mail.isEmpty()) {
             Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        // Validar formato del correo electrónico
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches()) {
+            Toast.makeText(this, "Correo electrónico no válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Validar formato del teléfono (ejemplo simple, puede ser más complejo)
+        if (!telefono.matches("\\d{9}")) {
+            Toast.makeText(this, "Número de teléfono no válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Crear una nueva instancia de Cliente
+        Cliente c = new Cliente(nombreCliente, primerApellido, segundoApellido, telefono, mail);
+
+        // Insertar en el repositorio
+        cr.insertar(c)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Cliente creado", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(this, Clientes.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Error al insertar datos", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

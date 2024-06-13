@@ -13,14 +13,14 @@
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="520dp"
         android:layout_marginTop="16dp"
-        android:text="Botes de Pelotas Disponibles"
-        android:textSize="32sp"
+        android:text="Botes de pelotas disponibles"
         android:textColor="@color/black"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <GridLayout
         android:id="@+id/gridLayoutBotesPelotas"
@@ -50,7 +50,7 @@
         android:id="@+id/fabCrearBotePelotas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="32dp"
         android:src="@drawable/tennis_ball_svgrepo_com"
         app:backgroundTint="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -67,23 +67,36 @@ public class nuevaPista extends AppCompatActivity {
 
     public void insertarPista(View view){
         PistaRepositorio pr = new PistaRepositorio(bd);
-        String nombrePista= etNombre.getText().toString();
-        int numeroPista = Integer.parseInt(etNumero.getText().toString());
+        String nombrePista = etNombre.getText().toString();
+        String numeroPistaStr = etNumero.getText().toString();
         String materialPista = etMaterial.getText().toString();
-        double precioPista =Integer.parseInt(etPrecio.getText().toString());
+        String precioPistaStr = etPrecio.getText().toString();
 
+        // Validar campos vacíos
+        if (nombrePista.isEmpty() || numeroPistaStr.isEmpty() || materialPista.isEmpty() || precioPistaStr.isEmpty()) {
+            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Convertir a los tipos correspondientes
+        int numeroPista;
+        double precioPista;
+        try {
+            numeroPista = Integer.parseInt(numeroPistaStr);
+            precioPista = Double.parseDouble(precioPistaStr);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Número de pista y precio deben ser numéricos", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Pista p = new Pista(nombrePista,numeroPista,materialPista,precioPista);
 
-        if (!nombrePista.isEmpty() && !materialPista.isEmpty()) {
             pr.insertar(p)
-                    .addOnCompleteListener(task -> {
-                        Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this,Pistas.class);//Falta crear la clase usuarios
-                        startActivity(intent);
-                    });
-        } else {
-            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
-        }
+                .addOnCompleteListener(task -> {
+                    Toast.makeText(this, "Pista creada", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this,Pistas.class);//Falta crear la clase usuarios
+                    startActivity(intent);
+                });
+
     }
 
     public void volverAtras(View view) {

@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="Nuevas Zapatillas"
-        android:textSize="24sp"
+        android:text="Añadir zapatillas"
+        android:textColor="@color/black"
+        android:textSize="35sp"
         android:textStyle="bold" />
 
     <EditText
@@ -73,6 +74,6 @@
         android:layout_marginStart="832dp"
         android:layout_marginTop="534dp"
         android:onClick="crearBote"
-        android:text="Crear Zapatilla" />
+        android:text="Añadir" />
 
 </RelativeLayout>

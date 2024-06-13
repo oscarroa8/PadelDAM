@@ -108,10 +108,10 @@ public class FormularioAlquiler extends AppCompatActivity {
 
         if ("Palas".equals(documento)) {
             String modelo = document.getString("modelo");
-            textViewMarca.setText(String.format("Marca: %s Modelo: %s", marca, modelo));
+            textViewMarca.setText(String.format("Marca: %s / Modelo: %s", marca, modelo));
         } else if ("Zapatillas".equals(documento)) {
             String talla = document.getString("talla");
-            textViewMarca.setText(String.format("Marca: %s Talla: %s", marca, talla));
+            textViewMarca.setText(String.format("Marca: %s / Talla: %s", marca, talla));
         } else if ("Pelotas".equals(documento)) {
             textViewMarca.setText(String.format("Marca: %s", marca));
         }

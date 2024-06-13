@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:text="Nueva Pala"
-        android:textSize="24sp"
+        android:text="Añadir pala"
+        android:textSize="35sp"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
     <EditText
@@ -74,6 +75,6 @@
         android:layout_marginStart="849dp"
         android:layout_marginTop="541dp"
         android:onClick="insertarPala"
-        android:text="Crear Pala" />
+        android:text="Añadir" />
 
 </RelativeLayout>

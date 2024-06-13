@@ -92,11 +92,11 @@ public class NuevaPala extends AppCompatActivity {
         mr.insertarPalas(nuevaPala)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Pala creada", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(this, AlquilerPalas.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(this, "Error al insertar los datos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error al insertar los datos de la pala", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

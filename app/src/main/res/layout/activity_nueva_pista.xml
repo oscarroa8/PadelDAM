@@ -13,9 +13,9 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="Nueva Pista"
+        android:text="Añadir pista"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="35sp"
         android:textStyle="bold" />
 
     <EditText

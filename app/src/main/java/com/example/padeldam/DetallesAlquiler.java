@@ -60,7 +60,7 @@ public class DetallesAlquiler extends AppCompatActivity {
 
                             // Mostrar los datos del material en la interfaz de usuario
                             TextView textViewNombre = findViewById(R.id.tvNombreMaterial);
-                            textViewNombre.setText("Nombre: " + nombreMaterial + " Marca: " + marca);
+                            textViewNombre.setText("Nombre: " + nombreMaterial + " / Marca: " + marca);
 
                         } else {
                             Log.d("DEBUG", "Documento no existe para idMaterial: " + idMaterial);

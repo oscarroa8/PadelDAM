@@ -72,30 +72,38 @@ public class NuevasZapatillas extends AppCompatActivity {
         finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
     }
     public void crearBote(View v) {
-        String  precioStr= etPrecio.getText().toString().trim();
+        String precioStr = etPrecio.getText().toString().trim();
         String nombre = etNombre.getText().toString().trim();
         String marca = etMarca.getText().toString().trim();
         String talla = etTalla.getText().toString().trim();
-        double precio = Double.parseDouble(precioStr);
 
-
-        Zapatillas nuevaZapatilla = new Zapatillas(nombre,marca,precio,talla);
-
-        MaterialesRepositorio mr = new MaterialesRepositorio(db);
-
-        if (!nombre.isEmpty() && !marca.isEmpty()&& !precioStr.isEmpty()) {
-            mr.insertarZapatillas(nuevaZapatilla)
-                    .addOnCompleteListener(task -> {
-                        Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this,AlquilerZapatillas.class);
-                        startActivity(intent);
-                    });
-        } else {
+        // Validar campos vacíos
+        if (nombre.isEmpty() || marca.isEmpty() || precioStr.isEmpty() || talla.isEmpty()) {
             Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
         }
 
+        double precio;
+        try {
+            precio = Double.parseDouble(precioStr);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "El precio debe ser un número válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        Zapatillas nuevaZapatilla = new Zapatillas(nombre, marca, precio, talla);
+        MaterialesRepositorio mr = new MaterialesRepositorio(db);
 
-
+        mr.insertarZapatillas(nuevaZapatilla)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Zapatilla creada", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(this, AlquilerZapatillas.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Error al insertar datos de la zapatilla", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
 }

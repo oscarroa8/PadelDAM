@@ -73,9 +73,7 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Error de autenticación: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
-                }) .addOnFailureListener(e -> {
-            // Manejo de fallos adicionales si es necesario
-            Toast.makeText(getApplicationContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
         });
 
     }

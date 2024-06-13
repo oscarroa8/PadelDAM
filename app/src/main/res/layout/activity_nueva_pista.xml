@@ -84,10 +84,11 @@
         android:layout_below="@+id/etPrecio"
         android:layout_alignParentStart="true"
         android:layout_marginStart="300dp"
+        android:layout_marginTop="55dp"
         android:background="@color/primaryColor"
-        android:layout_marginTop="60dp"
         android:onClick="volverAtras"
-        android:text="Volver" />
+        android:text="Volver"
+        android:textSize="20dp" />
 
     <Button
         android:id="@+id/btnCrearP"
@@ -96,7 +97,8 @@
         android:layout_below="@+id/etPrecio"
         android:layout_alignParentEnd="true"
         android:background="@color/primaryColor"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="55dp"
+        android:textSize="20dp"
         android:layout_marginEnd="300dp"
         android:onClick="insertarPista"
         android:text="Añadir" />

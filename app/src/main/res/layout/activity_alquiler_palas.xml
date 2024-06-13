@@ -13,23 +13,22 @@
         android:id="@+id/tvTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="520dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="556dp"
+        android:layout_marginTop="32dp"
         android:text="Palas disponibles"
+        android:textColor="@color/black"
         android:textSize="35sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <GridLayout
         android:id="@+id/gridLayoutPalas"
-        android:layout_width="998dp"
-        android:layout_height="547dp"
+        android:layout_width="1023dp"
+        android:layout_height="564dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="116dp"
         android:layout_weight="1"
         android:columnCount="6"
         android:rowCount="6"
@@ -40,14 +39,14 @@
         android:id="@+id/buttonVolver"
         android:layout_width="108dp"
         android:layout_height="60dp"
-        android:layout_marginStart="312dp"
-        android:layout_marginTop="40dp"
-
+        android:layout_marginStart="140dp"
+        android:textSize="20dp"
+        android:layout_marginTop="32dp"
         android:background="@color/primaryColor"
         android:onClick="volverAtras"
         android:text="Volver"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayoutPalas" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCrearPalas"

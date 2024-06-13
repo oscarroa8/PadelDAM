@@ -57,27 +57,27 @@
 
     <Button
         android:id="@+id/buttonVolver"
-        android:layout_width="115dp"
-        android:layout_height="68dp"
+        android:layout_width="183dp"
+        android:layout_height="76dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="335dp"
+        android:layout_marginStart="300dp"
         android:background="@color/primaryColor"
-
+        android:textSize="20dp"
         android:layout_marginTop="541dp"
         android:onClick="volverAtras"
         android:text="Volver" />
 
     <Button
         android:id="@+id/btnCrearPala"
-        android:layout_width="152dp"
-        android:layout_height="80dp"
+        android:layout_width="183dp"
+        android:layout_height="76dp"
         android:layout_alignParentStart="true"
-        android:background="@color/primaryColor"
-
         android:layout_alignParentTop="true"
-        android:layout_marginStart="849dp"
+        android:layout_marginStart="778dp"
         android:layout_marginTop="541dp"
+        android:textSize="20dp"
+        android:background="@color/primaryColor"
         android:onClick="insertarPala"
         android:text="Añadir" />
 

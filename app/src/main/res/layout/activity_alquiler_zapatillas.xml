@@ -38,15 +38,16 @@
 
     <Button
         android:id="@+id/buttonVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="216dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="108dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="140dp"
+        android:textSize="20dp"
+        android:layout_marginTop="32dp"
         android:background="@color/primaryColor"
         android:onClick="volverAtras"
         android:text="Volver"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridLayoutZapatillas" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCrearZapatillas"

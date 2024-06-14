@@ -56,21 +56,7 @@ public class AdapterClientes extends ArrayAdapter<Cliente> {
         TextView tvMail = view.findViewById(R.id.textViewEmail);
         tvMail.setText(cliente.getMail());
         FirebaseFirestore bd = FirebaseFirestore.getInstance();
-
-
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser empleado = mAuth.getCurrentUser();
         ImageView borrarCliente = view.findViewById(R.id.ivBorrarCliente);
-        borrarCliente.setVisibility(View.GONE);
-
-        AdminRepositorio adminRepositorio = new AdminRepositorio(bd);
-        adminRepositorio.isAdmin(empleado.getEmail()).addOnCompleteListener(task -> {
-            boolean admin = task.getResult();
-            if (admin) {
-                borrarCliente.setVisibility(View.VISIBLE);
-
-            }
-        });
         borrarCliente.setOnClickListener((v) -> borrar(cliente));
 
         return view;

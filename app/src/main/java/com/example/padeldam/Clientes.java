@@ -18,9 +18,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.padeldam.adaptadores.AdapterClientes;
+import com.example.padeldam.back.dao.AdminRepositorio;
 import com.example.padeldam.back.dao.ClienteRepositorio;
 import com.example.padeldam.back.entidades.Cliente;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -77,6 +80,19 @@ public class Clientes extends AppCompatActivity {
 
                 editarClienteLauncher.launch(intent);
 
+            }
+        });
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser empleado = mAuth.getCurrentUser();
+        FloatingActionButton btnCrearCliente = findViewById(R.id.fabCrearCliente);
+        btnCrearCliente.setVisibility(View.GONE);
+
+        AdminRepositorio adminRepositorio = new AdminRepositorio(bd);
+        adminRepositorio.isAdmin(empleado.getEmail()).addOnCompleteListener(task -> {
+            boolean admin = task.getResult();
+            if (admin) {
+                btnCrearCliente.setVisibility(View.VISIBLE);
             }
         });
 

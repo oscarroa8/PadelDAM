@@ -19,13 +19,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.padeldam.back.dao.AdminRepositorio;
 import com.example.padeldam.back.dao.AlquilerRepositorio;
 import com.example.padeldam.back.dao.MaterialesRepositorio;
 import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.BotePelotas;
 import com.example.padeldam.back.entidades.Reserva;
 import com.example.padeldam.back.entidades.Zapatillas;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -49,6 +52,19 @@ public class AlquilerZapatillas extends AppCompatActivity {
         ar = new AlquilerRepositorio(db);
 
         cargarZapas();
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser empleado = mAuth.getCurrentUser();
+        FloatingActionButton btnCrearZapatillas = findViewById(R.id.fabCrearZapatillas);
+        btnCrearZapatillas.setVisibility(View.GONE);
+
+        AdminRepositorio adminRepositorio = new AdminRepositorio(db);
+        adminRepositorio.isAdmin(empleado.getEmail()).addOnCompleteListener(task -> {
+            boolean admin = task.getResult();
+            if (admin) {
+                btnCrearZapatillas.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override

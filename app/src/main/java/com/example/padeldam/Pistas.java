@@ -41,8 +41,7 @@ public class Pistas extends AppCompatActivity {
         setContentView(R.layout.activity_pistas);
         listaPistas = findViewById(R.id.listaPistas);
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser empleado = mAuth.getCurrentUser();
+
 
         FirebaseFirestore bd = FirebaseFirestore.getInstance();
 
@@ -69,6 +68,9 @@ public class Pistas extends AppCompatActivity {
             // Inicia la nueva actividad
             startActivity(intent);
         });
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser empleado = mAuth.getCurrentUser();
 
         FloatingActionButton btnCrearPista = findViewById(R.id.fabCrearPista);
         btnCrearPista.setVisibility(View.GONE);

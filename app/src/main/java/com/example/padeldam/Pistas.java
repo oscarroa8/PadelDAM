@@ -9,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -18,8 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.padeldam.adaptadores.ListAdapterPistas;
+import com.example.padeldam.back.dao.AdminRepositorio;
 import com.example.padeldam.back.dao.PistaRepositorio;
 import com.example.padeldam.back.entidades.Pista;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -36,7 +41,11 @@ public class Pistas extends AppCompatActivity {
         setContentView(R.layout.activity_pistas);
         listaPistas = findViewById(R.id.listaPistas);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser empleado = mAuth.getCurrentUser();
+
         FirebaseFirestore bd = FirebaseFirestore.getInstance();
+
         PistaRepositorio pr = new PistaRepositorio(bd);
         adaptador = new ListAdapterPistas(Pistas.this,R.layout.card_pista, new ArrayList<>());
         listaPistas.setAdapter(adaptador);
@@ -61,6 +70,16 @@ public class Pistas extends AppCompatActivity {
             startActivity(intent);
         });
 
+        FloatingActionButton btnCrearPista = findViewById(R.id.fabCrearPista);
+        btnCrearPista.setVisibility(View.GONE);
+
+        AdminRepositorio adminRepositorio = new AdminRepositorio(bd);
+        adminRepositorio.isAdmin(empleado.getEmail()).addOnCompleteListener(task -> {
+            boolean admin = task.getResult();
+            if (admin) {
+                btnCrearPista.setVisibility(View.VISIBLE);
+            }
+        });
 
     }
 

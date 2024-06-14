@@ -8,12 +8,12 @@ public class Pista implements Serializable {
     private String nombre;
     private int numero;
     private String material;
-    private int precioHora;
+    private double precioHora;
 
     public Pista() {
     }
 
-    public Pista(String idPista, String nombre, int numero, String material, Integer precioHora) {
+    public Pista(String idPista, String nombre, int numero, String material, double precioHora) {
         this.idPista = idPista;
         this.nombre = nombre;
         this.numero = numero;
@@ -21,7 +21,7 @@ public class Pista implements Serializable {
         this.precioHora = precioHora;
     }
 
-    public Pista(String nombre, int numero, String material, int precioHora) {
+    public Pista(String nombre, int numero, String material, double precioHora) {
         this.idPista = UUID.randomUUID().toString();
         this.nombre = nombre;
         this.numero = numero;
@@ -61,11 +61,11 @@ public class Pista implements Serializable {
         this.material = material;
     }
 
-    public Integer getPrecioHora() {
+    public double getPrecioHora() {
         return precioHora;
     }
 
-    public void setPrecioHora(Integer precioHora) {
+    public void setPrecioHora(double precioHora) {
         this.precioHora = precioHora;
     }
 }

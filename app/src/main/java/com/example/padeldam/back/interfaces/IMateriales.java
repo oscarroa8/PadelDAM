@@ -33,4 +33,9 @@ public interface IMateriales<T> extends Operaciones<T>{
 
 
 
+        Task<Void> borrarMaterial(String id, String documento,String coleccion);
+
+
+
+
 }

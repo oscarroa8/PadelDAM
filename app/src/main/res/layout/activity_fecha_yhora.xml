@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,20 +13,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Nombre de la Pista"
-        android:textSize="24sp"
+        android:text="Nombre de la pista"
+        android:textSize="35sp"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:gravity="center"
         android:layout_gravity="center_horizontal"/>
+
+
 
     <Button
         android:id="@+id/buttonFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seleccionar Fecha"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/primaryColor"
+
         android:layout_marginBottom="20dp"
-        android:layout_gravity="center_horizontal"/>
+        android:text="Seleccionar Fecha" />
 
     <GridLayout
         android:id="@+id/gridLayoutHoras"
@@ -37,6 +42,8 @@
         android:rowCount="4"
         android:layout_gravity="center_horizontal">
     </GridLayout>
+
+
 
 </LinearLayout>
 

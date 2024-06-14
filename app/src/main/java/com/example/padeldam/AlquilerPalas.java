@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.BotePelotas;
 import com.example.padeldam.back.entidades.Palas;
 import com.example.padeldam.back.entidades.Zapatillas;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -68,6 +70,8 @@ public class AlquilerPalas extends AppCompatActivity {
             startActivity(intent);
         }
         if(id == R.id.itemLogout){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
             Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
 
@@ -90,6 +94,7 @@ public class AlquilerPalas extends AppCompatActivity {
         });
     }
 
+
     private void mostrarPalas(List<Palas> palas,List<Alquiler> alquileres) {
         gridLayout.removeAllViews();
         final Context context = this;
@@ -109,7 +114,7 @@ public class AlquilerPalas extends AppCompatActivity {
             boolean isAlquilado = false;
             Alquiler alquilerEncontrado = null;
             for (Alquiler alquiler : alquileres) {
-                if (alquiler.getNombreMaterial().equals(pala.getNombre())) {
+                if (alquiler.getIdMaterial() != null && pala.getIdMaterial() != null && alquiler.getIdMaterial().equals(pala.getIdMaterial())) {
                     isAlquilado = true;
                     alquilerEncontrado = alquiler;
                     break;
@@ -131,18 +136,25 @@ public class AlquilerPalas extends AppCompatActivity {
                 if ("ALQUILADA".equals(view.getTag())) {
                     Intent intent = new Intent(AlquilerPalas.this, DetallesAlquiler.class);
                     intent.putExtra("alquiler", finalAlquilerEncontrado);
+                    intent.putExtra("documento","Palas");
+                    intent.putExtra("coleccion","palas");
+
                     startActivity(intent);
                 } else {
                     Intent i = new Intent(AlquilerPalas.this, FormularioAlquiler.class);
-                    i.putExtra("nombreMaterial", pala.getNombre());
-                    i.putExtra("marca", pala.getMarca());
-                    i.putExtra("precio", pala.getPrecio());
+                    i.putExtra("idMaterial", pala.getIdMaterial());
+                    i.putExtra("documento","Palas");
+                    i.putExtra("coleccion","palas");
                     startActivity(i);
                 }
             });
 
             gridLayout.addView(button);
         }
+    }
+
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
     }
 
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,18 +39,24 @@ public class Login extends AppCompatActivity {
 
     public void loginUsuario(View v){
         String emailUsuario = etUsuario.getText().toString();
-        String contasenaUsuario = etContrasenia.getText().toString();
+        String contrasenaUsuario = etContrasenia.getText().toString();
 
-        Intent i = new Intent(Login.this, menuPrincipal.class);
+        if (TextUtils.isEmpty(emailUsuario) || TextUtils.isEmpty(contrasenaUsuario)) {
+            Toast.makeText(this, "Por favor, introduce un correo electrónico y contraseña válidos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         //Uso el signin que coge el correo y la contraseña para autenticar el ususario
         //Ese metodo devuelve un objeto Task<AuthResult> que es una tarea que se ejecutara en segundo plano para autenticar el usuario
-        Task<AuthResult> getUserInfoTask = mAuth.signInWithEmailAndPassword(emailUsuario, contasenaUsuario).addOnCompleteListener(
+        Task<AuthResult> getUserInfoTask = mAuth.signInWithEmailAndPassword(emailUsuario, contrasenaUsuario).addOnCompleteListener(
                 task -> {
                     if(task.isSuccessful()){//Si la tarea fue existosa (se autentico el usuario)
                         AuthResult authResult = task.getResult(); //Se obtiene el resultado de la tarea y se guarda en un objeto authresult
                         FirebaseUser currentUser = authResult.getUser();
+                        Toast.makeText(getApplicationContext(), "Bienvenido " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(Login.this, menuPrincipal.class);
                         i.putExtra("user", currentUser);
-                        Toast.makeText(getApplicationContext(), "Bienvenido "+currentUser.getEmail(), Toast.LENGTH_SHORT).show();
                         startActivity(i);
                     } else {
                         // Si la autenticación no fue exitosa, se maneja el caso de error
@@ -66,8 +73,8 @@ public class Login extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Error de autenticación: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
-                }
-        );
+
+        });
 
     }
 

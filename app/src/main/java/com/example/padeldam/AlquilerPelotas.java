@@ -20,6 +20,7 @@ import com.example.padeldam.back.dao.AlquilerRepositorio;
 import com.example.padeldam.back.dao.MaterialesRepositorio;
 import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.BotePelotas;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -65,6 +66,8 @@ public class AlquilerPelotas extends AppCompatActivity {
             startActivity(intent);
         }
         if(id == R.id.itemLogout){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
             Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
 
@@ -107,7 +110,7 @@ public class AlquilerPelotas extends AppCompatActivity {
             Alquiler alquilerEncontrado = null;
             boolean isAlquilado = false;
             for (Alquiler alquiler : alquileres) {
-                if (alquiler.getNombreMaterial().equals(bote.getNombre())) {
+                if (alquiler.getIdMaterial() != null && bote.getIdMaterial() != null && alquiler.getIdMaterial().equals(bote.getIdMaterial())) {
                     isAlquilado = true;
                     alquilerEncontrado = alquiler;
                     break;
@@ -127,12 +130,14 @@ public class AlquilerPelotas extends AppCompatActivity {
                 if ("ALQUILADA".equals(view.getTag())) {
                     Intent intent = new Intent(AlquilerPelotas.this, DetallesAlquiler.class);
                     intent.putExtra("alquiler", finalAlquilerEncontrado);
+                    intent.putExtra("documento","Pelotas");
+                    intent.putExtra("coleccion","botes");
                     startActivity(intent);
                 } else {
                     Intent i = new Intent(AlquilerPelotas.this, FormularioAlquiler.class);
-                    i.putExtra("nombreMaterial", bote.getNombre());
-                    i.putExtra("marca", bote.getMarca());
-                    i.putExtra("precio", bote.getPrecio());
+                    i.putExtra("idMaterial", bote.getIdMaterial());
+                    i.putExtra("documento","Pelotas");
+                    i.putExtra("coleccion","botes");
                     startActivity(i);
                 }
             });
@@ -141,6 +146,10 @@ public class AlquilerPelotas extends AppCompatActivity {
         }
     }
 
+
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
 
 
     public void crearPelotas(View v) {

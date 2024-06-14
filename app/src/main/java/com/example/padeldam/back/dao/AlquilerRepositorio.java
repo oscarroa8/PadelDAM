@@ -63,7 +63,7 @@ public class AlquilerRepositorio implements IAlquiler<Alquiler> {
     }
 
     @Override
-    public Alquiler getById(Integer id) {
+    public Alquiler getById(String id) {
         return null;
     }
 
@@ -77,10 +77,9 @@ public class AlquilerRepositorio implements IAlquiler<Alquiler> {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     Alquiler a= new Alquiler(
                                             document.getId(),
-                                            document.get("cliente", String.class),
+                                            document.get("idCliente", String.class),
                                             document.get("empleado", String.class),
-                                            document.get("nombreMaterial", String.class),
-                                            document.get("marca", String.class)
+                                            document.get("idMaterial", String.class)
 
                                     );
                                     alquileres.add(a);

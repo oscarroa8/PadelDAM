@@ -11,32 +11,36 @@ public class Reserva implements Serializable {
 
 
     private String idReserva;
+
+
+    private String idPista;
         private String fecha;
         private String hora;
-        private String cliente;
-        private String pista;
+        private String idCliente;
         private String empleadoEmail;
 
-        // Constructor vacío necesario para Firestore
+
         public Reserva() {
         }
 
         // Constructor completo
-        public Reserva(String fecha, String hora, String cliente, String pista, String empleadoEmail) {
+        public Reserva(String idPista,String fecha, String hora, String idCliente, String empleadoEmail) {
             this.idReserva = UUID.randomUUID().toString();
+            this.idPista = idPista;
             this.fecha = fecha;
             this.hora = hora;
-            this.cliente = cliente;
-            this.pista = pista;
+            this.idCliente = idCliente;
+
             this.empleadoEmail = empleadoEmail;
         }
 
-    public Reserva(String idReserva,String fecha, String hora, String cliente, String pista, String empleadoEmail) {
+    public Reserva(String idReserva,String idPista,String fecha, String hora, String idCliente,  String empleadoEmail) {
         this.idReserva = idReserva;
+        this.idPista = idPista;
         this.fecha = fecha;
         this.hora = hora;
-        this.cliente = cliente;
-        this.pista = pista;
+        this.idCliente = idCliente;
+
         this.empleadoEmail = empleadoEmail;
     }
 
@@ -67,21 +71,15 @@ public class Reserva implements Serializable {
             this.hora = hora;
         }
 
-        public String getCliente() {
-            return cliente;
+        public String getIdCliente() {
+            return idCliente;
         }
 
-        public void setCliente(String cliente) {
-            this.cliente = cliente;
+        public void setIdCliente(String idCliente) {
+            this.idCliente = idCliente;
         }
 
-        public String getPista() {
-            return pista;
-        }
-
-        public void setPista(String pista) {
-            this.pista = pista;
-        }
+ 
 
         public String getEmpleadoEmail() {
             return empleadoEmail;
@@ -90,5 +88,14 @@ public class Reserva implements Serializable {
         public void setEmpleadoEmail(String empleadoEmail) {
             this.empleadoEmail = empleadoEmail;
         }
+
+    public String getIdPista() {
+        return idPista;
     }
+
+    public void setIdPista(String idPista) {
+        this.idPista = idPista;
+    }
+
+}
 

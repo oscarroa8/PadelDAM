@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.padeldam.back.dao.ClienteRepositorio;
 import com.example.padeldam.back.entidades.Cliente;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EditarCliente extends AppCompatActivity {
@@ -65,14 +66,29 @@ public class EditarCliente extends AppCompatActivity {
 
     // Método para guardar los cambios del cliente
     public void actualizarCliente(View view) {
-        String nuevoNombre = etNombre.getText().toString();
-        String nuevoEmail = etMail.getText().toString();
-        String nuevoApellido1 = etPrimerApellido.getText().toString();
-        String nuevoApellido2 = etSegundoApellido.getText().toString();
-        String nuevoTelefono = etTelefono.getText().toString();
+        String nuevoNombre = etNombre.getText().toString().trim();
+        String nuevoEmail = etMail.getText().toString().trim();
+        String nuevoApellido1 = etPrimerApellido.getText().toString().trim();
+        String nuevoApellido2 = etSegundoApellido.getText().toString().trim();
+        String nuevoTelefono = etTelefono.getText().toString().trim();
 
-        Cliente clienteActualizado = new Cliente(clienteId, nuevoNombre, nuevoApellido1,nuevoApellido2,nuevoTelefono,nuevoEmail);
+        if (nuevoNombre.isEmpty() || nuevoEmail.isEmpty() || nuevoApellido1.isEmpty() ||
+                nuevoApellido2.isEmpty() || nuevoTelefono.isEmpty()) {
+            Toast.makeText(EditarCliente.this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        if (!nuevoTelefono.matches("\\d{9}")) {
+            Toast.makeText(EditarCliente.this, "El teléfono debe tener 9 dígitos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(nuevoEmail).matches()) {
+            Toast.makeText(EditarCliente.this, "El correo electrónico no es válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Cliente clienteActualizado = new Cliente(clienteId, nuevoNombre, nuevoApellido1, nuevoApellido2, nuevoTelefono, nuevoEmail);
 
         clienteRepositorio.actualizar(clienteActualizado)
                 .addOnSuccessListener(aVoid -> {
@@ -84,6 +100,7 @@ public class EditarCliente extends AppCompatActivity {
                     Toast.makeText(EditarCliente.this, "Error al actualizar cliente", Toast.LENGTH_SHORT).show();
                 });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.overflow,menu);
@@ -101,6 +118,8 @@ public class EditarCliente extends AppCompatActivity {
             startActivity(intent);
         }
         if(id == R.id.itemLogout){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
             Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
 
@@ -108,4 +127,8 @@ public class EditarCliente extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);    }
+
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
 }

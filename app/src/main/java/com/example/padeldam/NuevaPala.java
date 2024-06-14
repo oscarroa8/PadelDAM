@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.padeldam.back.dao.MaterialesRepositorio;
 import com.example.padeldam.back.entidades.Palas;
 import com.example.padeldam.back.entidades.Zapatillas;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class NuevaPala extends AppCompatActivity {
@@ -66,6 +67,8 @@ public class NuevaPala extends AppCompatActivity {
             startActivity(intent);
         }
         if(id == R.id.itemLogout){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
             Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
 
@@ -79,23 +82,31 @@ public class NuevaPala extends AppCompatActivity {
         String nombre = etNombre.getText().toString().trim();
         String marca = etMarca.getText().toString().trim();
         String modelo = etModelo.getText().toString().trim();
-        double precio = Double.parseDouble(precioStr);
 
-
-        Palas nuevaPala = new Palas(nombre, marca, modelo, precio);
-
-        MaterialesRepositorio mr = new MaterialesRepositorio(db);
-
-        if (!nombre.isEmpty() && !marca.isEmpty() && !precioStr.isEmpty()) {
-            mr.insertarPalas(nuevaPala)
-                    .addOnCompleteListener(task -> {
-                        Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this, AlquilerPalas.class);
-                        startActivity(intent);
-                    });
-        } else {
+        if (precioStr.isEmpty() || nombre.isEmpty() || marca.isEmpty() || modelo.isEmpty()) {
             Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
         }
 
+        double precio = Double.parseDouble(precioStr);
+
+        Palas nuevaPala = new Palas(nombre, marca, modelo, precio);
+        MaterialesRepositorio mr = new MaterialesRepositorio(db);
+        mr.insertarPalas(nuevaPala)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this, "Pala creada", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(this, AlquilerPalas.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Error al insertar los datos de la pala", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
+
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
+
+
 }

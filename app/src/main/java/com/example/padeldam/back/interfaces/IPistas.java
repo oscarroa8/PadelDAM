@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface IPistas<T> extends Operaciones<T>{
     Task<List<Pista>> findAll();
+
+    Task<Pista> obtenerPistaPorId(String pistaId);
 }

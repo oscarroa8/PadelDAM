@@ -1,11 +1,14 @@
 package com.example.padeldam;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +20,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.padeldam.back.dao.AlquilerRepositorio;
+import com.example.padeldam.back.dao.ClienteRepositorio;
+import com.example.padeldam.back.dao.MaterialesRepositorio;
 import com.example.padeldam.back.dao.ReservasRepositorio;
 import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.Reserva;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DetallesAlquiler extends AppCompatActivity {
@@ -31,23 +39,79 @@ public class DetallesAlquiler extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detalles_alquiler);
-        // Obtener detalles de la reserva del Intent
+        ClienteRepositorio clientesRepositorio = new ClienteRepositorio(FirebaseFirestore.getInstance());
+        MaterialesRepositorio materialRepositorio = new MaterialesRepositorio(FirebaseFirestore.getInstance());
+
         Intent intent = getIntent();
         Alquiler alquiler = (Alquiler) intent.getSerializableExtra("alquiler");
+        String documento = intent.getStringExtra("documento");
+        String coleccion = intent.getStringExtra("coleccion");
 
 
-        // Mostrar detalles de la reserva en la interfaz de usuario
-        TextView textViewNombre = findViewById(R.id.tvNombreMaterial);
-        textViewNombre.setText("Nombre: " + alquiler.getNombreMaterial()+"  Marca: "+alquiler.getMarca());
+        if (alquiler != null) {
+            String idMaterial = alquiler.getIdMaterial();
+            Log.d("DEBUG", "idMaterial: " + idMaterial);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference materialRef = db.collection("Materiales").document(documento).collection(coleccion).document(idMaterial);
+
+            materialRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            // Obtener los datos del material
+                            String nombreMaterial = document.getString("nombre");
+                            String marca = document.getString("marca");
+
+                            // Mostrar los datos del material en la interfaz de usuario
+                            TextView textViewNombre = findViewById(R.id.tvNombreMaterial);
+                            textViewNombre.setText("Nombre: " + nombreMaterial + " / Marca: " + marca);
+
+                        } else {
+                            Log.d("DEBUG", "Documento no existe para idMaterial: " + idMaterial);
+                            Toast.makeText(DetallesAlquiler.this, "El material no existe", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.d("DEBUG", "Error al obtener documento: ", task.getException());
+                        Toast.makeText(DetallesAlquiler.this, "Error al obtener los datos del material", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            Log.d("DEBUG", "Alquiler es null");
+            Toast.makeText(DetallesAlquiler.this, "Error al obtener los detalles del alquiler", Toast.LENGTH_SHORT).show();
+        }
 
 
         TextView textViewCliente = findViewById(R.id.textViewCliente);
-        textViewCliente.setText("Cliente: " + alquiler.getCliente());
+        String idCliente = alquiler.getIdCliente();
+        if (idCliente != null) {
+            clientesRepositorio.obtenerNombreClientePorId(idCliente).addOnCompleteListener(new OnCompleteListener<String>() {
+                @Override
+                public void onComplete(@NonNull Task<String> task) {
+                    if (task.isSuccessful()) {
+                        String nombreCliente = task.getResult();
+                        if (nombreCliente != null) {
+                            textViewCliente.setText("Cliente: " + nombreCliente);
+                        } else {
+                            textViewCliente.setText("Cliente no encontrado");
+                        }
+                    } else {
+                        textViewCliente.setText("Error al obtener el cliente");
+                    }
+                }
+            });
+        } else {
+            textViewCliente.setText("Cliente no especificado");
+        }
+
 
         TextView textViewEmpleado = findViewById(R.id.textViewEmpleado);
         textViewEmpleado.setText("Empleado: " + alquiler.getEmpleado());
 
         Button buttonCancelar = findViewById(R.id.buttonCancelarAlquiler);
+
         buttonCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +119,31 @@ public class DetallesAlquiler extends AppCompatActivity {
                 cancelarAlquiler(alquiler);
             }
         });
+
+
+        String idMaterial = alquiler.getIdMaterial();
+        ImageView borrarMaterial = findViewById(R.id.borrarMaterial);
+        borrarMaterial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                materialRepositorio.borrarMaterial(idMaterial, documento, coleccion).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(DetallesAlquiler.this, "Material borrado exitosamente", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(DetallesAlquiler.this,Alquilar.class);
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(DetallesAlquiler.this, "Error al borrar el material", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -75,6 +163,8 @@ public class DetallesAlquiler extends AppCompatActivity {
             startActivity(intent);
         }
         if(id == R.id.itemLogout){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
             Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
 
@@ -82,6 +172,12 @@ public class DetallesAlquiler extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);    }
+
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
+
+
 
     private void cancelarAlquiler(Alquiler alquiler) {
         AlquilerRepositorio ar = new AlquilerRepositorio(FirebaseFirestore.getInstance());

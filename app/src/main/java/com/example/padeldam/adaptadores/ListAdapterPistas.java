@@ -50,7 +50,7 @@ public class ListAdapterPistas extends ArrayAdapter<Pista> {
         TextView tvMaterial = view.findViewById(R.id.materialtv);
         tvMaterial.setText(pista.getMaterial());
         TextView tvprecio = view.findViewById(R.id.preciotv);
-        int precio = pista.getPrecioHora();
+        double precio = pista.getPrecioHora();
         tvprecio.setText(String.valueOf(precio));
         ImageView borrarPista = view.findViewById(R.id.ivBorrarPista);
         borrarPista.setOnClickListener((v) -> borrar(pista));

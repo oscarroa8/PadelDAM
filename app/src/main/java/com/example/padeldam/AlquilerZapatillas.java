@@ -25,6 +25,7 @@ import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.BotePelotas;
 import com.example.padeldam.back.entidades.Reserva;
 import com.example.padeldam.back.entidades.Zapatillas;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -68,6 +69,8 @@ public class AlquilerZapatillas extends AppCompatActivity {
             startActivity(intent);
         }
         if(id == R.id.itemLogout){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
             Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
 
@@ -109,7 +112,7 @@ public class AlquilerZapatillas extends AppCompatActivity {
             Alquiler alquilerEncontrado = null;
             boolean isAlquilado = false;
             for (Alquiler alquiler : alquileres) {
-                if (alquiler.getNombreMaterial().equals(zapas.getNombre())) {
+                if (alquiler.getIdMaterial() != null && zapas.getIdMaterial() != null && alquiler.getIdMaterial().equals(zapas.getIdMaterial())) {
                     isAlquilado = true;
                     alquilerEncontrado = alquiler;
                     break;
@@ -129,12 +132,14 @@ public class AlquilerZapatillas extends AppCompatActivity {
                 if ("ALQUILADA".equals(view.getTag())) {
                     Intent intent = new Intent(AlquilerZapatillas.this, DetallesAlquiler.class);
                     intent.putExtra("alquiler", finalAlquilerEncontrado);
+                    intent.putExtra("documento","Zapatillas");
+                    intent.putExtra("coleccion","zapatillas");
                     startActivity(intent);
                 } else {
                     Intent i = new Intent(AlquilerZapatillas.this, FormularioAlquiler.class);
-                    i.putExtra("nombreMaterial", zapas.getNombre());
-                    i.putExtra("marca", zapas.getMarca());
-                    i.putExtra("precio", zapas.getPrecio());
+                    i.putExtra("idMaterial", zapas.getIdMaterial());
+                    i.putExtra("documento","Zapatillas");
+                    i.putExtra("coleccion","zapatillas");
 
                     startActivity(i);
                 }
@@ -144,6 +149,10 @@ public class AlquilerZapatillas extends AppCompatActivity {
         }
     }
 
+
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
 
 
 

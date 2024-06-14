@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.padeldam.back.dao.PistaRepositorio;
 import com.example.padeldam.back.entidades.Pista;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class nuevaPista extends AppCompatActivity {
@@ -37,7 +38,7 @@ public class nuevaPista extends AppCompatActivity {
         etNombre = findViewById(R.id.editTextNombrePista);
         etNumero = findViewById(R.id.etNumero);
         etMaterial = findViewById(R.id.etMaterialPista);
-        etPrecio= findViewById(R.id.etNumero);
+        etPrecio= findViewById(R.id.etPrecio);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,6 +58,8 @@ public class nuevaPista extends AppCompatActivity {
             startActivity(intent);
         }
         if(id == R.id.itemLogout){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
             Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
 
@@ -67,22 +70,40 @@ public class nuevaPista extends AppCompatActivity {
 
     public void insertarPista(View view){
         PistaRepositorio pr = new PistaRepositorio(bd);
-        String nombrePista= etNombre.getText().toString();
-        int numeroPista = Integer.parseInt(etNumero.getText().toString());
+        String nombrePista = etNombre.getText().toString();
+        String numeroPistaStr = etNumero.getText().toString();
         String materialPista = etMaterial.getText().toString();
-       int precioPista =Integer.parseInt(etPrecio.getText().toString());
+        String precioPistaStr = etPrecio.getText().toString();
 
+        // Validar campos vacíos
+        if (nombrePista.isEmpty() || numeroPistaStr.isEmpty() || materialPista.isEmpty() || precioPistaStr.isEmpty()) {
+            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Convertir a los tipos correspondientes
+        int numeroPista;
+        double precioPista;
+        try {
+            numeroPista = Integer.parseInt(numeroPistaStr);
+            precioPista = Double.parseDouble(precioPistaStr);
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Número de pista y precio deben ser numéricos", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Pista p = new Pista(nombrePista,numeroPista,materialPista,precioPista);
 
-        if (!nombrePista.isEmpty() && !materialPista.isEmpty()) {
             pr.insertar(p)
-                    .addOnCompleteListener(task -> {
-                        Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(this,Pistas.class);//Falta crear la clase usuarios
-                        startActivity(intent);
-                    });
-        } else {
-            Toast.makeText(this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
-        }
+                .addOnCompleteListener(task -> {
+                    Toast.makeText(this, "Pista creada", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this,Pistas.class);//Falta crear la clase usuarios
+                    startActivity(intent);
+                });
+
     }
+
+    public void volverAtras(View view) {
+        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
+    }
+
 }

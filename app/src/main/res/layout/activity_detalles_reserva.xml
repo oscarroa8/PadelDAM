@@ -12,9 +12,10 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp"
-        android:text="Detalles de la Reserva"
+        android:text="Detalles de la reserva"
         android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:textSize="35sp"
+        android:textStyle="bold"/>
 
     <!-- Detalles de la reserva -->
 
@@ -23,17 +24,19 @@
         android:layout_width="wrap_content"
         android:layout_height="350dp"
         android:layout_below="@id/textViewTitulo"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="58dp"
-        android:layout_marginEnd="114dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="180dp"
         android:background="@color/azul_muyclaro"
         android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_width="500dp"
+            android:layout_height="50dp"
             android:layout_marginStart="80dp"
+            android:layout_marginTop="70dp"
             android:orientation="horizontal">
 
 
@@ -47,7 +50,7 @@
 
             <TextView
                 android:id="@+id/textViewHora"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewTitulo"
                 android:layout_alignParentEnd="true"
@@ -61,10 +64,10 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="500dp"
+            android:layout_height="50dp"
             android:layout_marginStart="80dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
 
@@ -78,7 +81,7 @@
 
             <TextView
                 android:id="@+id/textViewPista"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textViewHora"
                 android:layout_alignParentEnd="true"
@@ -93,10 +96,10 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="500dp"
+            android:layout_height="50dp"
             android:layout_marginStart="80dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
 
@@ -122,10 +125,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_width="500dp"
+            android:layout_height="50dp"
             android:layout_marginStart="80dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
 
@@ -151,22 +154,33 @@
         </LinearLayout>
 
 
-
-
-
     </LinearLayout>
 
     <Button
         android:id="@+id/buttonCancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="183dp"
+        android:layout_height="76dp"
+        android:textSize="20dp"
         android:layout_below="@+id/linearLayout"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="554dp"
-        android:layout_marginTop="137dp"
-        android:background="@drawable/button_background"
-        android:text="Cancelar Reserva"
+        android:layout_marginStart="823dp"
+        android:background="@color/primaryColor"
+        android:layout_marginTop="131dp"
+        android:text="Cancelar"
         android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/buttonVolver"
+        android:layout_width="183dp"
+        android:layout_height="76dp"
+        android:textSize="20dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:background="@color/primaryColor"
+        android:layout_marginStart="358dp"
+        android:layout_marginTop="131dp"
+        android:onClick="volverAtras"
+        android:text="Volver" />
 
 
 </RelativeLayout>

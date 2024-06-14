@@ -6,6 +6,7 @@ import com.example.padeldam.back.entidades.Cliente;
 import com.example.padeldam.back.interfaces.ICliente;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -99,7 +100,28 @@ public class ClienteRepositorio implements ICliente<Cliente> {
     }
 
     @Override
-    public Cliente getById(Integer id) {
+    public Cliente getById(String id) {
         return null;
+    }
+
+    @Override
+    public Task<String> obtenerNombreClientePorId(String clienteId) {
+        return bd.collection("clientes").document(clienteId).get().continueWith(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    String nombre = document.getString("nombre");
+                    String primerApellido = document.getString("apellido1");
+                    String segundoApellido = document.getString("apellido2");
+                    return nombre + " " + primerApellido + " " + segundoApellido;
+                } else {
+                    Log.w("ClientesRepositorio", "Cliente no encontrado");
+                    return null;
+                }
+            } else {
+                Log.w("ClientesRepositorio", "Error en consulta de firebase", task.getException());
+                return null;
+            }
+        });
     }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface ICliente<T> extends Operaciones<T>{
     Task<List<Cliente>> findAll();
+
+    Task<String> obtenerNombreClientePorId(String clienteId);
 }

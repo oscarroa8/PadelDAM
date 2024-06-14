@@ -95,7 +95,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/pelotas" />
+                        app:srcCompat="@drawable/bote" />
 
                     <TextView
                         android:id="@+id/tvPelotas"

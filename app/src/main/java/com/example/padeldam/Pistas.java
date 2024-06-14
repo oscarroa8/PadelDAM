@@ -63,8 +63,8 @@ public class Pistas extends AppCompatActivity {
             Intent intent = new Intent(Pistas.this, FechaYHora.class);
 
             // Añade los datos del ítem seleccionado al intent
-            intent.putExtra("nombrePista", pistaSeleccionada.getNombre());
-            intent.putExtra("precioHora", pistaSeleccionada.getPrecioHora());
+            intent.putExtra("idPista", pistaSeleccionada.getIdPista());
+
 
             // Inicia la nueva actividad
             startActivity(intent);
@@ -107,6 +107,8 @@ public class Pistas extends AppCompatActivity {
             startActivity(intent);
         }
         if(id == R.id.itemLogout){
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
             Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
 

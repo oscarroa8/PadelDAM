@@ -7,27 +7,29 @@ import java.util.UUID;
 public class Alquiler implements Serializable {
 
     private String idAlquiler;
-    private String cliente;
+    private String idCliente;
     private String empleado;
-    private String nombreMaterial;
-    private String marca;
 
 
 
-    public Alquiler(String idAlquiler, String cliente, String empleado, String nombreMaterial, String marca) {
+    private String idMaterial;
+
+
+
+
+
+    public Alquiler(String idAlquiler, String idCliente, String empleado,String idMaterial) {
         this.idAlquiler = idAlquiler;
-        this.cliente = cliente;
+        this.idCliente = idCliente;
         this.empleado = empleado;
-        this.nombreMaterial = nombreMaterial;
-        this.marca = marca;
+        this.idMaterial = idMaterial;
     }
 
-    public Alquiler( String cliente, String empleado, String nombreMaterial,String marca) {
+    public Alquiler( String idCliente, String empleado,String idMaterial) {
         this.idAlquiler =  UUID.randomUUID().toString();
-        this.cliente = cliente;
+        this.idCliente = idCliente;
         this.empleado = empleado;
-        this.nombreMaterial = nombreMaterial;
-        this.marca = marca;
+        this.idMaterial = idMaterial;
     }
 
     public Alquiler() {
@@ -41,14 +43,6 @@ public class Alquiler implements Serializable {
         this.idAlquiler = idAlquiler;
     }
 
-    public String getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(String cliente) {
-        this.cliente = cliente;
-    }
-
     public String getEmpleado() {
         return empleado;
     }
@@ -57,19 +51,19 @@ public class Alquiler implements Serializable {
         this.empleado = empleado;
     }
 
-    public String getNombreMaterial() {
-        return nombreMaterial;
+    public String getIdCliente() {
+        return idCliente;
     }
 
-    public void setNombreMaterial(String nombreMaterial) {
-        this.nombreMaterial = nombreMaterial;
+    public void setIdCliente(String idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public String getMarca() {
-        return marca;
+    public String getIdMaterial() {
+        return idMaterial;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setIdMaterial(String idMaterial) {
+        this.idMaterial = idMaterial;
     }
 }

@@ -15,8 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="520dp"
         android:layout_marginTop="16dp"
-        android:text="Zapatillas Disponibles"
-        android:textSize="32sp"
+        android:text="Zapatillas disponibles"
+        android:textSize="35sp"
+        android:textStyle="bold"
         android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,11 +36,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></GridLayout>
 
+    <Button
+        android:id="@+id/buttonVolver"
+        android:layout_width="108dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="140dp"
+        android:textSize="20dp"
+        android:layout_marginTop="32dp"
+        android:background="@color/primaryColor"
+        android:onClick="volverAtras"
+        android:text="Volver"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCrearZapatillas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="32dp"
         android:src="@drawable/sports_shoes_1_svgrepo_com"
         app:backgroundTint="@color/primaryColor"
         app:layout_constraintBottom_toBottomOf="parent"

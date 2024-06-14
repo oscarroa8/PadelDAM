@@ -17,7 +17,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="ContentDescription" />
 
     <EditText
         android:id="@+id/etCorreo"
@@ -61,10 +62,10 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="88dp"
         android:layout_marginEnd="24dp"
-        android:onClick="loginUsuario"
-        android:text="Entrar"
-        android:textColor="@color/white"
         android:background="@color/primaryColor"
+        android:onClick="loginUsuario"
+        android:text="Iniciar sesión"
+        android:textColor="@color/white"
 
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"

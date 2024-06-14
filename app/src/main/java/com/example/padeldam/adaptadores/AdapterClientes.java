@@ -12,8 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.padeldam.R;
+import com.example.padeldam.back.dao.AdminRepositorio;
 import com.example.padeldam.back.dao.ClienteRepositorio;
 import com.example.padeldam.back.entidades.Cliente;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -52,7 +55,22 @@ public class AdapterClientes extends ArrayAdapter<Cliente> {
         tvTelefono.setText(cliente.getTelefono());
         TextView tvMail = view.findViewById(R.id.textViewEmail);
         tvMail.setText(cliente.getMail());
+        FirebaseFirestore bd = FirebaseFirestore.getInstance();
+
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser empleado = mAuth.getCurrentUser();
         ImageView borrarCliente = view.findViewById(R.id.ivBorrarCliente);
+        borrarCliente.setVisibility(View.GONE);
+
+        AdminRepositorio adminRepositorio = new AdminRepositorio(bd);
+        adminRepositorio.isAdmin(empleado.getEmail()).addOnCompleteListener(task -> {
+            boolean admin = task.getResult();
+            if (admin) {
+                borrarCliente.setVisibility(View.VISIBLE);
+
+            }
+        });
         borrarCliente.setOnClickListener((v) -> borrar(cliente));
 
         return view;

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -74,6 +75,7 @@ public class Pistas extends AppCompatActivity {
 
         FloatingActionButton btnCrearPista = findViewById(R.id.fabCrearPista);
         btnCrearPista.setVisibility(View.GONE);
+
 
         AdminRepositorio adminRepositorio = new AdminRepositorio(bd);
         adminRepositorio.isAdmin(empleado.getEmail()).addOnCompleteListener(task -> {

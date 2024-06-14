@@ -19,6 +19,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.padeldam.back.dao.AdminRepositorio;
 import com.example.padeldam.back.dao.AlquilerRepositorio;
 import com.example.padeldam.back.dao.ClienteRepositorio;
 import com.example.padeldam.back.dao.MaterialesRepositorio;
@@ -27,7 +28,9 @@ import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.Reserva;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -39,6 +42,7 @@ public class DetallesAlquiler extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detalles_alquiler);
+        FirebaseFirestore bd = FirebaseFirestore.getInstance();
         ClienteRepositorio clientesRepositorio = new ClienteRepositorio(FirebaseFirestore.getInstance());
         MaterialesRepositorio materialRepositorio = new MaterialesRepositorio(FirebaseFirestore.getInstance());
 
@@ -112,6 +116,23 @@ public class DetallesAlquiler extends AppCompatActivity {
 
         Button buttonCancelar = findViewById(R.id.buttonCancelarAlquiler);
 
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser empleado = mAuth.getCurrentUser();
+
+        ImageView borrarMaterial = findViewById(R.id.borrarMaterial);
+        borrarMaterial.setVisibility(View.GONE);
+
+
+
+        AdminRepositorio adminRepositorio = new AdminRepositorio(bd);
+        adminRepositorio.isAdmin(empleado.getEmail()).addOnCompleteListener(task -> {
+            boolean admin = task.getResult();
+            if (admin) {
+                borrarMaterial.setVisibility(View.VISIBLE);
+
+            }
+        });
+
         buttonCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +143,7 @@ public class DetallesAlquiler extends AppCompatActivity {
 
 
         String idMaterial = alquiler.getIdMaterial();
-        ImageView borrarMaterial = findViewById(R.id.borrarMaterial);
+
         borrarMaterial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

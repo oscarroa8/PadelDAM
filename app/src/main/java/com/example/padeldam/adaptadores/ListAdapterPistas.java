@@ -12,9 +12,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.padeldam.R;
+import com.example.padeldam.back.dao.AdminRepositorio;
 import com.example.padeldam.back.dao.ClienteRepositorio;
 import com.example.padeldam.back.dao.PistaRepositorio;
 import com.example.padeldam.back.entidades.Pista;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
@@ -51,8 +54,24 @@ public class ListAdapterPistas extends ArrayAdapter<Pista> {
         tvMaterial.setText(pista.getMaterial());
         TextView tvprecio = view.findViewById(R.id.preciotv);
         double precio = pista.getPrecioHora();
+        FirebaseFirestore bd = FirebaseFirestore.getInstance();
+
         tvprecio.setText(String.valueOf(precio));
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser empleado = mAuth.getCurrentUser();
         ImageView borrarPista = view.findViewById(R.id.ivBorrarPista);
+        borrarPista.setVisibility(View.GONE);
+
+        AdminRepositorio adminRepositorio = new AdminRepositorio(bd);
+        adminRepositorio.isAdmin(empleado.getEmail()).addOnCompleteListener(task -> {
+            boolean admin = task.getResult();
+            if (admin) {
+                borrarPista.setVisibility(View.VISIBLE);
+
+            }
+        });
+
         borrarPista.setOnClickListener((v) -> borrar(pista));
 
         return view;

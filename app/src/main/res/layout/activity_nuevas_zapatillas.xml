@@ -26,13 +26,14 @@
         android:hint="Nombre" />
 
     <EditText
-        android:id="@+id/etPrecioZapas"
+        android:id="@+id/etPrecioBote"
         android:layout_width="1251dp"
         android:layout_height="66dp"
         android:layout_below="@+id/etMarca"
         android:layout_alignParentStart="true"
         android:layout_marginTop="23dp"
-        android:hint="Precio" />
+        android:hint="Precio"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/etTalla"
@@ -68,7 +69,7 @@
         android:textSize="20dp" />
 
     <Button
-        android:id="@+id/btnCrearZapas"
+        android:id="@+id/btnCrearBote"
         android:layout_width="183dp"
         android:layout_height="76dp"
         android:layout_below="@+id/etTalla"

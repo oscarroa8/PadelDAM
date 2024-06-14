@@ -36,10 +36,10 @@ public class NuevoBotePelotas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_bote_pelotas);
 
-        etPrecioHora = findViewById(R.id.etPrecioZapas);
+        etPrecioHora = findViewById(R.id.etPrecioBote);
         etNombre = findViewById(R.id.etNombre);
         etMarca = findViewById(R.id.etMarca);
-        btnCrearBote = findViewById(R.id.btnCrearZapas);
+        btnCrearBote = findViewById(R.id.btnCrearBote);
 
         db = FirebaseFirestore.getInstance();
 

@@ -29,10 +29,12 @@
         android:id="@+id/etPrecioPala"
         android:layout_width="1251dp"
         android:layout_height="66dp"
-        android:layout_below="@+id/etMarca"
+        android:layout_below="@+id/etModelo"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:hint="Precio" />
+
+        android:layout_marginTop="39dp"
+        android:hint="Precio"
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/etMarca"
@@ -44,16 +46,16 @@
         android:layout_marginTop="35dp"
         android:hint="Marca"/>
 
+
     <EditText
         android:id="@+id/etModelo"
         android:layout_width="1251dp"
         android:layout_height="66dp"
         android:layout_below="@+id/etMarca"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="132dp"
-        android:hint="Modelo" />
 
+        android:layout_marginTop="22dp"
+        android:hint="Modelo" />
 
     <Button
         android:id="@+id/buttonVolver"

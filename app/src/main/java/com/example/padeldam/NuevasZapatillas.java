@@ -35,11 +35,11 @@ public class NuevasZapatillas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevas_zapatillas);
 
-        etPrecio = findViewById(R.id.etPrecioZapas);
+        etPrecio = findViewById(R.id.etPrecioBote);
         etNombre = findViewById(R.id.etNombre);
         etMarca = findViewById(R.id.etMarca);
         etTalla = findViewById(R.id.etTalla);
-        btnCrearZapatilla = findViewById(R.id.btnCrearZapas);
+        btnCrearZapatilla = findViewById(R.id.btnCrearBote);
 
         db = FirebaseFirestore.getInstance();
 

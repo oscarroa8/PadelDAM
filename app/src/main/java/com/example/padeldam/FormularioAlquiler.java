@@ -18,6 +18,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.padeldam.back.dao.AdminRepositorio;
 import com.example.padeldam.back.dao.AlquilerRepositorio;
 import com.example.padeldam.back.dao.MaterialesRepositorio;
 import com.example.padeldam.back.dao.ReservasRepositorio;
@@ -82,6 +83,23 @@ public class FormularioAlquiler extends AppCompatActivity {
         }
 
         cargarClientesEnSpinner();
+
+
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser empleado = mAuth.getCurrentUser();
+        buttonBorrarMaterial = findViewById(R.id.borrarMaterialesAlquiler);
+        buttonBorrarMaterial.setVisibility(View.GONE);
+
+
+
+        AdminRepositorio adminRepositorio = new AdminRepositorio(db);
+        adminRepositorio.isAdmin(empleado.getEmail()).addOnCompleteListener(task -> {
+            boolean admin = task.getResult();
+            if (admin) {
+                buttonBorrarMaterial.setVisibility(View.VISIBLE);
+
+            }
+        });
 
 
         buttonBorrarMaterial.setOnClickListener(new View.OnClickListener() {

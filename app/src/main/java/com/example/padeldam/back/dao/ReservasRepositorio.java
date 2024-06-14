@@ -2,8 +2,6 @@ package com.example.padeldam.back.dao;
 
 import android.util.Log;
 
-import com.example.padeldam.Reservar;
-import com.example.padeldam.back.entidades.Pista;
 import com.example.padeldam.back.entidades.Reserva;
 import com.example.padeldam.back.interfaces.IReserva;
 import com.google.android.gms.tasks.Task;

@@ -2,7 +2,6 @@ package com.example.padeldam.back.interfaces;
 
 import com.example.padeldam.back.entidades.BotePelotas;
 import com.example.padeldam.back.entidades.Palas;
-import com.example.padeldam.back.entidades.Pista;
 import com.example.padeldam.back.entidades.Zapatillas;
 import com.google.android.gms.tasks.Task;
 

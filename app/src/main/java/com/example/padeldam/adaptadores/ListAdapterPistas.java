@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 
 import com.example.padeldam.R;
 import com.example.padeldam.back.dao.AdminRepositorio;
-import com.example.padeldam.back.dao.ClienteRepositorio;
 import com.example.padeldam.back.dao.PistaRepositorio;
 import com.example.padeldam.back.entidades.Pista;
 import com.google.firebase.auth.FirebaseAuth;

@@ -1,8 +1,5 @@
 package com.example.padeldam.back.entidades;
 
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import java.io.Serializable;
 import java.util.UUID;
 

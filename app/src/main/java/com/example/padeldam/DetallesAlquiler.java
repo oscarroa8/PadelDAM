@@ -1,7 +1,6 @@
 package com.example.padeldam;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,20 +14,18 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 
 import com.example.padeldam.back.dao.AdminRepositorio;
 import com.example.padeldam.back.dao.AlquilerRepositorio;
 import com.example.padeldam.back.dao.ClienteRepositorio;
 import com.example.padeldam.back.dao.MaterialesRepositorio;
-import com.example.padeldam.back.dao.ReservasRepositorio;
+
 import com.example.padeldam.back.entidades.Alquiler;
-import com.example.padeldam.back.entidades.Reserva;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;

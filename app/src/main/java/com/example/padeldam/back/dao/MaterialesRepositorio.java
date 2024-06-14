@@ -3,12 +3,9 @@ package com.example.padeldam.back.dao;
 import android.util.Log;
 
 import com.example.padeldam.back.entidades.BotePelotas;
-import com.example.padeldam.back.entidades.Cliente;
 import com.example.padeldam.back.entidades.Material;
 import com.example.padeldam.back.entidades.Palas;
-import com.example.padeldam.back.entidades.Pista;
 import com.example.padeldam.back.entidades.Zapatillas;
-import com.example.padeldam.back.interfaces.ICliente;
 import com.example.padeldam.back.interfaces.IMateriales;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;

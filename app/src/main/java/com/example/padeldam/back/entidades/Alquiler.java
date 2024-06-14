@@ -1,7 +1,6 @@
 package com.example.padeldam.back.entidades;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.UUID;
 
 public class Alquiler implements Serializable {

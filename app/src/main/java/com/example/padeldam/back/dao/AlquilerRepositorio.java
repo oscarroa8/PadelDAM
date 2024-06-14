@@ -3,7 +3,6 @@ package com.example.padeldam.back.dao;
 import android.util.Log;
 
 import com.example.padeldam.back.entidades.Alquiler;
-import com.example.padeldam.back.entidades.Cliente;
 import com.example.padeldam.back.interfaces.IAlquiler;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;

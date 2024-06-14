@@ -184,7 +184,7 @@
             android:text="Finalizar" />
 
         <ImageView
-            android:id="@+id/ivBorrarPista"
+            android:id="@+id/borrarMaterialesAlquiler"
             android:layout_width="183dp"
             android:layout_height="76dp"
             android:layout_below="@+id/linearLayout"

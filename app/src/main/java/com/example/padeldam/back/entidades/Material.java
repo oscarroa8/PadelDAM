@@ -3,7 +3,7 @@ package com.example.padeldam.back.entidades;
 import java.io.Serializable;
 
 public class Material implements Serializable {
-    private Integer idMaterial;
+    private String idMaterial;
     private double precioHora;
     private String nombre;
 
@@ -11,18 +11,18 @@ public class Material implements Serializable {
     public Material() {
     }
 
-    public Material(Integer idMaterial, double precioHora, String nombre) {
+    public Material(String idMaterial, double precioHora, String nombre) {
         this.idMaterial = idMaterial;
         this.precioHora = precioHora;
         this.nombre = nombre;
 
     }
 
-    public Integer getIdMaterial() {
+    public String getIdMaterial() {
         return idMaterial;
     }
 
-    public void setIdMaterial(Integer idMaterial) {
+    public void setIdMaterial(String idMaterial) {
         this.idMaterial = idMaterial;
     }
 

@@ -1,6 +1,7 @@
 package com.example.padeldam;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.padeldam.back.dao.AlquilerRepositorio;
 import com.example.padeldam.back.dao.ClienteRepositorio;
+import com.example.padeldam.back.dao.MaterialesRepositorio;
 import com.example.padeldam.back.dao.ReservasRepositorio;
 import com.example.padeldam.back.entidades.Alquiler;
 import com.example.padeldam.back.entidades.Reserva;
@@ -38,6 +40,8 @@ public class DetallesAlquiler extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detalles_alquiler);
         ClienteRepositorio clientesRepositorio = new ClienteRepositorio(FirebaseFirestore.getInstance());
+        MaterialesRepositorio materialRepositorio = new MaterialesRepositorio(FirebaseFirestore.getInstance());
+
         Intent intent = getIntent();
         Alquiler alquiler = (Alquiler) intent.getSerializableExtra("alquiler");
         String documento = intent.getStringExtra("documento");
@@ -113,6 +117,27 @@ public class DetallesAlquiler extends AppCompatActivity {
             public void onClick(View v) {
                 // Cancelar la reserva
                 cancelarAlquiler(alquiler);
+            }
+        });
+
+
+        String idMaterial = alquiler.getIdMaterial();
+        ImageView borrarMaterial = findViewById(R.id.borrarMaterial);
+        borrarMaterial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                materialRepositorio.borrarMaterial(idMaterial, documento, coleccion).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(DetallesAlquiler.this, "Material borrado exitosamente", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(DetallesAlquiler.this,Alquilar.class);
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(DetallesAlquiler.this, "Error al borrar el material", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 

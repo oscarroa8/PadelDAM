@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.padeldam.back.dao.AlquilerRepositorio;
+import com.example.padeldam.back.dao.MaterialesRepositorio;
 import com.example.padeldam.back.dao.ReservasRepositorio;
 import com.example.padeldam.back.entidades.Alquiler;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -38,6 +40,8 @@ public class FormularioAlquiler extends AppCompatActivity {
     private TextView textViewNombreMaterial;
     private Spinner spinnerClientes;
     private Button buttonAlquiler;
+    private ImageView buttonBorrarMaterial;
+
     private TextView textViewMarca;
     private TextView textViewPrecio;
     private String nombreMaterial;
@@ -63,6 +67,7 @@ public class FormularioAlquiler extends AppCompatActivity {
         textViewPrecio = findViewById(R.id.tvPrecioMaterial);
         spinnerClientes = findViewById(R.id.spinnerClientes);
         buttonAlquiler = findViewById(R.id.buttonAlquilar);
+        buttonBorrarMaterial = findViewById(R.id.borrarMaterialesAlquiler);
 
         db = FirebaseFirestore.getInstance();
 
@@ -77,6 +82,27 @@ public class FormularioAlquiler extends AppCompatActivity {
         }
 
         cargarClientesEnSpinner();
+
+
+        buttonBorrarMaterial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MaterialesRepositorio materialRepositorio = new MaterialesRepositorio(db);
+                materialRepositorio.borrarMaterial(idMaterial, documento, coleccion)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(FormularioAlquiler.this, "Material borrado exitosamente", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(FormularioAlquiler.this,Alquilar.class);
+                                    startActivity(i);
+                                } else {
+                                    Toast.makeText(FormularioAlquiler.this, "Error al borrar el material", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+            }
+        });
     }
 
     private void obtenerDetallesMaterial(String idMaterial) {

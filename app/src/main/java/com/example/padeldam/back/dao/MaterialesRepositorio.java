@@ -37,8 +37,8 @@ public class MaterialesRepositorio implements IMateriales<Material> {
     }
 
     @Override
-    public Task<Void> borrar(Material entidad) {
-        return null;
+    public Task<Void> borrar(Material material) {
+      return null;
     }
 
     @Override
@@ -296,6 +296,21 @@ public class MaterialesRepositorio implements IMateriales<Material> {
         }).addOnFailureListener(e -> {
             Log.e("Firestore", "Error actualizando el bote", e);
         });
+    }
+
+    @Override
+    public Task<Void> borrarMaterial(String id, String documento, String coleccion) {
+        return bd.collection("Materiales").document(documento).collection(coleccion).document(id)
+                .delete()
+                .continueWith(task -> {
+                    if (task.isSuccessful()) {
+                        return null;
+                    }
+                    else {
+                        Log.w(TAG, "Error en consulta de firebase", task.getException());
+                        return null;
+                    }
+                });
     }
 
 

@@ -20,6 +20,7 @@ import com.example.padeldam.back.entidades.Cliente;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/** @noinspection ALL*/
 public class EditarCliente extends AppCompatActivity {
 
     private EditText etNombre;

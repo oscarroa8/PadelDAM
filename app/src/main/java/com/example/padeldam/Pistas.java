@@ -30,6 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
+/** @noinspection ALL*/
 public class Pistas extends AppCompatActivity {
     private ListView listaPistas;
     ListAdapterPistas adaptador;

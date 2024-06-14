@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
+/** @noinspection ALL*/
 public class AlquilerPelotas extends AppCompatActivity {
     private GridLayout gridLayout;
     private FirebaseFirestore db;

@@ -3,6 +3,7 @@ package com.example.padeldam.back.entidades;
 import java.io.Serializable;
 import java.util.UUID;
 
+/** @noinspection ALL*/
 public class Cliente implements Serializable {
 
     private String idCliente;

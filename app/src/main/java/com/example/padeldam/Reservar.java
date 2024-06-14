@@ -28,6 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/** @noinspection ALL*/
 public class Reservar extends AppCompatActivity {
     private TextView textViewFechaHora;
     private Spinner spinnerClientes;

@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
+/** @noinspection ALL*/
 public class ListAdapterPistas extends ArrayAdapter<Pista> {
     private Context contexto;
     private int resourceLayout;

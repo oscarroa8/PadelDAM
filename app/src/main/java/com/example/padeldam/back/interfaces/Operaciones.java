@@ -2,6 +2,7 @@ package com.example.padeldam.back.interfaces;
 
 import com.google.android.gms.tasks.Task;
 
+/** @noinspection ALL*/
 public interface Operaciones <T>{
     Task<String> insertar(T entidad);
     Task<Void> actualizar(T entidad);

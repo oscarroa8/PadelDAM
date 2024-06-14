@@ -2,6 +2,7 @@ package com.example.padeldam.back.entidades;
 
 import java.util.UUID;
 
+/** @noinspection ALL*/
 public class BotePelotas {
     private String idMaterial;
     private double precio;

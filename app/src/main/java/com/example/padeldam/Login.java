@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 
+/** @noinspection ALL*/
 public class Login extends AppCompatActivity {
 
     private EditText etUsuario, etContrasenia;

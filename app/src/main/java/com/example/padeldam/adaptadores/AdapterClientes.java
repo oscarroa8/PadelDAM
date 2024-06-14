@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
+/** @noinspection ALL*/
 public class AdapterClientes extends ArrayAdapter<Cliente> {
     private Context contexto;
     private int resourceLayout;

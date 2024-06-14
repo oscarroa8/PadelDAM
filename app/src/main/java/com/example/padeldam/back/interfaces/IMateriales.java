@@ -8,6 +8,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.List;
 
+/** @noinspection ALL*/
 public interface IMateriales<T> extends Operaciones<T>{
 
     Task<List<BotePelotas>> findAllBotes();

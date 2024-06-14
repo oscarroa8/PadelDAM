@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/** @noinspection ALL*/
 public class FormularioAlquiler extends AppCompatActivity {
     private TextView textViewNombreMaterial;
     private Spinner spinnerClientes;

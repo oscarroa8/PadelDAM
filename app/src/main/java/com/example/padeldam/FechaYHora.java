@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/** @noinspection ALL*/
 public class FechaYHora extends AppCompatActivity {
     private Button buttonFecha;
     private GridLayout gridLayoutHoras;

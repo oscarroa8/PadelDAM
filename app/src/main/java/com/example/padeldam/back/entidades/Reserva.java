@@ -6,6 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.io.Serializable;
 import java.util.UUID;
 
+/** @noinspection ALL*/
 public class Reserva implements Serializable {
 
 

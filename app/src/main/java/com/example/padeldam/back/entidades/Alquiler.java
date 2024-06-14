@@ -10,13 +10,7 @@ public class Alquiler implements Serializable {
     private String idCliente;
     private String empleado;
 
-
-
     private String idMaterial;
-
-
-
-
 
     public Alquiler(String idAlquiler, String idCliente, String empleado,String idMaterial) {
         this.idAlquiler = idAlquiler;

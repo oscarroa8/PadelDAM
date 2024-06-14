@@ -19,6 +19,7 @@ import com.example.padeldam.back.entidades.Pista;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/** @noinspection ALL*/
 public class nuevaPista extends AppCompatActivity {
     Button btnCrear;
     EditText etNombre,etNumero,etMaterial,etPrecio;

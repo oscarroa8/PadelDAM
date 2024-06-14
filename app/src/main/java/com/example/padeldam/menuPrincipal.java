@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/** @noinspection ALL*/
 public class menuPrincipal extends AppCompatActivity  {
 
     @Override
@@ -32,7 +33,6 @@ public class menuPrincipal extends AppCompatActivity  {
         ImageView ivPistas = findViewById(R.id.ivPistas);
         ImageView ivAlquiler = findViewById(R.id.ivAlquiler);
 
-//
 
         ivPistas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,8 +53,6 @@ public class menuPrincipal extends AppCompatActivity  {
                 startActivity(i);
             }
         });
-//
-//
 
     }
 
@@ -68,31 +66,23 @@ public class menuPrincipal extends AppCompatActivity  {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.itemCliente){
-            Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
+            Intent intent = new Intent(this,Clientes.class);
             startActivity(intent);
         }
         if(id == R.id.itemHome){
-            Intent intent = new Intent(this,menuPrincipal.class);//Falta crear la clase usuarios
+            Intent intent = new Intent(this,menuPrincipal.class);
             startActivity(intent);
         }
         if(id == R.id.itemLogout){
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
-            Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
+            Intent intent = new Intent(this,Login.class);
             Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);    }
-
-    // Método para realizar alguna acción que afecte al menú
-
-
-
-
-
-
 
 
 }

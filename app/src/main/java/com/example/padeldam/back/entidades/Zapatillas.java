@@ -2,12 +2,11 @@ package com.example.padeldam.back.entidades;
 
 import java.util.UUID;
 
+/** @noinspection ALL*/
 public class Zapatillas {
     private String idMaterial;
     private double precio;
     private String nombre;
-
-
     private String marca;
     private String talla;
 

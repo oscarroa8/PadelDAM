@@ -8,10 +8,7 @@ public class Palas {
     private double precio;
     private String nombre;
     private String marca;
-
     private String modelo;
-
-
 
     public Palas() {
     }

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Material implements Serializable {
     private String idMaterial;
-    private double precioHora;
+    private double precio;
     private String nombre;
 
 
@@ -13,7 +13,7 @@ public class Material implements Serializable {
 
     public Material(String idMaterial, double precioHora, String nombre) {
         this.idMaterial = idMaterial;
-        this.precioHora = precioHora;
+        this.precio = precioHora;
         this.nombre = nombre;
 
     }
@@ -26,12 +26,12 @@ public class Material implements Serializable {
         this.idMaterial = idMaterial;
     }
 
-    public double getPrecioHora() {
-        return precioHora;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setPrecioHora(double precioHora) {
-        this.precioHora = precioHora;
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     public String getNombre() {

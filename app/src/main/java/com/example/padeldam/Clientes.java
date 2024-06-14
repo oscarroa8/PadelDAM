@@ -28,6 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
+/** @noinspection ALL*/
 public class Clientes extends AppCompatActivity {
 
     private ListView listaClientes;

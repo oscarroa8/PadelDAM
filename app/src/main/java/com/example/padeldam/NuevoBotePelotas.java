@@ -18,6 +18,7 @@ import com.example.padeldam.back.entidades.BotePelotas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/** @noinspection ALL*/
 public class NuevoBotePelotas extends AppCompatActivity {
 
     private EditText etPrecioHora;

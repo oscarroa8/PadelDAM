@@ -23,13 +23,12 @@ import com.example.padeldam.back.entidades.Zapatillas;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/** @noinspection ALL*/
 public class NuevaPala extends AppCompatActivity {
     private EditText etPrecio;
     private EditText etNombre;
     private EditText etMarca;
     private EditText etModelo;
-
-
     private Button btnCrearPala;
 
     private FirebaseFirestore db;

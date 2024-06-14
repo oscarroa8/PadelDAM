@@ -21,6 +21,7 @@ import com.example.padeldam.back.entidades.Cliente;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/** @noinspection ALL*/
 public class nuevoCliente extends AppCompatActivity {
     Button btnCrear;
     EditText etNombre,etPrimerApellido,etSegundoApellido,etTelefono,etMail;

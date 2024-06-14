@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+/** @noinspection ALL*/
 public class Alquilar extends AppCompatActivity {
 
     @Override

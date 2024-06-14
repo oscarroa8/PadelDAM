@@ -34,6 +34,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
+/** @noinspection ALL*/
 public class AlquilerPalas extends AppCompatActivity {
 
     private GridLayout gridLayout;

@@ -33,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
+/** @noinspection ALL*/
 public class AlquilerZapatillas extends AppCompatActivity {
     public static final int ALQUILADO = 0;
     private GridLayout gridLayout;

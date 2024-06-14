@@ -13,6 +13,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/** @noinspection ALL*/
 public class AlquilerRepositorio implements IAlquiler<Alquiler> {
 
     private final FirebaseFirestore bd;

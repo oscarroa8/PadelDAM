@@ -120,23 +120,23 @@
                 android:textSize="18sp" />
 
         </LinearLayout>
+        <ImageView
+            android:id="@+id/borrarMaterial"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/linearLayout"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="930dp"
+            android:layout_marginTop="50dp"
+            android:background="@color/btnborrar"
+            android:clickable="true"
+            android:padding="4dp"
+            android:src="@drawable/bin_svgrepo_com" />
 
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/borrarMaterial"
-        android:layout_width="78dp"
-        android:layout_height="76dp"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="970dp"
-        android:layout_marginTop="81dp"
-        android:layout_marginEnd="224dp"
-        android:background="@drawable/button_background"
-        android:clickable="true"
-        android:padding="4dp"
-        android:src="@drawable/bin_svgrepo_com" />
+
 
     <Button
         android:id="@+id/buttonCancelarAlquiler"
@@ -146,9 +146,9 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="564dp"
         android:layout_marginTop="81dp"
-        android:background="@color/primaryColor"
+        android:backgroundTint="@color/btn_color"
+        android:textColor="@color/black"
         android:text="Devolver"
-        android:textColor="@android:color/white"
         android:textSize="20dp" />
 
 

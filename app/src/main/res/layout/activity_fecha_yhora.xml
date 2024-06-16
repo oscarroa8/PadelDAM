@@ -27,7 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/primaryColor"
+        android:backgroundTint="@color/btn_color"
+        android:textColor="@android:color/black"
 
         android:layout_marginBottom="20dp"
         android:text="Seleccionar Fecha" />

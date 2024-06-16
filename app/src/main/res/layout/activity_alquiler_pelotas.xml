@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
         android:src="@drawable/tennis_ball_svgrepo_com"
-        app:backgroundTint="@color/primaryColor"
+        android:backgroundTint="@color/btnaniadir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:onClick="crearPelotas"/>

@@ -9,6 +9,8 @@
     <RelativeLayout
         android:id="@+id/relativeTitulo"
         android:layout_width="1264dp"
+        android:layout_marginTop="20dp"
+
         android:layout_height="wrap_content">
 
         <TextView
@@ -96,7 +98,9 @@
         android:layout_marginStart="535dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="567dp"
-        android:background="@color/primaryColor"
+        android:backgroundTint="@color/btn_color"
+        android:textColor="@android:color/black"
+
         android:onClick="insertarPista"
         android:text="Añadir"
         android:textSize="20dp" />

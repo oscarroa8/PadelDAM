@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:src="@drawable/bin_svgrepo_com"
-                android:background="@drawable/button_background"
+                android:background="@color/btnborrar"
                 android:padding="4dp"
                 android:clickable="true"/>
 

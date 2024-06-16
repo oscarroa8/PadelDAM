@@ -39,7 +39,7 @@
         android:layout_margin="32dp"
         android:onClick="crearPista"
         android:src="@drawable/tennis_court_svgrepo_com"
-        app:backgroundTint="@color/primaryColor"
+        android:backgroundTint="@color/btnaniadir"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

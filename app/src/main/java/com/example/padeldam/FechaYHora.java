@@ -51,6 +51,7 @@ public class FechaYHora extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fecha_yhora);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         db = FirebaseFirestore.getInstance();
 
@@ -132,6 +133,10 @@ public class FechaYHora extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            Intent intent = new Intent(this,Pistas.class);//Falta crear la clase usuarios
+            startActivity(intent);
+        }
         if(id == R.id.itemCliente){
             Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
             startActivity(intent);

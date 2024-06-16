@@ -63,10 +63,12 @@ public class FormularioAlquiler extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_formulario_alquiler);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         textViewNombreMaterial = findViewById(R.id.tvNombreMaterial);
         textViewMarca = findViewById(R.id.tvMarcaMaterial);
         textViewPrecio = findViewById(R.id.tvPrecioMaterial);
+
         spinnerClientes = findViewById(R.id.spinnerClientes);
         buttonAlquiler = findViewById(R.id.buttonAlquilar);
         buttonBorrarMaterial = findViewById(R.id.borrarMaterialesAlquiler);
@@ -247,6 +249,9 @@ public class FormularioAlquiler extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            finish();
+        }
         if (id == R.id.itemCliente) {
             Intent intent = new Intent(this, Clientes.class);
             startActivity(intent);

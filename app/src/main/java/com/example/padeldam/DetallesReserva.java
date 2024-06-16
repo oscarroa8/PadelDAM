@@ -32,6 +32,7 @@ public class DetallesReserva extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detalles_reserva);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         PistaRepositorio pistasRepositorio = new PistaRepositorio(FirebaseFirestore.getInstance());
         ClienteRepositorio clientesRepositorio = new ClienteRepositorio(FirebaseFirestore.getInstance());
@@ -115,6 +116,9 @@ public class DetallesReserva extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            finish();
+        }
         if (id == R.id.itemCliente) {
             Intent intent = new Intent(this, Clientes.class); // Falta crear la clase usuarios
             startActivity(intent);
@@ -133,9 +137,6 @@ public class DetallesReserva extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void volverAtras(View view) {
-        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
-    }
 
     private void cancelarReserva(Reserva reserva) {
         ReservasRepositorio rp = new ReservasRepositorio(FirebaseFirestore.getInstance());

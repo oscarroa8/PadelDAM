@@ -41,6 +41,7 @@ public class DetallesAlquiler extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_detalles_alquiler);
         FirebaseFirestore bd = FirebaseFirestore.getInstance();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ClienteRepositorio clientesRepositorio = new ClienteRepositorio(FirebaseFirestore.getInstance());
         MaterialesRepositorio materialRepositorio = new MaterialesRepositorio(FirebaseFirestore.getInstance());
 
@@ -173,6 +174,9 @@ public class DetallesAlquiler extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            finish();
+        }
         if(id == R.id.itemCliente){
             Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
             startActivity(intent);
@@ -191,11 +195,6 @@ public class DetallesAlquiler extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);    }
-
-    public void volverAtras(View view) {
-        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
-    }
-
 
 
     private void cancelarAlquiler(Alquiler alquiler) {

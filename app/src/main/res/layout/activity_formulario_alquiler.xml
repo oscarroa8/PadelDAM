@@ -161,21 +161,10 @@
 
 
         <Button
-            android:id="@+id/buttonVolver"
-            android:layout_width="183dp"
-            android:layout_height="76dp"
-            android:textSize="20dp"
-            android:background="@color/primaryColor"
-
-            android:layout_marginStart="120dp"
-            android:onClick="volverAtras"
-            android:text="Volver" />
-
-        <Button
             android:id="@+id/buttonAlquilar"
             android:layout_width="183dp"
             android:layout_height="76dp"
-            android:layout_marginStart="120dp"
+            android:layout_marginStart="400dp"
             android:enabled="false"
             android:textSize="20dp"
             android:background="@color/primaryColor"
@@ -185,15 +174,11 @@
 
         <ImageView
             android:id="@+id/borrarMaterialesAlquiler"
-            android:layout_width="183dp"
+            android:layout_width="78dp"
             android:layout_height="76dp"
             android:layout_below="@+id/linearLayout"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="end"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="95dp"
 
-            android:layout_marginEnd="224dp"
+            android:layout_marginStart="200dp"
             android:layout_toEndOf="@+id/buttonCancelarAlquiler"
             android:background="@color/primaryColor"
             android:clickable="true"

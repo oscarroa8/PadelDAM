@@ -40,6 +40,7 @@ public class Pistas extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pistas);
         listaPistas = findViewById(R.id.listaPistas);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
@@ -101,6 +102,9 @@ public class Pistas extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            finish();
+        }
         if(id == R.id.itemCliente){
             Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
             startActivity(intent);

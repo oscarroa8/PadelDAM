@@ -42,6 +42,7 @@ public class AlquilerPelotas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alquiler_pelotas);
         gridLayout = findViewById(R.id.gridLayoutBotesPelotas);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         db = FirebaseFirestore.getInstance();
         mr = new MaterialesRepositorio(db);
         ar = new AlquilerRepositorio(db);
@@ -72,6 +73,10 @@ public class AlquilerPelotas extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            Intent intent = new Intent(this, Alquilar.class);//Falta crear la clase usuarios
+            startActivity(intent);
+        }
         if(id == R.id.itemCliente){
             Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
             startActivity(intent);
@@ -159,11 +164,6 @@ public class AlquilerPelotas extends AppCompatActivity {
 
             gridLayout.addView(button);
         }
-    }
-
-
-    public void volverAtras(View view) {
-        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
     }
 
 

@@ -36,6 +36,7 @@ public class NuevoBotePelotas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevo_bote_pelotas);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etPrecioHora = findViewById(R.id.etPrecioBote);
         etNombre = findViewById(R.id.etNombre);
@@ -54,6 +55,9 @@ public class NuevoBotePelotas extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            finish();
+        }
         if(id == R.id.itemCliente){
             Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
             startActivity(intent);

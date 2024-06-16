@@ -39,6 +39,7 @@ public class NuevaPala extends AppCompatActivity {
 
         etPrecio = findViewById(R.id.etPrecioPala);
         etNombre = findViewById(R.id.etNombre);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         etMarca = findViewById(R.id.etMarca);
         etModelo = findViewById(R.id.etModelo);
         btnCrearPala = findViewById(R.id.btnCrearPala);
@@ -55,6 +56,9 @@ public class NuevaPala extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            finish();
+        }
         if(id == R.id.itemCliente){
             Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
             startActivity(intent);
@@ -99,10 +103,6 @@ public class NuevaPala extends AppCompatActivity {
                         Toast.makeText(this, "Error al insertar los datos de la pala", Toast.LENGTH_SHORT).show();
                     }
                 });
-    }
-
-    public void volverAtras(View view) {
-        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
     }
 
 

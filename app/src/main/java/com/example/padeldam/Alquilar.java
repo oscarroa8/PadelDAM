@@ -24,7 +24,7 @@ public class Alquilar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_alquiler);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ImageView ivPelotas = findViewById(R.id.ivPelotas);
         ImageView ivPalas = findViewById(R.id.ivPalas);
         ImageView ivZapatillas = findViewById(R.id.ivZapatillas);
@@ -74,6 +74,10 @@ public class Alquilar extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            Intent intent = new Intent(this,menuPrincipal.class);//Falta crear la clase usuarios
+            startActivity(intent);
+        }
         if(id == R.id.itemCliente){
             Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
             startActivity(intent);

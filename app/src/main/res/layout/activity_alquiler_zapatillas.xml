@@ -28,26 +28,13 @@
         android:layout_width="998dp"
         android:layout_height="547dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="116dp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="112dp"
         android:layout_weight="1"
         android:columnCount="6"
         android:rowCount="6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></GridLayout>
-
-    <Button
-        android:id="@+id/buttonVolver"
-        android:layout_width="108dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="140dp"
-        android:textSize="20dp"
-        android:layout_marginTop="32dp"
-        android:background="@color/primaryColor"
-        android:onClick="volverAtras"
-        android:text="Volver"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabCrearZapatillas"

@@ -35,9 +35,11 @@ public class NuevasZapatillas extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nuevas_zapatillas);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etPrecio = findViewById(R.id.etPrecioBote);
         etNombre = findViewById(R.id.etNombre);
+
         etMarca = findViewById(R.id.etMarca);
         etTalla = findViewById(R.id.etTalla);
         btnCrearZapatilla = findViewById(R.id.btnCrearBote);
@@ -54,6 +56,9 @@ public class NuevasZapatillas extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            finish();
+        }
         if(id == R.id.itemCliente){
             Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
             startActivity(intent);

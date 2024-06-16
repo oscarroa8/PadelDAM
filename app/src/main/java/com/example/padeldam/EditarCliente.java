@@ -34,6 +34,7 @@ public class EditarCliente extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_cliente);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         etNombre = findViewById(R.id.editTextNombre);
         etPrimerApellido = findViewById(R.id.editTextApellido1);
@@ -108,6 +109,9 @@ public class EditarCliente extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
+        if(id==android.R.id.home){
+            finish();
+        }
         if(id == R.id.itemCliente){
             Intent intent = new Intent(this,Clientes.class);//Falta crear la clase usuarios
             startActivity(intent);
@@ -127,7 +131,4 @@ public class EditarCliente extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);    }
 
-    public void volverAtras(View view) {
-        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
-    }
 }

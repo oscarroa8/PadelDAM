@@ -77,7 +77,7 @@ public class menuPrincipal extends AppCompatActivity  {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             Intent intent = new Intent(this,Login.class);
-            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion finalizada", Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
         }

@@ -44,7 +44,7 @@
 
         android:layout_marginTop="39dp"
         android:hint="Precio"
-        android:inputType="number" />
+        android:inputType="number|numberDecimal" />
 
     <EditText
         android:id="@+id/etMarca"

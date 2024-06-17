@@ -2,6 +2,7 @@ package com.example.padeldam;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -30,13 +33,15 @@ import java.util.List;
 
 /** @noinspection ALL*/
 public class Reservar extends AppCompatActivity {
-    private TextView textViewFechaHora;
     private Spinner spinnerClientes;
     private Button buttonReservar;
 
     private String fechaSeleccionada;
     private String horaSeleccionada;
     private String clienteSeleccionado;
+    private TextView tvPrecioReserva;
+    private TextView tvHoraReserva;
+    private TextView tvNombrePista;
 
     private String nombrePista;
     private String idPista;
@@ -53,9 +58,14 @@ public class Reservar extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_reserva);
 
-        textViewFechaHora = findViewById(R.id.textViewFechaHora);
         spinnerClientes = findViewById(R.id.spinnerClientes);
         buttonReservar = findViewById(R.id.buttonReservar);
+
+        tvPrecioReserva = findViewById(R.id.tvPrecioReserva);
+        tvNombrePista = findViewById(R.id.tvNombrePistaReserva);
+        tvHoraReserva = findViewById(R.id.tvHoraReserva);
+
+
 
         // Inicializar Firestore
         db = FirebaseFirestore.getInstance();
@@ -65,10 +75,28 @@ public class Reservar extends AppCompatActivity {
         idPista = intent.getStringExtra("idPista");
         fechaSeleccionada = intent.getStringExtra("fechaSeleccionada");
         horaSeleccionada = intent.getStringExtra("horaSeleccionada");
-        //nombrePista = intent.getStringExtra("nombrePista");
 
-        // Muestra la fecha y hora seleccionadas
-        textViewFechaHora.setText(fechaSeleccionada + " " + horaSeleccionada);
+
+
+        DocumentReference docRef = db.collection("pistas").document(idPista);
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        String nombrePista = document.getString("nombre");
+                        Double precioPista = document.getDouble("precioHora");
+                        String precioPistaStr = String.valueOf(precioPista);
+                        tvNombrePista.setText(nombrePista);
+                        tvPrecioReserva.setText(precioPistaStr+"€");
+                        tvHoraReserva.setText(fechaSeleccionada+" / "+horaSeleccionada);
+                    } else {
+                        Log.d("Firestore", "Pista no encontrada");
+                    }
+                }
+            }
+        });
 
         // Cargar clientes de Firestore y configurar el Spinner
         cargarClientesEnSpinner();
@@ -142,7 +170,7 @@ public class Reservar extends AppCompatActivity {
 
         rp.insertar(reserva)
                 .addOnCompleteListener(task -> {
-            Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Reserva creada correctamente", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this,FechaYHora.class);
                     intent.putExtra("idPista", idPista);
                     intent.putExtra("fechaSeleccionada", fechaSeleccionada);
@@ -175,14 +203,12 @@ public class Reservar extends AppCompatActivity {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
-            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion finalizada", Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);    }
 
-    public void volverAtras(View view) {
-        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
-    }
+
 }

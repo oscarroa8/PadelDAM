@@ -70,7 +70,7 @@ public class NuevoBotePelotas extends AppCompatActivity {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
-            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion finalizada", Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
         }
@@ -106,7 +106,7 @@ public class NuevoBotePelotas extends AppCompatActivity {
         mr.insertarBotePelotas(nuevoBote)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Bote insertado correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Bote creado correctamente", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(this, AlquilerPelotas.class);
                         startActivity(intent);
                     } else {
@@ -115,7 +115,4 @@ public class NuevoBotePelotas extends AppCompatActivity {
                 });
     }
 
-    public void volverAtras(View view) {
-        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
-    }
 }

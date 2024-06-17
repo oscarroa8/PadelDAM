@@ -71,7 +71,7 @@ public class NuevaPala extends AppCompatActivity {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
-            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion finalizada", Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
         }
@@ -96,7 +96,7 @@ public class NuevaPala extends AppCompatActivity {
         mr.insertarPalas(nuevaPala)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Pala creada", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Pala creada correctamente", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(this, AlquilerPalas.class);
                         startActivity(intent);
                     } else {

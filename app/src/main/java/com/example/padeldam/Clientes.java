@@ -84,18 +84,6 @@ public class Clientes extends AppCompatActivity {
             }
         });
 
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        FirebaseUser empleado = mAuth.getCurrentUser();
-        FloatingActionButton btnCrearCliente = findViewById(R.id.fabCrearCliente);
-        btnCrearCliente.setVisibility(View.GONE);
-
-        AdminRepositorio adminRepositorio = new AdminRepositorio(bd);
-        adminRepositorio.isAdmin(empleado.getEmail()).addOnCompleteListener(task -> {
-            boolean admin = task.getResult();
-            if (admin) {
-                btnCrearCliente.setVisibility(View.VISIBLE);
-            }
-        });
 
 
     }
@@ -131,7 +119,7 @@ public class Clientes extends AppCompatActivity {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
-            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion finalizada", Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
         }

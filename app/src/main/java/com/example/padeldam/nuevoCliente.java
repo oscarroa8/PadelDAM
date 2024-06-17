@@ -74,7 +74,7 @@ public class nuevoCliente extends AppCompatActivity {
         cr.insertar(c)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Cliente creado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Cliente creado correctamente", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(this, Clientes.class);
                         startActivity(intent);
                     } else {
@@ -107,7 +107,7 @@ public class nuevoCliente extends AppCompatActivity {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
-            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion finalizada", Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
         }

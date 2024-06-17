@@ -44,7 +44,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="23dp"
         android:hint="Precio"
-        android:inputType="number" />
+        android:inputType="number|numberDecimal" />
 
     <EditText
         android:id="@+id/etTalla"
@@ -55,7 +55,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="132dp"
         android:hint="Talla"
-        android:inputType="number" />
+        android:inputType="number|numberDecimal" />
 
     <EditText
         android:id="@+id/etMarca"

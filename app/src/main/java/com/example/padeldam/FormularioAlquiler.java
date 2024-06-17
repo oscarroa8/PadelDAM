@@ -137,11 +137,11 @@ public class FormularioAlquiler extends AppCompatActivity {
                     if (document.exists()) {
                         actualizarTextViews(document);
                     } else {
-                        Log.d("DEBUG", "No such document");
+
                         Toast.makeText(FormularioAlquiler.this, "El material no existe", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Log.d("DEBUG", "get failed with ", task.getException());
+
                     Toast.makeText(FormularioAlquiler.this, "Error al obtener los datos del material", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -224,7 +224,7 @@ public class FormularioAlquiler extends AppCompatActivity {
 
             ar.insertar(alquiler).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
-                    Toast.makeText(this, "Datos insertados correctamente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Material alquilado correctamente", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(FormularioAlquiler.this, Alquilar.class);
                     startActivity(intent);
                 } else {
@@ -236,9 +236,6 @@ public class FormularioAlquiler extends AppCompatActivity {
         }
     }
 
-    public void volverAtras(View view) {
-        finish(); // Cierra la actividad actual y vuelve a la actividad anterior en la pila de actividades.
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -262,7 +259,7 @@ public class FormularioAlquiler extends AppCompatActivity {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             Intent intent = new Intent(this, Login.class);
-            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion finalizada", Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

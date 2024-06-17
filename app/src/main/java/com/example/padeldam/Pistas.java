@@ -56,7 +56,7 @@ public class Pistas extends AppCompatActivity {
         adapter= listaPistas.getAdapter();
 
         listaPistas.setOnItemClickListener((adapterView, view, position, l) -> {
-            Log.d("ListViewClick", "Item clicked at position: " + position);
+
             Pista pistaSeleccionada = adaptador.getItem(position);
 
             // Crea un intent para la nueva actividad
@@ -117,7 +117,7 @@ public class Pistas extends AppCompatActivity {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
-            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion finalizada", Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
         }

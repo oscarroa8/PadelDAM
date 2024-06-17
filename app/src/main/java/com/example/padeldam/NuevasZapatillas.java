@@ -71,7 +71,7 @@ public class NuevasZapatillas extends AppCompatActivity {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
-            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion finalizada", Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
         }
@@ -106,7 +106,7 @@ public class NuevasZapatillas extends AppCompatActivity {
         mr.insertarZapatillas(nuevaZapatilla)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Zapatilla creada", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Zapatilla creada correctametne", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(this, AlquilerZapatillas.class);
                         startActivity(intent);
                     } else {

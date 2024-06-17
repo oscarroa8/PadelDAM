@@ -1,6 +1,7 @@
 package com.example.padeldam.adaptadores;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 
 /** @noinspection ALL*/
 public class ListAdapterPistas extends ArrayAdapter<Pista> {
@@ -54,10 +58,15 @@ public class ListAdapterPistas extends ArrayAdapter<Pista> {
         tvMaterial.setText(pista.getMaterial());
         TextView tvprecio = view.findViewById(R.id.preciotv);
         double precio = pista.getPrecioHora();
+        Log.d("PrecioPista", "Precio antes de formatear: " + precio);
+        // Asegurarse de que el valor de precio tiene decimales
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        decimalFormat.setRoundingMode(RoundingMode.HALF_UP);
+        String precioFormateado = decimalFormat.format(precio);
+        Log.d("PrecioPista", "Precio formateado: " + precioFormateado);
+        tvprecio.setText(precioFormateado);
+
         FirebaseFirestore bd = FirebaseFirestore.getInstance();
-
-        tvprecio.setText(String.valueOf(precio));
-
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser empleado = mAuth.getCurrentUser();
         ImageView borrarPista = view.findViewById(R.id.ivBorrarPista);

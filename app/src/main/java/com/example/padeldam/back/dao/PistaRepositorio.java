@@ -36,7 +36,7 @@ public class PistaRepositorio implements IPistas<Pista> {
                                             document.get("nombre", String.class),
                                             document.get("numero", Integer.class),
                                             document.get("material", String.class),
-                                            document.get("precioHora", Integer.class)
+                                            document.get("precioHora", Double.class)
 
                                     );
                                     pistas.add(p);

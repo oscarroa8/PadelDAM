@@ -65,7 +65,7 @@ public class nuevaPista extends AppCompatActivity {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             mAuth.signOut();
             Intent intent = new Intent(this,Login.class);//Falta crear la clase usuarios
-            Toast.makeText(getApplicationContext(), "Usuario deslogueado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Sesion finalizada", Toast.LENGTH_SHORT).show();
 
             startActivity(intent);
         }
@@ -99,7 +99,7 @@ public class nuevaPista extends AppCompatActivity {
 
             pr.insertar(p)
                 .addOnCompleteListener(task -> {
-                    Toast.makeText(this, "Pista creada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Pista creada correctamente", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this,Pistas.class);//Falta crear la clase usuarios
                     startActivity(intent);
                 });
